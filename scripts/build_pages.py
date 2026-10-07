@@ -4,8 +4,9 @@ Run from the repo root:  python3 scripts/build_pages.py
 Writes public/styles.css, public/<slug>.html and public/sitemap.xml. Commit the output;
 Cloudflare serves public/ as-is, there is no build step there.
 Rule for all copy: never name the ERP platform or framework, and no city or country names.
-Approved exceptions (Josh, 2026-10-07): the partner page may name ERPNext and Frappe; the unlisted FBR page may name FBR and Pakistan.
-Unlisted pages are in the sitemap but not in the footer or related links, so the names stay on their own page.
+Approved exception: the unlisted FBR page may name FBR and Pakistan. Unlisted pages are in the sitemap
+but not in the footer or related links, so those names stay on that page.
+No exception for the platform or framework names, on any page, ever.
 """
 import datetime, html, json, pathlib, re
 
@@ -79,25 +80,22 @@ PAGES = [
       ("Can you bring our old records in?", "Yes. Paper records and exports from old software are migrated, priced per 1,000 documents after a paid sample."),
       ("Do you charge per user?", "No. Every plan includes unlimited users, so adding staff never changes your bill."),
     ]),
-  dict(slug="erp-partner-development", label="Partner firms", service="ERPNext and Frappe development for partner firms",
-    link="White-label ERP development for partner firms",
-    title="ERPNext & Frappe Developers for Partner Firms | Nastaliq",
-    desc="White-label ERPNext and Frappe developers for partner firms: custom apps, integrations, reports and fixes, delivered to your repository. From $45 an hour.",
-    h1="More ERPNext projects than developers? We build under your name.",
-    lede="Nastaliq is a white-label Frappe development team for ERPNext partner firms. Send a scoped task or a whole backlog, and the work arrives as code in your repository, to your standards.",
+  dict(slug="erp-partner-development", label="Partner firms", service="White-label ERP development for partner firms",
+    title="White-Label ERP Development for Partner Firms | Nastaliq",
+    desc="White-label ERP development for partner firms: custom apps, integrations, reports and fixes, delivered to your repository. From $45 an hour.",
+    h1="More projects than developers? We build under your name.",
+    lede="Nastaliq works as a white-label development team for ERP partner firms. Send a scoped task or a whole backlog, and the work arrives as code in your repository, to your standards.",
     sections=[
-      ("What we take on", "ul", ["Custom Frappe apps.", "Integrations between ERPNext and other systems.", "Print formats and reports.", "Fixes to existing ERPNext customisations."]),
+      ("What we take on", "ul", ["Custom apps.", "Integrations with other systems.", "Print formats and reports.", "Fixes to existing customisations."]),
       ("How it works", "ol", ["You send a scoped task or a whole backlog.", "We agree a fixed price or an hourly rate before starting.", "Code arrives as a pull request you review.", "Our working day overlaps with Europe, the Gulf and Asia."]),
-      ("Our own Frappe apps", "ul", ["Brandkit: white-labels the ERPNext desk for each client site, with app name, logo, favicon, help menu and the powered-by line.", "A restaurant and bakery point of sale, with layouts the admin can restyle for each brand.", "A desk home page and app launcher that puts each team's apps one click away."]),
       ("Rates", "p", ["From $45 an hour, or a dedicated developer from $3,000 a month."]),
     ],
     faqs=[
-      ("Do you do white-label ERPNext development?", "Yes. The work is delivered under your name, to your repository and your standards."),
-      ("How do you price ERPNext and Frappe development?", "A fixed price or an hourly rate, agreed before starting. Hourly work starts at $45, and a dedicated developer starts at $3,000 a month."),
+      ("Do you work white-label?", "Yes. The work is delivered under your name, to your repository and your standards."),
+      ("How do you price development work?", "A fixed price or an hourly rate, agreed before starting. Hourly work starts at $45, and a dedicated developer starts at $3,000 a month."),
       ("How is code delivered?", "As a pull request to your repository, for you to review before merging."),
       ("Which time zones do you cover?", "Our working day overlaps with Europe, the Gulf and Asia."),
     ],
-    note="ERPNext and Frappe are trademarks of Frappe Technologies.",
     cta=("Send us a task", "Tell us what you need built.", "Send the scope, your deadline and how you like code delivered. We reply within one working day.")),
   dict(slug="fbr-e-invoicing", label="FBR e-invoicing", service="FBR digital invoicing integration", unlisted=True,
     title="FBR Digital Invoicing Integration for Your ERP | Nastaliq",
