@@ -4,6 +4,8 @@ Run from the repo root:  python3 scripts/build_pages.py
 Writes public/styles.css, public/<slug>.html and public/sitemap.xml. Commit the output;
 Cloudflare serves public/ as-is, there is no build step there.
 Rule for all copy: never name the ERP platform or framework, and no city or country names.
+Approved exceptions (Josh, 2026-10-07): the partner page may name ERPNext and Frappe; the unlisted FBR page may name FBR and Pakistan.
+Unlisted pages are in the sitemap but not in the footer or related links, so the names stay on their own page.
 """
 import datetime, html, json, pathlib, re
 
@@ -77,24 +79,45 @@ PAGES = [
       ("Can you bring our old records in?", "Yes. Paper records and exports from old software are migrated, priced per 1,000 documents after a paid sample."),
       ("Do you charge per user?", "No. Every plan includes unlimited users, so adding staff never changes your bill."),
     ]),
-  dict(slug="erp-partner-development", label="Partner firms", service="White-label ERP development for partner firms",
-    title="White-Label ERP Development for Partner Firms | Nastaliq",
-    desc="White-label ERP development for partner firms: custom apps, integrations, reports and fixes, delivered to your repository. From $45 an hour.",
-    h1="More projects than developers? We build under your name.",
-    lede="Nastaliq works as a white-label development team for ERP partner firms. Send a scoped task or a whole backlog, and the work arrives as code in your repository, to your standards.",
+  dict(slug="erp-partner-development", label="Partner firms", service="ERPNext and Frappe development for partner firms",
+    link="White-label ERP development for partner firms",
+    title="ERPNext & Frappe Developers for Partner Firms | Nastaliq",
+    desc="White-label ERPNext and Frappe developers for partner firms: custom apps, integrations, reports and fixes, delivered to your repository. From $45 an hour.",
+    h1="More ERPNext projects than developers? We build under your name.",
+    lede="Nastaliq is a white-label Frappe development team for ERPNext partner firms. Send a scoped task or a whole backlog, and the work arrives as code in your repository, to your standards.",
     sections=[
-      ("What we take on", "ul", ["Custom apps.", "Integrations with other systems.", "Print formats and reports.", "Fixes to existing customisations."]),
+      ("What we take on", "ul", ["Custom Frappe apps.", "Integrations between ERPNext and other systems.", "Print formats and reports.", "Fixes to existing ERPNext customisations."]),
       ("How it works", "ol", ["You send a scoped task or a whole backlog.", "We agree a fixed price or an hourly rate before starting.", "Code arrives as a pull request you review.", "Our working day overlaps with Europe, the Gulf and Asia."]),
+      ("Our own Frappe apps", "ul", ["Brandkit: white-labels the ERPNext desk for each client site, with app name, logo, favicon, help menu and the powered-by line.", "A restaurant and bakery point of sale, with layouts the admin can restyle for each brand.", "A desk home page and app launcher that puts each team's apps one click away."]),
       ("Rates", "p", ["From $45 an hour, or a dedicated developer from $3,000 a month."]),
     ],
     faqs=[
-      ("Do you work white-label?", "Yes. The work is delivered under your name, to your repository and your standards."),
-      ("How do you price development work?", "A fixed price or an hourly rate, agreed before starting. Hourly work starts at $45, and a dedicated developer starts at $3,000 a month."),
+      ("Do you do white-label ERPNext development?", "Yes. The work is delivered under your name, to your repository and your standards."),
+      ("How do you price ERPNext and Frappe development?", "A fixed price or an hourly rate, agreed before starting. Hourly work starts at $45, and a dedicated developer starts at $3,000 a month."),
       ("How is code delivered?", "As a pull request to your repository, for you to review before merging."),
       ("Which time zones do you cover?", "Our working day overlaps with Europe, the Gulf and Asia."),
     ],
+    note="ERPNext and Frappe are trademarks of Frappe Technologies.",
     cta=("Send us a task", "Tell us what you need built.", "Send the scope, your deadline and how you like code delivered. We reply within one working day.")),
-  dict(slug="erp-pricing", label="Pricing", service="Managed cloud ERP",
+  dict(slug="fbr-e-invoicing", label="FBR e-invoicing", service="FBR digital invoicing integration", unlisted=True,
+    title="FBR Digital Invoicing Integration for Your ERP | Nastaliq",
+    desc="Nastaliq connects your ERP to FBR's Digital Invoicing system: invoices reported in real time, FBR invoice number and QR code printed, rejections easy to fix.",
+    h1="FBR digital invoicing, built into your ERP.",
+    lede="FBR requires sales tax registered businesses in Pakistan to report invoices to its Digital Invoicing system as they are issued. Nastaliq connects your ERP to FBR, so each invoice goes out in real time and comes back with its FBR invoice number and QR code, ready to print.",
+    sections=[
+      ("What the connection does", "ul", ["Sends each sales tax invoice to FBR as it is issued, from the same ERP that runs your stock and accounts.", "Prints the FBR invoice number and QR code on every invoice.", "Keeps the FBR invoice number with each invoice in the system.", "Flags rejected invoices, so your team can correct them and send them again."]),
+      ("How we set it up", "ol", ["You get your security token from FBR's IRIS portal, and we connect it to your ERP.", "We run FBR's sandbox test scenarios for the kinds of invoices you issue.", "Once the tests pass, we switch the connection on for live invoices.", "Your team keeps invoicing as before, and we keep the connection up to date when FBR changes the system."]),
+      ("Check your deadline", "p", ["FBR has phased digital invoicing in by business size and sector, and has moved the deadlines more than once. Check the current date for your category on FBR's website or with your tax adviser."]),
+      ("Pricing", "p", ["A one-time fee for the FBR connection, then included in your monthly plan, from $400 a month. Tell us which sales tax scenarios apply to your invoices and we will tell you the fee."]),
+    ],
+    faqs=[
+      ("What is FBR digital invoicing?", "FBR's system for sales tax registered businesses to report each invoice to FBR in real time. Each accepted invoice gets an FBR invoice number and a QR code, which go on the printed invoice."),
+      ("Who has to use FBR digital invoicing?", "Sales tax registered persons, phased in by business size and sector. FBR has changed the deadlines more than once, so check the current date for your category."),
+      ("Do we need separate software for FBR invoicing?", "No. Nastaliq builds the FBR connection into the same ERP that runs your invoicing, stock and accounts."),
+      ("What happens if FBR rejects an invoice?", "It is flagged in the ERP, so your team can correct it and send it again."),
+      ("How much does FBR integration cost?", "A one-time fee for the connection, then included in your monthly plan."),
+    ]),
+  dict(slug="erp-pricing", label="Pricing", service="Managed cloud ERP", link="ERP pricing",
     title="ERP Pricing: Flat Monthly Plans, Unlimited Users | Nastaliq",
     desc="Nastaliq ERP pricing: Core $400, Scale $900 and Enterprise from $2,000 a month, all with unlimited users. Hosting, updates and support included.",
     h1="Flat monthly pricing, with no per-user fees.",
@@ -161,7 +184,7 @@ PAGES = [
     ]),
 ]
 ORDER = ["erp-implementation", "erp-pricing", "erp-for-manufacturers", "erp-for-retail", "erp-data-migration",
-         "e-invoicing", "restaurant-pos", "custom-erp-apps", "erp-partner-development"]
+         "e-invoicing", "restaurant-pos", "custom-erp-apps", "erp-partner-development", "fbr-e-invoicing"]
 PAGES.sort(key=lambda p: ORDER.index(p["slug"]))
 SHORT = {"erp-implementation": "Implementation", "erp-pricing": "Pricing", "erp-for-manufacturers": "Manufacturers",
          "erp-for-retail": "Retail", "erp-data-migration": "Data migration", "e-invoicing": "E-invoicing",
@@ -244,7 +267,7 @@ def block(kind, items):
 
 def build():
     home = (ROOT / "index.html").read_text()
-    nav = '<nav class="links" aria-label="Services">' + "".join(f'<a href="/{p["slug"]}">{SHORT[p["slug"]]}</a>' for p in PAGES) + "</nav>"
+    nav = '<nav class="links" aria-label="Services">' + "".join(f'<a href="/{p["slug"]}">{SHORT[p["slug"]]}</a>' for p in PAGES if not p.get("unlisted")) + "</nav>"
     home, n = re.subn(r'<nav class="links" aria-label="Services">.*?</nav>', nav, home, flags=re.S)
     assert n == 1, "footer nav not found in index.html"
     (ROOT / "index.html").write_text(home)
@@ -262,8 +285,9 @@ def build():
         cta = p.get("cta", ("Book a walkthrough", "Show us how your business runs today.", "Write to us with what you sell, how many branches you have, and what you use now. We reply within one working day."))
         second = ('<a class="btn ghost" href="/erp-implementation">How implementation works</a>' if p["slug"] == "erp-pricing"
                   else '<a class="btn ghost" href="/erp-pricing">See all pricing</a>')
-        others = "".join(f'<li><a href="/{o["slug"]}">{E(o["service"])}</a></li>' for o in PAGES if o is not p)
+        others = "".join(f'<li><a href="/{o["slug"]}">{E(o.get("link", o["service"]))}</a></li>' for o in PAGES if o is not p and not o.get("unlisted"))
         body = "".join(f'<div class="prose"><h2>{E(h)}</h2>{block(k, items)}</div>' for h, k, items in p["sections"])
+        if p.get("note"): body += f'<div class="prose"><p class="note">{E(p["note"])}</p></div>'
         faqs = "".join(f"<details><summary>{E(q)}</summary><p>{E(a)}</p></details>" for q, a in p["faqs"])
         doc = f"""<!doctype html>
 <html lang="en">
