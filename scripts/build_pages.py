@@ -180,13 +180,72 @@ PAGES = [
       ("What do the morning alerts cover?", "Items running low on stock and payments that are late, sent each morning so they can be dealt with before the day starts."),
       ("Can the admin carry our branding?", "Yes. The admin can show your company's name, logo and colours."),
     ]),
+  dict(slug="how-much-does-erp-cost", kind="guide", date="2026-10-07", label="Guides", faqhead="Common questions",
+    link="How much does an ERP system cost?", service="How much does an ERP system cost?",
+    title="How Much Does an ERP System Cost? | Nastaliq",
+    desc="What an ERP system really costs: licences, implementation, data migration, hosting and support, per-user versus flat pricing, and what to ask before you sign.",
+    h1="How much does an ERP system cost?",
+    lede="The price of an ERP is rarely one number. It is usually five: the software licence, getting it set up, moving your records in, hosting it, and supporting your team once it is live. Here is what each one covers, and what to ask about each before you sign.",
+    sections=[
+      ("1. The software licence", "p", ["Many ERP vendors charge per user, per month. That looks cheap for a small team and grows with every person you add. Others charge a flat fee for the whole company, or no licence fee at all and charge for the service around the software instead. Ask what happens to the bill when you hire ten more people."]),
+      ("2. Implementation", "p", ["Implementation is the work of setting the system up around how you run: your chart of accounts, items, warehouses, branches, prices, approvals and reports. It is usually a one-time fee, and it is where most projects go over budget. Ask what is included, how long it takes, and whether a pilot comes before the full switch."]),
+      ("3. Data migration", "p", ["Bringing your history in is often priced separately. Clean exports from old software are quick. Paper records and handwritten logs take far longer, because every document has to be read and checked. Ask for a paid sample before agreeing a price for the whole archive."]),
+      ("4. Hosting", "p", ["A cloud ERP needs servers, backups and updates. Some vendors include hosting in the monthly fee, others bill it separately or leave it to you. Ask where your data is hosted, how often it is backed up, and whether you can export it."]),
+      ("5. Support and changes", "p", ["After go-live your team will have questions, and the business will keep changing. Ask whether support is included, how fast it responds, and how new reports or changes are priced."]),
+      ("What Nastaliq charges", "ul", ["Monthly plans of $400 (Core), $900 (Scale) and from $2,000 (Enterprise), all with unlimited users.", "A one-time launch fee of $6,000 to $12,000, with about six weeks to go live.", "Hosting, updates and support included in every plan.", "Data migration priced per 1,000 documents after a paid sample."]),
+    ],
+    faqs=[
+      ("Is per-user ERP pricing cheaper?", "For a very small team it can be. Because the bill grows with every user, a flat fee usually works out cheaper as the team grows, and it never discourages you from giving more staff access."),
+      ("What is the biggest hidden cost in an ERP project?", "Usually implementation and data migration, because both depend on how your business works and how messy your records are. Agree what is included, and ask for a pilot or sample before committing to the full price."),
+      ("How much does a cloud ERP cost per month?", "It depends on the vendor and the pricing model. Nastaliq's plans are $400, $900 or from $2,000 a month, with unlimited users and hosting included."),
+      ("Should hosting be included in the ERP price?", "It is simpler when it is. If hosting, backups and updates come from the same team that set the system up, there is one place to go when something breaks."),
+    ]),
+  dict(slug="paper-records-to-erp", kind="guide", date="2026-10-07", label="Guides", faqhead="Common questions",
+    link="How to move paper records into an ERP", service="How to move paper records into an ERP",
+    title="How to Move Paper Records into an ERP | Nastaliq",
+    desc="A step-by-step guide to moving receipts, delivery notes and handwritten logs into an ERP: what to bring in, how to sample, check and import, and what it costs.",
+    h1="How to move paper records into an ERP",
+    lede="Many growing companies still keep years of history on paper: receipts, delivery notes, handwritten registers. Moving it into an ERP makes it searchable and gives you real reports from the first day. Here is how to do it without stopping the business.",
+    sections=[
+      ("1. Decide what history you need", "p", ["Not every piece of paper needs to come across. Start with what you will actually use: customer and supplier balances, sales history for reporting, and stock movements. Older or rarely used records can be archived instead."]),
+      ("2. Sort the documents by type", "p", ["Group the paper into types, such as sales invoices, purchase receipts, delivery notes and handwritten logs. Each type has its own layout and its own fields, and each is handled as its own batch."]),
+      ("3. Run a sample first", "p", ["Bring in a small, representative batch of each type before committing to the whole archive. The sample shows how readable the records are, how long they take, and what the full migration will cost."]),
+      ("4. Read, check and link", "p", ["Each document is read into the system's fields and checked, then linked to the right customer, supplier and item. Linking is what turns a pile of scans into history you can report on."]),
+      ("5. Import in batches, then switch over", "p", ["Bring records in batch by batch, checking each one before it reaches the live system. Keep the old records accessible until you are sure everything has come across."]),
+    ],
+    faqs=[
+      ("Can handwritten records be moved into an ERP?", "Yes. They take longer than printed documents, because each one has to be read and checked, so they usually cost more per document."),
+      ("How much does it cost to move paper records into an ERP?", "It depends on volume and how readable the records are, which is why a paid sample comes first. Nastaliq prices migration per 1,000 documents after the sample."),
+      ("Do we have to stop working while records are migrated?", "No. Records come over in batches while the business keeps running, and the old records stay accessible until the move is complete."),
+      ("What should we migrate first?", "Balances and the history you will report on: customers, suppliers, items, opening balances, and recent sales and purchases."),
+    ]),
+  dict(slug="what-is-e-invoicing", kind="guide", date="2026-10-07", label="Guides", faqhead="Common questions",
+    link="What is e-invoicing, and how does it work?", service="What is e-invoicing, and how does it work?",
+    title="What Is E-Invoicing and How Does It Work? | Nastaliq",
+    desc="E-invoicing explained: how invoices reach the tax authority in real time, what comes back on each one, what happens on rejection, and how an ERP connects.",
+    h1="What is e-invoicing, and how does it work?",
+    lede="E-invoicing means sending each invoice to the tax authority electronically, usually as it is issued, instead of only reporting totals in a periodic return. More tax authorities require it every year. Here is how it works and what it means for your invoicing.",
+    sections=[
+      ("How it works", "ol", ["Your system creates the invoice as usual.", "The invoice data is sent to the tax authority's system, usually in real time.", "The authority checks it, and either accepts it or rejects it with a reason.", "An accepted invoice comes back with a reference from the authority, often a unique number and a QR code, which go on the invoice you send."]),
+      ("Clearance and reporting", "p", ["Some tax authorities clear each invoice before it is valid, so the customer only ever receives an invoice the authority has accepted. Others accept a report of each invoice shortly after it is issued. Either way, the invoice data has to leave your system in the authority's format."]),
+      ("Why connect it to your ERP", "p", ["Typing invoices into a government portal by hand does not scale. When the connection is built into the ERP that already creates your invoices, reporting happens automatically, rejections show up where your team works, and your stock and accounts stay in step with what the authority sees."]),
+      ("What to ask before you connect", "ul", ["Which of your invoice types and tax scenarios the connection covers.", "How rejected invoices are flagged and corrected.", "Whether the connection is tested in the authority's sandbox before it goes live.", "Who keeps it working when the authority changes its system."]),
+    ],
+    faqs=[
+      ("What is the difference between an e-invoice and a PDF invoice?", "A PDF is a picture of an invoice for people to read. An e-invoice is structured data in the tax authority's format, sent to its system so it can be checked automatically."),
+      ("Is e-invoicing mandatory?", "In a growing number of countries, yes, usually phased in by business size or sector. Check the current rules and deadlines with your tax authority or adviser."),
+      ("What happens when an e-invoice is rejected?", "The authority returns it with a reason. The invoice has to be corrected and sent again before it counts."),
+      ("Can e-invoicing be added to an existing ERP?", "Usually, if the ERP can send invoice data in the authority's format. Nastaliq builds the connection into the ERP it runs for each client."),
+    ]),
 ]
 ORDER = ["erp-implementation", "erp-pricing", "erp-for-manufacturers", "erp-for-retail", "erp-data-migration",
-         "e-invoicing", "restaurant-pos", "custom-erp-apps", "erp-partner-development", "fbr-e-invoicing"]
+         "e-invoicing", "restaurant-pos", "custom-erp-apps", "erp-partner-development", "fbr-e-invoicing",
+         "how-much-does-erp-cost", "paper-records-to-erp", "what-is-e-invoicing"]
 PAGES.sort(key=lambda p: ORDER.index(p["slug"]))
 SHORT = {"erp-implementation": "Implementation", "erp-pricing": "Pricing", "erp-for-manufacturers": "Manufacturers",
          "erp-for-retail": "Retail", "erp-data-migration": "Data migration", "e-invoicing": "E-invoicing",
-         "restaurant-pos": "Restaurant POS", "custom-erp-apps": "Custom apps", "erp-partner-development": "Partner firms"}
+         "restaurant-pos": "Restaurant POS", "custom-erp-apps": "Custom apps", "erp-partner-development": "Partner firms",
+         "how-much-does-erp-cost": "What ERP costs", "paper-records-to-erp": "Paper to ERP", "what-is-e-invoicing": "E-invoicing explained"}
 
 # ponytail: theme toggle and background dots copied from the homepage script; if those change there, change them here.
 SCRIPT = """<script>
@@ -246,8 +305,13 @@ def offer(t):  # (name, price, unit) or (name, min price, unit, "min"[, max pric
     return {"@type": "Offer", "name": name, "priceSpecification": spec}
 
 def ld(page, url):
-    service = {"@type": "Service", "@id": f"{url}#service", "name": page["service"], "serviceType": page["label"],
-               "description": page["desc"], "url": url, "provider": ORG}
+    if page.get("kind") == "guide":
+        service = {"@type": "Article", "@id": f"{url}#article", "headline": page["h1"], "description": page["desc"],
+                   "url": url, "mainEntityOfPage": url, "datePublished": page["date"], "dateModified": page["date"],
+                   "author": ORG, "publisher": {**ORG, "logo": f"{SITE}/apple-touch-icon.png"}, "image": f"{SITE}/og-image.png"}
+    else:
+        service = {"@type": "Service", "@id": f"{url}#service", "name": page["service"], "serviceType": page["label"],
+                   "description": page["desc"], "url": url, "provider": ORG}
     if page.get("offers"): service["offers"] = [offer(t) for t in page["offers"]]
     return {"@context": "https://schema.org", "@graph": [
         service,
@@ -265,8 +329,10 @@ def block(kind, items):
 
 def build():
     home = (ROOT / "index.html").read_text()
-    nav = '<nav class="links" aria-label="Services">' + "".join(f'<a href="/{p["slug"]}">{SHORT[p["slug"]]}</a>' for p in PAGES if not p.get("unlisted")) + "</nav>"
-    home, n = re.subn(r'<nav class="links" aria-label="Services">.*?</nav>', nav, home, flags=re.S)
+    listed = [p for p in PAGES if not p.get("unlisted")]
+    nav = "".join(f'<nav class="links" aria-label="{label}">' + "".join(f'<a href="/{p["slug"]}">{SHORT[p["slug"]]}</a>' for p in listed if (p.get("kind") == "guide") == g) + "</nav>"
+                  for label, g in (("Services", False), ("Guides", True)))
+    home, n = re.subn(r'<nav class="links" aria-label="Services">.*?</nav>(?:<nav class="links" aria-label="Guides">.*?</nav>)?', nav, home, flags=re.S)
     assert n == 1, "footer nav not found in index.html"
     (ROOT / "index.html").write_text(home)
     grab = lambda pat: re.search(pat, home, re.S).group(0)
@@ -283,7 +349,7 @@ def build():
         cta = p.get("cta", ("Book a walkthrough", "Show us how your business runs today.", "Write to us with what you sell, how many branches you have, and what you use now. We reply within one working day."))
         second = ('<a class="btn ghost" href="/erp-implementation">How implementation works</a>' if p["slug"] == "erp-pricing"
                   else '<a class="btn ghost" href="/erp-pricing">See all pricing</a>')
-        others = "".join(f'<li><a href="/{o["slug"]}">{E(o.get("link", o["service"]))}</a></li>' for o in PAGES if o is not p and not o.get("unlisted"))
+        others = "".join(f'<li><a href="/{o["slug"]}">{E(o.get("link", o["service"]))}</a></li>' for o in PAGES if o is not p and not o.get("unlisted") and o.get("kind") != "guide")
         body = "".join(f'<div class="prose"><h2>{E(h)}</h2>{block(k, items)}</div>' for h, k, items in p["sections"])
         if p.get("note"): body += f'<div class="prose"><p class="note">{E(p["note"])}</p></div>'
         faqs = "".join(f"<details><summary>{E(q)}</summary><p>{E(a)}</p></details>" for q, a in p["faqs"])
@@ -325,7 +391,7 @@ def build():
     </div>
   </section>
   <section><div class="wrap">{body}</div></section>
-  <section id="faq"><div class="wrap"><div class="head"><p class="label">FAQ</p><h2>{E(p['label'])} questions</h2></div>{faqs}</div></section>
+  <section id="faq"><div class="wrap"><div class="head"><p class="label">FAQ</p><h2>{E(p.get('faqhead', p['label'] + ' questions'))}</h2></div>{faqs}</div></section>
   <section class="related"><div class="wrap"><div class="head"><p class="label">More from Nastaliq</p></div><ul>{others}</ul></div></section>
   <section id="contact">
     <div class="wrap contact">
@@ -343,6 +409,13 @@ def build():
 """
         (ROOT / f"{p['slug']}.html").write_text(doc)
 
+    full = ["# Nastaliq: full text of nastaliq.co", "", "Nastaliq is an ERP company for growing businesses. Website: https://nastaliq.co. Email: hello@nastaliq.co.", ""]
+    for p in listed:
+        full += [f"## {p['h1']}", f"URL: {SITE}/{p['slug']}", "", p["lede"], ""]
+        for h, k, items in p["sections"]:
+            full += [f"### {h}"] + (items if k == "p" else [f"- {t}" for t in items]) + [""]
+        full += ["### Questions"] + [f"Q: {q}\nA: {a}\n" for q, a in p["faqs"]] + [""]
+    (ROOT / "llms-full.txt").write_text("\n".join(full))
     today = datetime.date.today().isoformat()
     urls = [f"{SITE}/"] + [f"{SITE}/{p['slug']}" for p in PAGES]
     (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

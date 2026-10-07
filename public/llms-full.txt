@@ -1,0 +1,410 @@
+# Nastaliq: full text of nastaliq.co
+
+Nastaliq is an ERP company for growing businesses. Website: https://nastaliq.co. Email: hello@nastaliq.co.
+
+## ERP implementation that starts with a pilot, not a big bang.
+URL: https://nastaliq.co/erp-implementation
+
+Nastaliq configures accounting, stock, buying, selling and manufacturing around how your business already works. Each stage gives you something working before the next one starts, and most companies are live in about six weeks.
+
+### Four stages
+- A walkthrough. You show us how orders, stock and money move today, and we tell you plainly whether we are a fit.
+- A pilot. We set up one branch, one warehouse or one process first, and your team runs real work on it.
+- The move. Records come over, staff learn on their own screens, and the old system stays readable until you are sure.
+- Day to day. Hosting, updates and support from the people who built it. Your data exports whenever you want it.
+
+### What gets set up
+- Chart of accounts and tax reports, with your accountant.
+- Items, warehouses and branches.
+- Customers, suppliers and price lists.
+- Buying, selling and, if you make things, manufacturing.
+- Users, and what each role can see.
+
+### Cost
+Launch is a one-time $6,000 to $12,000, depending on the size of the setup. After that, one monthly plan from $400, with unlimited users.
+
+### Questions
+Q: How long does ERP implementation take?
+A: About six weeks for a standard launch, from walkthrough to go-live.
+
+Q: Why start with a pilot?
+A: Running real work on one branch, warehouse or process shows problems early, while they are cheap to fix, and gives your team confidence before everything moves.
+
+Q: Do you train our staff?
+A: Yes. Staff learn on their own screens, and training is part of the launch fee.
+
+Q: What happens after go-live?
+A: We host the system, keep it updated and support your team. Your data can be exported whenever you want it.
+
+
+## Flat monthly pricing, with no per-user fees.
+URL: https://nastaliq.co/erp-pricing
+
+Every Nastaliq plan includes hosting, updates and support, with unlimited users. You pay a one-time launch fee to go live, then one monthly fee that does not change when you add staff.
+
+### Monthly plans
+- Core, $400 a month: accounting, stock, sales, purchasing and e-invoicing for one company, with support in business hours.
+- Scale, $900 a month: everything in Core, plus several branches, manufacturing, point of sale, alerts and priority support.
+- Enterprise, from $2,000 a month: a dedicated server, a named engineer and agreed response times.
+
+### One-time fees
+- Launch, $6,000 to $12,000: the system configured, tested and live in about six weeks, with your team trained.
+- Data migration: priced per 1,000 documents after a paid sample, because handwritten records take longer than printed ones.
+- E-invoicing: a one-time fee per country for the connection, then included in your monthly plan.
+
+### Included in every plan
+- Unlimited users.
+- Cloud hosting with offsite backups.
+- Updates.
+- Support from the people who built your system.
+- Your data, exportable whenever you want it.
+
+### Questions
+Q: How much does an ERP system cost?
+A: With Nastaliq, $400 or $900 a month for most companies, or from $2,000 a month for Enterprise, plus a one-time launch fee of $6,000 to $12,000. Every plan has unlimited users.
+
+Q: Do you charge per user?
+A: No. Every plan includes unlimited users, so adding staff never changes your bill.
+
+Q: Is there a software licence fee?
+A: No. You pay for setup, hosting, updates and support. There is no licence fee on top.
+
+Q: What does the launch fee cover?
+A: Configuring the system around how you work, testing it, a pilot on one branch, warehouse or process, and training your team. Most launches go live in about six weeks.
+
+
+## One system for what you buy, make, stock and sell.
+URL: https://nastaliq.co/erp-for-manufacturers
+
+Nastaliq sets up and runs ERP for manufacturers, distributors and retailers with several branches. Purchasing, production, warehouses, sales and accounting sit in one cloud system, configured around how your business already works.
+
+### What it covers
+- Purchasing and suppliers, from order to payment.
+- Manufacturing, with bills of materials and production drawn from stock.
+- Stock across several warehouses and branches.
+- Sales, invoicing and money owed to you.
+- Accounting and tax reports, set up with your accountant.
+
+### A pilot first, then the move
+Every project starts with a pilot on one branch, one warehouse or one process, running real work. Then the rest of the business comes across with its old records, and staff learn on their own screens.
+
+### Pricing
+The Scale plan, at $900 a month, covers several branches and manufacturing with unlimited users. Launch is a one-time $6,000 to $12,000, with about six weeks to go live.
+
+### Questions
+Q: Is this ERP suitable for manufacturers?
+A: Yes. The Scale plan covers manufacturing, several branches and warehouses, alongside stock, sales, purchasing and accounts.
+
+Q: How long does it take to go live?
+A: About six weeks for a standard launch, starting with a pilot on one branch, warehouse or process.
+
+Q: Can you bring our old records in?
+A: Yes. Paper records and exports from old software are migrated, priced per 1,000 documents after a paid sample.
+
+Q: Do you charge per user?
+A: No. Every plan includes unlimited users, so adding staff never changes your bill.
+
+
+## Every branch's stock and sales in one system.
+URL: https://nastaliq.co/erp-for-retail
+
+Nastaliq sets up and runs ERP for retailers with more than one shop. Every branch sells from the same system, so stock, sales and accounts are up to date across the business, not just at month end.
+
+### What it covers
+- Stock in every shop and warehouse, visible from head office.
+- Transfers between branches and warehouses.
+- Point of sale at each counter, connected to stock and accounts.
+- Buying from suppliers, centrally or per branch.
+- Morning alerts for low stock and late payments.
+- One set of accounts for the whole business.
+
+### Good fit
+Bookshops, pharmacies, food and drink chains, and any retailer whose spreadsheets can no longer keep up with several branches.
+
+### Pricing
+Several branches and point of sale are part of the Scale plan at $900 a month, with unlimited users. Launch is a one-time $6,000 to $12,000.
+
+### Questions
+Q: Can head office see every branch's stock?
+A: Yes. Stock is tracked per shop and warehouse, and head office sees all of it in one place.
+
+Q: Can we move stock between branches?
+A: Yes. Transfers between branches and warehouses are recorded in the system, so both sides stay accurate.
+
+Q: Does it include point of sale?
+A: Yes. The Scale plan includes point of sale, connected to stock and accounts.
+
+Q: How much does it cost for several branches?
+A: Several branches are covered by the Scale plan at $900 a month, with unlimited users.
+
+
+## Years of paper records, searchable in your ERP.
+URL: https://nastaliq.co/erp-data-migration
+
+Receipts, delivery notes, handwritten logs and exports from old software. Nastaliq brings your history into the new system, linked to the right customers, suppliers and items, so it can be searched and reported on instead of sitting in a cupboard.
+
+### What we bring in
+- Sales and purchase invoices, receipts and delivery notes.
+- Handwritten activity logs, registers and ledgers.
+- Exports and spreadsheets from your old accounting or inventory software.
+- Customers, suppliers, items and opening balances.
+
+### How a migration runs
+- A paid sample. We bring in a representative batch of your documents, so you can check the result and we can price the rest accurately.
+- A price per 1,000 documents. Printed records cost less than handwritten ones, because they take less work to read and check.
+- Batches, checked before import. Records come over in batches, and each batch is checked before it reaches your live system.
+- No cut-off day. Your old system stays readable until you are sure everything has come across.
+
+### Why it is worth doing
+History in the system means real reports from the first day: what each customer has bought over the years, which items move slowly, and what suppliers have charged. It also means the paper can finally be archived.
+
+### Questions
+Q: How is ERP data migration priced?
+A: Per 1,000 documents, after a paid sample. The sample shows what your records look like, so the price reflects how much is printed and how much is handwritten.
+
+Q: Can you migrate handwritten records?
+A: Yes. Handwritten logs, registers and receipts can be brought in. They take longer than printed documents to read and check, which is why they are priced separately after the sample.
+
+Q: Can you migrate from our current accounting software?
+A: Yes. Exports and spreadsheets from your old software are mapped into the new system, including customers, suppliers, items and opening balances.
+
+Q: Do we have to stop using the old system during the move?
+A: No. The old system stays readable until you are sure everything has come across.
+
+
+## Invoices reported to the tax authority as you issue them.
+URL: https://nastaliq.co/e-invoicing
+
+Where the tax authority requires e-invoicing, Nastaliq connects your ERP to it, so invoices are reported as they are issued and rejected ones are easy to find and fix.
+
+### How it works
+- Invoices are reported to the tax authority as they are issued, from the same system that runs your stock and accounts.
+- Rejected invoices are flagged, so your team can correct them and send them again.
+- Once the connection is set up, it is included in your monthly plan.
+
+### Built country by country
+Every tax authority's e-invoicing system works differently. We build each country's connection as clients need it, and tell you up front what it takes and what it costs.
+
+### Pricing
+A one-time fee per country for the connection, then included in your monthly plan. Every plan from Core at $400 a month includes e-invoicing.
+
+### Questions
+Q: Which e-invoicing systems do you support?
+A: We build each country's connection as clients need it. Tell us where you invoice and we will tell you what it takes and what it costs.
+
+Q: How much does e-invoicing integration cost?
+A: A one-time fee per country for the connection. After that it is included in your monthly plan.
+
+Q: What happens when the tax authority rejects an invoice?
+A: It is flagged in the system, so your team can correct it and send it again.
+
+Q: Do we need separate software for e-invoicing?
+A: No. The connection is built into the same ERP that runs your invoicing, stock and accounts.
+
+
+## A fast till for restaurants and bakeries, tied to your stock and accounts.
+URL: https://nastaliq.co/restaurant-pos
+
+Nastaliq's point of sale is built for counters that move quickly: restaurants, fast food, cafés and bakeries. Every sale updates stock and the books in the same system, so the numbers at closing match the numbers in your accounts.
+
+### Built for busy counters
+- A fast, minimal till for counters with queues.
+- Layouts the admin can restyle for each brand.
+- Several branches on one system.
+
+### Connected to everything else
+Sales reduce stock as they happen, so items running low show up in the morning alert before they run out. Takings go straight into your accounts, so nothing is typed in twice at the end of the day.
+
+### Pricing
+Point of sale is part of the Scale plan at $900 a month, with unlimited users.
+
+### Questions
+Q: Does the POS work for bakeries and cafés?
+A: Yes. It is designed for restaurants, fast food, cafés and bakeries, where speed at the counter matters most.
+
+Q: Is the POS connected to inventory?
+A: Yes. Every sale updates stock in the same system, and morning alerts flag items running low.
+
+Q: Can each brand have its own look?
+A: Yes. The admin can restyle the till layout for each brand.
+
+Q: How much does the POS cost?
+A: Point of sale is included in the Scale plan at $900 a month, with unlimited users.
+
+
+## The apps your team needs, built on top of your ERP.
+URL: https://nastaliq.co/custom-erp-apps
+
+Standard modules cover most of a business. For the rest, Nastaliq builds custom apps that sit on top of your ERP, so updates to the core system don't break them.
+
+### What we build
+- Morning alerts for low stock and late payments, sent before the day starts.
+- Owner dashboards: sales, money owed, cash and stock at a glance.
+- Point of sale for restaurants, cafés and bakeries.
+- Your own branding on the admin: name, logo and colours.
+- Custom reports and print formats.
+
+### Built to survive updates
+Each app is built separately from the core system, so it keeps working when the core is updated.
+
+### Pricing
+Alerts and point of sale are part of the Scale plan at $900 a month. For anything else, tell us what you need and we will quote it.
+
+### Questions
+Q: Can you build a custom app for our ERP?
+A: Yes. Tell us what your team needs and we will tell you what it takes and what it costs.
+
+Q: Will custom apps break when the system is updated?
+A: They are built not to. Each app sits separately from the core system, so core updates don't overwrite it.
+
+Q: What do the morning alerts cover?
+A: Items running low on stock and payments that are late, sent each morning so they can be dealt with before the day starts.
+
+Q: Can the admin carry our branding?
+A: Yes. The admin can show your company's name, logo and colours.
+
+
+## More projects than developers? We build under your name.
+URL: https://nastaliq.co/erp-partner-development
+
+Nastaliq works as a white-label development team for ERP partner firms. Send a scoped task or a whole backlog, and the work arrives as code in your repository, to your standards.
+
+### What we take on
+- Custom apps.
+- Integrations with other systems.
+- Print formats and reports.
+- Fixes to existing customisations.
+
+### How it works
+- You send a scoped task or a whole backlog.
+- We agree a fixed price or an hourly rate before starting.
+- Code arrives as a pull request you review.
+- Our working day overlaps with Europe, the Gulf and Asia.
+
+### Rates
+From $45 an hour, or a dedicated developer from $3,000 a month.
+
+### Questions
+Q: Do you work white-label?
+A: Yes. The work is delivered under your name, to your repository and your standards.
+
+Q: How do you price development work?
+A: A fixed price or an hourly rate, agreed before starting. Hourly work starts at $45, and a dedicated developer starts at $3,000 a month.
+
+Q: How is code delivered?
+A: As a pull request to your repository, for you to review before merging.
+
+Q: Which time zones do you cover?
+A: Our working day overlaps with Europe, the Gulf and Asia.
+
+
+## How much does an ERP system cost?
+URL: https://nastaliq.co/how-much-does-erp-cost
+
+The price of an ERP is rarely one number. It is usually five: the software licence, getting it set up, moving your records in, hosting it, and supporting your team once it is live. Here is what each one covers, and what to ask about each before you sign.
+
+### 1. The software licence
+Many ERP vendors charge per user, per month. That looks cheap for a small team and grows with every person you add. Others charge a flat fee for the whole company, or no licence fee at all and charge for the service around the software instead. Ask what happens to the bill when you hire ten more people.
+
+### 2. Implementation
+Implementation is the work of setting the system up around how you run: your chart of accounts, items, warehouses, branches, prices, approvals and reports. It is usually a one-time fee, and it is where most projects go over budget. Ask what is included, how long it takes, and whether a pilot comes before the full switch.
+
+### 3. Data migration
+Bringing your history in is often priced separately. Clean exports from old software are quick. Paper records and handwritten logs take far longer, because every document has to be read and checked. Ask for a paid sample before agreeing a price for the whole archive.
+
+### 4. Hosting
+A cloud ERP needs servers, backups and updates. Some vendors include hosting in the monthly fee, others bill it separately or leave it to you. Ask where your data is hosted, how often it is backed up, and whether you can export it.
+
+### 5. Support and changes
+After go-live your team will have questions, and the business will keep changing. Ask whether support is included, how fast it responds, and how new reports or changes are priced.
+
+### What Nastaliq charges
+- Monthly plans of $400 (Core), $900 (Scale) and from $2,000 (Enterprise), all with unlimited users.
+- A one-time launch fee of $6,000 to $12,000, with about six weeks to go live.
+- Hosting, updates and support included in every plan.
+- Data migration priced per 1,000 documents after a paid sample.
+
+### Questions
+Q: Is per-user ERP pricing cheaper?
+A: For a very small team it can be. Because the bill grows with every user, a flat fee usually works out cheaper as the team grows, and it never discourages you from giving more staff access.
+
+Q: What is the biggest hidden cost in an ERP project?
+A: Usually implementation and data migration, because both depend on how your business works and how messy your records are. Agree what is included, and ask for a pilot or sample before committing to the full price.
+
+Q: How much does a cloud ERP cost per month?
+A: It depends on the vendor and the pricing model. Nastaliq's plans are $400, $900 or from $2,000 a month, with unlimited users and hosting included.
+
+Q: Should hosting be included in the ERP price?
+A: It is simpler when it is. If hosting, backups and updates come from the same team that set the system up, there is one place to go when something breaks.
+
+
+## How to move paper records into an ERP
+URL: https://nastaliq.co/paper-records-to-erp
+
+Many growing companies still keep years of history on paper: receipts, delivery notes, handwritten registers. Moving it into an ERP makes it searchable and gives you real reports from the first day. Here is how to do it without stopping the business.
+
+### 1. Decide what history you need
+Not every piece of paper needs to come across. Start with what you will actually use: customer and supplier balances, sales history for reporting, and stock movements. Older or rarely used records can be archived instead.
+
+### 2. Sort the documents by type
+Group the paper into types, such as sales invoices, purchase receipts, delivery notes and handwritten logs. Each type has its own layout and its own fields, and each is handled as its own batch.
+
+### 3. Run a sample first
+Bring in a small, representative batch of each type before committing to the whole archive. The sample shows how readable the records are, how long they take, and what the full migration will cost.
+
+### 4. Read, check and link
+Each document is read into the system's fields and checked, then linked to the right customer, supplier and item. Linking is what turns a pile of scans into history you can report on.
+
+### 5. Import in batches, then switch over
+Bring records in batch by batch, checking each one before it reaches the live system. Keep the old records accessible until you are sure everything has come across.
+
+### Questions
+Q: Can handwritten records be moved into an ERP?
+A: Yes. They take longer than printed documents, because each one has to be read and checked, so they usually cost more per document.
+
+Q: How much does it cost to move paper records into an ERP?
+A: It depends on volume and how readable the records are, which is why a paid sample comes first. Nastaliq prices migration per 1,000 documents after the sample.
+
+Q: Do we have to stop working while records are migrated?
+A: No. Records come over in batches while the business keeps running, and the old records stay accessible until the move is complete.
+
+Q: What should we migrate first?
+A: Balances and the history you will report on: customers, suppliers, items, opening balances, and recent sales and purchases.
+
+
+## What is e-invoicing, and how does it work?
+URL: https://nastaliq.co/what-is-e-invoicing
+
+E-invoicing means sending each invoice to the tax authority electronically, usually as it is issued, instead of only reporting totals in a periodic return. More tax authorities require it every year. Here is how it works and what it means for your invoicing.
+
+### How it works
+- Your system creates the invoice as usual.
+- The invoice data is sent to the tax authority's system, usually in real time.
+- The authority checks it, and either accepts it or rejects it with a reason.
+- An accepted invoice comes back with a reference from the authority, often a unique number and a QR code, which go on the invoice you send.
+
+### Clearance and reporting
+Some tax authorities clear each invoice before it is valid, so the customer only ever receives an invoice the authority has accepted. Others accept a report of each invoice shortly after it is issued. Either way, the invoice data has to leave your system in the authority's format.
+
+### Why connect it to your ERP
+Typing invoices into a government portal by hand does not scale. When the connection is built into the ERP that already creates your invoices, reporting happens automatically, rejections show up where your team works, and your stock and accounts stay in step with what the authority sees.
+
+### What to ask before you connect
+- Which of your invoice types and tax scenarios the connection covers.
+- How rejected invoices are flagged and corrected.
+- Whether the connection is tested in the authority's sandbox before it goes live.
+- Who keeps it working when the authority changes its system.
+
+### Questions
+Q: What is the difference between an e-invoice and a PDF invoice?
+A: A PDF is a picture of an invoice for people to read. An e-invoice is structured data in the tax authority's format, sent to its system so it can be checked automatically.
+
+Q: Is e-invoicing mandatory?
+A: In a growing number of countries, yes, usually phased in by business size or sector. Check the current rules and deadlines with your tax authority or adviser.
+
+Q: What happens when an e-invoice is rejected?
+A: The authority returns it with a reason. The invoice has to be corrected and sent again before it counts.
+
+Q: Can e-invoicing be added to an existing ERP?
+A: Usually, if the ERP can send invoice data in the authority's format. Nastaliq builds the connection into the ERP it runs for each client.
+

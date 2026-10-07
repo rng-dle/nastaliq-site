@@ -151,7 +151,7 @@ footer .support { display: inline-flex; align-items: center; gap: 8px; }
 footer .ribbon { width: 18px; height: 18px; stroke: var(--accent); }
 .more { font-weight: 500; font-size: 0.95rem; text-underline-offset: 3px; align-self: flex-start; padding-block: 6px; }
 .more::after { content: " \2192"; }
-.links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-left: 0; }
 .links a { color: var(--muted); text-decoration: none; padding-block: 8px; }
 .links a:hover { color: var(--fg); text-decoration: underline; }
 

@@ -48,3 +48,13 @@ Email: hello@nastaliq.co
 - [Restaurant and bakery point of sale](https://nastaliq.co/restaurant-pos): a fast till connected to stock and accounts.
 - [Custom ERP apps](https://nastaliq.co/custom-erp-apps): morning alerts, owner dashboards, point of sale and branding on the admin.
 - [White-label development for ERP partner firms](https://nastaliq.co/erp-partner-development): custom apps, integrations, reports and fixes under the partner's name.
+
+## Guides
+
+- [How much does an ERP system cost?](https://nastaliq.co/how-much-does-erp-cost): licences, implementation, migration, hosting and support, and per-user versus flat pricing.
+- [How to move paper records into an ERP](https://nastaliq.co/paper-records-to-erp): deciding what to bring in, sampling, checking, linking and importing in batches.
+- [What is e-invoicing, and how does it work?](https://nastaliq.co/what-is-e-invoicing): real-time reporting, clearance and reporting models, rejections, and connecting an ERP.
+
+## Full text
+
+- [llms-full.txt](https://nastaliq.co/llms-full.txt): the full text of every page in one file.
