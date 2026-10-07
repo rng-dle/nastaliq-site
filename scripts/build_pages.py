@@ -94,7 +94,78 @@ PAGES = [
       ("Which time zones do you cover?", "Our working day overlaps with Europe, the Gulf and Asia."),
     ],
     cta=("Send us a task", "Tell us what you need built.", "Send the scope, your deadline and how you like code delivered. We reply within one working day.")),
+  dict(slug="erp-pricing", label="Pricing", service="Managed cloud ERP",
+    title="ERP Pricing: Flat Monthly Plans, Unlimited Users | Nastaliq",
+    desc="Nastaliq ERP pricing: Core $400, Scale $900 and Enterprise from $2,000 a month, all with unlimited users. Hosting, updates and support included.",
+    h1="Flat monthly pricing, with no per-user fees.",
+    lede="Every Nastaliq plan includes hosting, updates and support, with unlimited users. You pay a one-time launch fee to go live, then one monthly fee that does not change when you add staff.",
+    sections=[
+      ("Monthly plans", "ul", ["Core, $400 a month: accounting, stock, sales, purchasing and e-invoicing for one company, with support in business hours.", "Scale, $900 a month: everything in Core, plus several branches, manufacturing, point of sale, alerts and priority support.", "Enterprise, from $2,000 a month: a dedicated server, a named engineer and agreed response times."]),
+      ("One-time fees", "ul", ["Launch, $6,000 to $12,000: the system configured, tested and live in about six weeks, with your team trained.", "Data migration: priced per 1,000 documents after a paid sample, because handwritten records take longer than printed ones.", "E-invoicing: a one-time fee per country for the connection, then included in your monthly plan."]),
+      ("Included in every plan", "ul", ["Unlimited users.", "Cloud hosting with offsite backups.", "Updates.", "Support from the people who built your system.", "Your data, exportable whenever you want it."]),
+    ],
+    faqs=[
+      ("How much does an ERP system cost?", "With Nastaliq, $400 or $900 a month for most companies, or from $2,000 a month for Enterprise, plus a one-time launch fee of $6,000 to $12,000. Every plan has unlimited users."),
+      ("Do you charge per user?", "No. Every plan includes unlimited users, so adding staff never changes your bill."),
+      ("Is there a software licence fee?", "No. You pay for setup, hosting, updates and support. There is no licence fee on top."),
+      ("What does the launch fee cover?", "Configuring the system around how you work, testing it, a pilot on one branch, warehouse or process, and training your team. Most launches go live in about six weeks."),
+    ],
+    offers=[("Core plan", 400, "MONTH"), ("Scale plan", 900, "MONTH"), ("Enterprise plan", 2000, "MONTH", "min"), ("Launch", 6000, None, "min", 12000)]),
+  dict(slug="erp-implementation", label="Implementation", service="ERP implementation",
+    title="ERP Implementation in About Six Weeks | Nastaliq",
+    desc="Nastaliq ERP implementation: a walkthrough, a pilot on real work, then the move with your records, staff training and hosting. Live in about six weeks.",
+    h1="ERP implementation that starts with a pilot, not a big bang.",
+    lede="Nastaliq configures accounting, stock, buying, selling and manufacturing around how your business already works. Each stage gives you something working before the next one starts, and most companies are live in about six weeks.",
+    sections=[
+      ("Four stages", "ol", ["A walkthrough. You show us how orders, stock and money move today, and we tell you plainly whether we are a fit.", "A pilot. We set up one branch, one warehouse or one process first, and your team runs real work on it.", "The move. Records come over, staff learn on their own screens, and the old system stays readable until you are sure.", "Day to day. Hosting, updates and support from the people who built it. Your data exports whenever you want it."]),
+      ("What gets set up", "ul", ["Chart of accounts and tax reports, with your accountant.", "Items, warehouses and branches.", "Customers, suppliers and price lists.", "Buying, selling and, if you make things, manufacturing.", "Users, and what each role can see."]),
+      ("Cost", "p", ["Launch is a one-time $6,000 to $12,000, depending on the size of the setup. After that, one monthly plan from $400, with unlimited users."]),
+    ],
+    faqs=[
+      ("How long does ERP implementation take?", "About six weeks for a standard launch, from walkthrough to go-live."),
+      ("Why start with a pilot?", "Running real work on one branch, warehouse or process shows problems early, while they are cheap to fix, and gives your team confidence before everything moves."),
+      ("Do you train our staff?", "Yes. Staff learn on their own screens, and training is part of the launch fee."),
+      ("What happens after go-live?", "We host the system, keep it updated and support your team. Your data can be exported whenever you want it."),
+    ]),
+  dict(slug="erp-for-retail", label="Retail", service="ERP for retailers with several branches",
+    title="ERP for Retailers with Several Branches | Nastaliq",
+    desc="Cloud ERP for retailers with several branches: stock in every shop and warehouse, point of sale, transfers between branches and one set of accounts.",
+    h1="Every branch's stock and sales in one system.",
+    lede="Nastaliq sets up and runs ERP for retailers with more than one shop. Every branch sells from the same system, so stock, sales and accounts are up to date across the business, not just at month end.",
+    sections=[
+      ("What it covers", "ul", ["Stock in every shop and warehouse, visible from head office.", "Transfers between branches and warehouses.", "Point of sale at each counter, connected to stock and accounts.", "Buying from suppliers, centrally or per branch.", "Morning alerts for low stock and late payments.", "One set of accounts for the whole business."]),
+      ("Good fit", "p", ["Bookshops, pharmacies, food and drink chains, and any retailer whose spreadsheets can no longer keep up with several branches."]),
+      ("Pricing", "p", ["Several branches and point of sale are part of the Scale plan at $900 a month, with unlimited users. Launch is a one-time $6,000 to $12,000."]),
+    ],
+    faqs=[
+      ("Can head office see every branch's stock?", "Yes. Stock is tracked per shop and warehouse, and head office sees all of it in one place."),
+      ("Can we move stock between branches?", "Yes. Transfers between branches and warehouses are recorded in the system, so both sides stay accurate."),
+      ("Does it include point of sale?", "Yes. The Scale plan includes point of sale, connected to stock and accounts."),
+      ("How much does it cost for several branches?", "Several branches are covered by the Scale plan at $900 a month, with unlimited users."),
+    ]),
+  dict(slug="custom-erp-apps", label="Custom apps", service="Custom ERP apps",
+    title="Custom ERP Apps, Alerts and Dashboards | Nastaliq",
+    desc="Nastaliq builds custom apps on top of your ERP: morning alerts for low stock and late payments, owner dashboards, point of sale and your own branding.",
+    h1="The apps your team needs, built on top of your ERP.",
+    lede="Standard modules cover most of a business. For the rest, Nastaliq builds custom apps that sit on top of your ERP, so updates to the core system don't break them.",
+    sections=[
+      ("What we build", "ul", ["Morning alerts for low stock and late payments, sent before the day starts.", "Owner dashboards: sales, money owed, cash and stock at a glance.", "Point of sale for restaurants, cafés and bakeries.", "Your own branding on the admin: name, logo and colours.", "Custom reports and print formats."]),
+      ("Built to survive updates", "p", ["Each app is built separately from the core system, so it keeps working when the core is updated."]),
+      ("Pricing", "p", ["Alerts and point of sale are part of the Scale plan at $900 a month. For anything else, tell us what you need and we will quote it."]),
+    ],
+    faqs=[
+      ("Can you build a custom app for our ERP?", "Yes. Tell us what your team needs and we will tell you what it takes and what it costs."),
+      ("Will custom apps break when the system is updated?", "They are built not to. Each app sits separately from the core system, so core updates don't overwrite it."),
+      ("What do the morning alerts cover?", "Items running low on stock and payments that are late, sent each morning so they can be dealt with before the day starts."),
+      ("Can the admin carry our branding?", "Yes. The admin can show your company's name, logo and colours."),
+    ]),
 ]
+ORDER = ["erp-implementation", "erp-pricing", "erp-for-manufacturers", "erp-for-retail", "erp-data-migration",
+         "e-invoicing", "restaurant-pos", "custom-erp-apps", "erp-partner-development"]
+PAGES.sort(key=lambda p: ORDER.index(p["slug"]))
+SHORT = {"erp-implementation": "Implementation", "erp-pricing": "Pricing", "erp-for-manufacturers": "Manufacturers",
+         "erp-for-retail": "Retail", "erp-data-migration": "Data migration", "e-invoicing": "E-invoicing",
+         "restaurant-pos": "Restaurant POS", "custom-erp-apps": "Custom apps", "erp-partner-development": "Partner firms"}
 
 # ponytail: theme toggle and background dots copied from the homepage script; if those change there, change them here.
 SCRIPT = """<script>
@@ -146,10 +217,19 @@ EXTRA_CSS = """
 .related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
 """
 
+def offer(t):  # (name, price, unit) or (name, min price, unit, "min"[, max price])
+    name, price, unit, *rest = t
+    spec = {"@type": "UnitPriceSpecification", "priceCurrency": "USD", ("minPrice" if rest else "price"): price}
+    if len(rest) > 1: spec["maxPrice"] = rest[1]
+    if unit: spec["unitText"] = unit
+    return {"@type": "Offer", "name": name, "priceSpecification": spec}
+
 def ld(page, url):
+    service = {"@type": "Service", "@id": f"{url}#service", "name": page["service"], "serviceType": page["label"],
+               "description": page["desc"], "url": url, "provider": ORG}
+    if page.get("offers"): service["offers"] = [offer(t) for t in page["offers"]]
     return {"@context": "https://schema.org", "@graph": [
-        {"@type": "Service", "@id": f"{url}#service", "name": page["service"], "serviceType": page["label"],
-         "description": page["desc"], "url": url, "provider": ORG},
+        service,
         {"@type": "FAQPage", "@id": f"{url}#faq", "mainEntity": [
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in page["faqs"]]},
         {"@type": "BreadcrumbList", "itemListElement": [
@@ -164,6 +244,10 @@ def block(kind, items):
 
 def build():
     home = (ROOT / "index.html").read_text()
+    nav = '<nav class="links" aria-label="Services">' + "".join(f'<a href="/{p["slug"]}">{SHORT[p["slug"]]}</a>' for p in PAGES) + "</nav>"
+    home, n = re.subn(r'<nav class="links" aria-label="Services">.*?</nav>', nav, home, flags=re.S)
+    assert n == 1, "footer nav not found in index.html"
+    (ROOT / "index.html").write_text(home)
     grab = lambda pat: re.search(pat, home, re.S).group(0)
     (ROOT / "styles.css").write_text(grab(r"(?<=<style>).*?(?=</style>)").strip() + "\n" + EXTRA_CSS)
     aside = grab(r'<aside class="aware".*?</aside>')
@@ -176,6 +260,8 @@ def build():
     for p in PAGES:
         url = f"{SITE}/{p['slug']}"
         cta = p.get("cta", ("Book a walkthrough", "Show us how your business runs today.", "Write to us with what you sell, how many branches you have, and what you use now. We reply within one working day."))
+        second = ('<a class="btn ghost" href="/erp-implementation">How implementation works</a>' if p["slug"] == "erp-pricing"
+                  else '<a class="btn ghost" href="/erp-pricing">See all pricing</a>')
         others = "".join(f'<li><a href="/{o["slug"]}">{E(o["service"])}</a></li>' for o in PAGES if o is not p)
         body = "".join(f'<div class="prose"><h2>{E(h)}</h2>{block(k, items)}</div>' for h, k, items in p["sections"])
         faqs = "".join(f"<details><summary>{E(q)}</summary><p>{E(a)}</p></details>" for q, a in p["faqs"])
@@ -213,7 +299,7 @@ def build():
       <p class="crumb"><a href="/">Nastaliq</a> / {E(p['label'])}</p>
       <h1>{E(p['h1'])}</h1>
       <p class="lede">{E(p['lede'])}</p>
-      <div class="cta"><a class="btn primary" href="#contact">{E(cta[0])}</a><a class="btn ghost" href="/#pricing">See all pricing</a></div>
+      <div class="cta"><a class="btn primary" href="#contact">{E(cta[0])}</a>{second}</div>
     </div>
   </section>
   <section><div class="wrap">{body}</div></section>

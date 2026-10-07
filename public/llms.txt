@@ -32,15 +32,19 @@ Email: hello@nastaliq.co
 ## Key facts
 
 - Cloud only: Nastaliq hosts and runs every system on managed cloud hosting in the region closest to the client, with offsite backups.
-- No lock-in: the system runs on open-source software, so data and setup can move to another host or partner.
+- No lock-in: data and setup can move to another host or partner, and a full backup is handed over on request.
 - Takes over existing systems: reviews current customisations and fixes anything fragile before adding new work.
 - Works with the client's accountant on the chart of accounts and tax reports.
 
 ## Pages
 
 - [Home](https://nastaliq.co/): services, pricing, how a project runs and FAQ.
+- [ERP implementation](https://nastaliq.co/erp-implementation): walkthrough, pilot, the move and day-to-day support; live in about six weeks.
+- [Pricing](https://nastaliq.co/erp-pricing): flat monthly plans with unlimited users, launch and migration fees.
 - [ERP for manufacturers and distributors](https://nastaliq.co/erp-for-manufacturers): purchasing, production, multi-warehouse stock, sales and accounts on one system.
 - [ERP data migration](https://nastaliq.co/erp-data-migration): paper records and old-software exports brought into the ERP, priced per 1,000 documents.
+- [ERP for retailers with several branches](https://nastaliq.co/erp-for-retail): stock per shop and warehouse, transfers, point of sale, one set of accounts.
 - [E-invoicing integration](https://nastaliq.co/e-invoicing): invoices reported to the tax authority as they are issued.
 - [Restaurant and bakery point of sale](https://nastaliq.co/restaurant-pos): a fast till connected to stock and accounts.
+- [Custom ERP apps](https://nastaliq.co/custom-erp-apps): morning alerts, owner dashboards, point of sale and branding on the admin.
 - [White-label development for ERP partner firms](https://nastaliq.co/erp-partner-development): custom apps, integrations, reports and fixes under the partner's name.
