@@ -1,0 +1,37 @@
+# Nastaliq
+
+> Nastaliq (also written Nastaliq ERP) is an ERP company for growing businesses. It sets up, hosts and supports one cloud system for accounting, stock, sales, purchasing, manufacturing and point of sale, moves years of paper and old-software records into it, and connects invoicing to the tax authority for e-invoicing.
+
+Website: https://nastaliq.co
+Email: hello@nastaliq.co
+
+## Services
+
+- ERP implementation: accounting, stock, buying, selling and manufacturing, configured around how the client works. Good fit: manufacturers, distributors and retailers with several branches.
+- Data migration: receipts, delivery notes, handwritten logs and exports from old software brought into the ERP so history is searchable. Priced per 1,000 documents after a paid sample.
+- E-invoicing: invoicing connected to the tax authority, so invoices are reported as they are issued and rejected ones are easy to fix. Built per country as clients need it.
+- Custom apps: point of sale for restaurants and bakeries, morning alerts for low stock and late payments, dashboards, and the client's own branding on the admin.
+- Development for ERP partner firms: custom apps, integrations, print formats, reports and fixes delivered under the partner's name, to their repository and standards.
+
+## Pricing (USD)
+
+- Core: $400 a month. One company: accounting, stock, sales, purchasing, e-invoicing, business-hours support.
+- Scale: $900 a month. Everything in Core plus multi-branch, manufacturing, point of sale, alerts, priority support.
+- Enterprise: from $2,000 a month. Dedicated server, named engineer, agreed response times.
+- All plans: unlimited users, no per-user fees, no software licence fee. Hosting, updates and support included.
+- Launch: $6,000 to $12,000 one time. About six weeks to go live, staff training included.
+- Partner development: from $45 an hour, or a dedicated developer from $3,000 a month.
+
+## How a project runs
+
+1. Walkthrough: the client shows how orders, stock and money move today; Nastaliq says plainly whether it is a fit.
+2. Pilot: one branch, warehouse or process goes live first and the team runs real work on it.
+3. The move: records come over, staff learn on their own screens, the old system stays readable until the client is sure.
+4. Day to day: hosting, updates and support from the people who built it. Data exports whenever the client wants.
+
+## Key facts
+
+- Cloud only: Nastaliq hosts and runs every system on managed cloud hosting in the region closest to the client, with offsite backups.
+- No lock-in: the system runs on open-source software, so data and setup can move to another host or partner.
+- Takes over existing systems: reviews current customisations and fixes anything fragile before adding new work.
+- Works with the client's accountant on the chart of accounts and tax reports.
