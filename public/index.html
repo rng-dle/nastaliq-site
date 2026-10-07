@@ -180,6 +180,11 @@ footer { border-top: 1px solid var(--line); padding-block: 28px 40px; }
 footer .wrap { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: space-between; color: var(--muted); font-size: 0.9rem; }
 footer .support { display: inline-flex; align-items: center; gap: 8px; }
 footer .ribbon { width: 18px; height: 18px; stroke: var(--accent); }
+.more { font-weight: 500; font-size: 0.95rem; text-underline-offset: 3px; align-self: flex-start; padding-block: 6px; }
+.more::after { content: " \2192"; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.links a { color: var(--muted); text-decoration: none; padding-block: 8px; }
+.links a:hover { color: var(--fg); text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -252,21 +257,25 @@ footer .ribbon { width: 18px; height: 18px; stroke: var(--accent); }
           <h3>ERP implementation</h3>
           <p>Accounting, stock, buying, selling and manufacturing, configured around your process instead of the other way round.</p>
           <p class="fit">Good fit: manufacturers, distributors and retailers with several branches.</p>
+          <a class="more" href="/erp-for-manufacturers">ERP for manufacturers and distributors</a>
         </article>
         <article class="service">
           <h3>Data migration</h3>
           <p>Receipts, delivery notes, handwritten logs, exports from your old software. We bring years of records in, so your history is searchable instead of sitting in a cupboard.</p>
           <p class="fit">Good fit: companies moving off paper or legacy systems.</p>
+          <a class="more" href="/erp-data-migration">How data migration works</a>
         </article>
         <article class="service">
           <h3>E-invoicing</h3>
           <p>We connect your invoicing to the tax authority, so invoices are reported as they are issued and rejected ones are easy to fix.</p>
           <p class="fit">Good fit: companies with e-invoicing deadlines.</p>
+          <a class="more" href="/e-invoicing">E-invoicing in detail</a>
         </article>
         <article class="service">
           <h3>Custom apps</h3>
           <p>Point of sale for restaurants and bakeries, morning alerts for low stock and late payments, dashboards, and your own branding on the admin.</p>
           <p class="fit">Good fit: teams that need more than the standard modules.</p>
+          <a class="more" href="/restaurant-pos">Point of sale for restaurants and bakeries</a>
         </article>
       </div>
     </div>
@@ -327,6 +336,7 @@ footer .ribbon { width: 18px; height: 18px; stroke: var(--accent); }
         <p class="label">Partner firms</p>
         <h2>More projects than developers?</h2>
         <p class="note">We take development work under your name: custom apps, integrations, print formats, reports and fixes, delivered to your repository and your standards.</p>
+        <a class="more" href="/erp-partner-development">How we work with partner firms</a>
       </div>
       <div>
         <p class="price">$45 <small>/ hour</small></p>
@@ -373,6 +383,7 @@ footer .ribbon { width: 18px; height: 18px; stroke: var(--accent); }
 <footer>
   <div class="wrap">
     <span>© 2026 Nastaliq</span>
+    <nav class="links" aria-label="Services"><a href="/erp-for-manufacturers">Manufacturers</a><a href="/erp-data-migration">Data migration</a><a href="/e-invoicing">E-invoicing</a><a href="/restaurant-pos">Restaurant POS</a><a href="/erp-partner-development">Partner firms</a></nav>
     <span class="support"><svg class="ribbon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 14.6C9.6 11.4 8.2 9.2 8.2 7a3.8 3.8 0 0 1 7.6 0c0 2.2-1.4 4.4-3.8 7.6"/><path d="M14.4 11.4L8.3 21.2M9.6 11.4l6.1 9.8"/></svg>We support Breast Cancer Awareness Month</span>
   </div>
 </footer>
