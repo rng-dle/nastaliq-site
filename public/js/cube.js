@@ -1,4 +1,4 @@
-/* Nastaliq glass cube: a crystal cube balanced on one corner, logo on every face.
+/* Nastaliq mark in 3D: the three interlocking planes of the logo, extruded and lit like a polished object.
    Drag to turn it any way, right-drag or shift-drag (two fingers on touch) to move it,
    pinch or Ctrl + scroll to zoom. Needs three.js r149 (vendor/three.min.js). */
 (function () {
@@ -25,7 +25,7 @@
   var scene = new T.Scene();
   scene.background = new T.Color(BG);
   var camera = new T.PerspectiveCamera(28, 1, 0.1, 100);
-  var TARGET = new T.Vector3(0, 1.3, 0);
+  var TARGET = new T.Vector3(0, 1.45, 0);
 
   /* ---------- studio lighting baked into an environment map ---------- */
   function panel(root, w, h, x, y, z, k, col) {
@@ -45,32 +45,33 @@
   scene.environment = pmrem.fromScene(envScene, 0.02).texture;
   pmrem.dispose();
 
-  /* ---------- materials ---------- */
-  var glass = new T.MeshPhysicalMaterial({
-    color: 0xf4f9ff, metalness: 0, roughness: 0.03, transmission: 1, thickness: 1.6,
-    clearcoat: 1, clearcoatRoughness: 0.02, envMapIntensity: 1.4
-  });
-  glass.ior = 1.5;
-  glass.attenuationColor = new T.Color(0xcfe8ff); glass.attenuationDistance = 6;
-  var glassBase = glass.clone(); glassBase.thickness = 0.5; glassBase.envMapIntensity = 0.35; glassBase.clearcoat = 0.15; glassBase.color = new T.Color(0xdfe8f2);
-  var metal = new T.MeshStandardMaterial({ color: 0xdfe3ea, metalness: 1, roughness: 0.18, envMapIntensity: 1.2 });
-  var edgeMat = new T.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.5 });
+  /* ---------- materials: one per plane of the mark ---------- */
+  function amber(hex) {
+    return new T.MeshPhysicalMaterial({ color: hex, metalness: 0.45, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.1 });
+  }
+  var PLANES = [   // [colour, z layer, path from the logo]
+    [0xD9800B, -1, 'M1.03 -2.50L1.81 -2.05L1.81 -1.05L2.52 -0.64L2.52 -3.36ZM-0.08 -1.86L-2.52 -0.45L-2.52 3.36L-0.16 2.00L-1.89 1.00L-0.08 -0.05Z'],
+    [0xF3A21C,  0, 'M-1.65 -1.14L0.08 -2.14L0.08 -0.05L1.65 0.86L1.65 -1.95L-1.65 -3.86ZM1.65 3.86L1.65 2.14L0.87 2.59L0.00 2.09L-0.71 2.50Z'],
+    [0xFFC23A,  1, 'M1.81 -0.86L1.81 1.14L0.00 0.09L-1.57 1.00L0.87 2.41L2.56 1.43L4.17 0.50ZM-2.56 -1.43L-4.17 -0.50L-2.68 0.36L-2.68 -0.55L-1.81 -1.05L-1.81 -1.86Z']
+  ];
 
-  /* ---------- geometry ---------- */
-  var S = 1.7;                                   // cube edge
+  /* ---------- geometry: logo polygons pulled out into solid shapes ---------- */
+  var K = 0.44, DEPTH = 0.3, LIFT = 1.8;
   var rig = new T.Group(); scene.add(rig);
-
-  var baseGeo = new T.BoxGeometry(3.1, 0.2, 3.1);
-  var base = new T.Mesh(baseGeo, glassBase); base.position.y = -0.1; rig.add(base);
-  base.add(new T.LineSegments(new T.EdgesGeometry(baseGeo), edgeMat));
-
-  var PIN_H = 0.2;
-  var pin = new T.Mesh(new T.CylinderGeometry(0.075, 0.095, PIN_H, 32), metal);
-  pin.position.y = PIN_H / 2; rig.add(pin);
-
-  var cubeGeo = new T.BoxGeometry(S, S, S);
-  var cube = new T.Mesh(cubeGeo, glass);
-  cube.add(new T.LineSegments(new T.EdgesGeometry(cubeGeo), edgeMat));
+  var cube = new T.Group();                         // the mark; named cube in the controls below
+  PLANES.forEach(function (pl) {
+    var mat = amber(pl[0]);
+    pl[2].split('Z').forEach(function (sub) {
+      var pts = [], re = /(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/g, m;
+      while ((m = re.exec(sub))) pts.push(new T.Vector2(parseFloat(m[1]) * K, -parseFloat(m[2]) * K));
+      if (pts.length < 3) return;
+      var geo = new T.ExtrudeGeometry(new T.Shape(pts), {
+        depth: DEPTH, bevelEnabled: true, bevelThickness: 0.035, bevelSize: 0.03, bevelSegments: 4, curveSegments: 1
+      });
+      geo.translate(0, 0, pl[1] * DEPTH - DEPTH / 2);
+      cube.add(new T.Mesh(geo, mat));
+    });
+  });
   rig.add(cube);
 
   /* studio backdrop and floor: opaque, so the glass has something to refract */
@@ -89,59 +90,12 @@
   var sg = sh.getContext('2d'), gr = sg.createRadialGradient(64, 64, 4, 64, 64, 64);
   gr.addColorStop(0, 'rgba(0,0,0,.75)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
   sg.fillStyle = gr; sg.fillRect(0, 0, 128, 128);
-  var shadow = new T.Mesh(new T.PlaneGeometry(6.4, 6.4), new T.MeshBasicMaterial({ map: new T.CanvasTexture(sh), transparent: true, depthWrite: false }));
+  var shadow = new T.Mesh(new T.PlaneGeometry(5.2, 5.2), new T.MeshBasicMaterial({ map: new T.CanvasTexture(sh), transparent: true, opacity: 0.7, depthWrite: false }));
   shadow.rotation.x = -Math.PI / 2; shadow.position.y = -0.21; rig.add(shadow);
 
-  /* ---------- logo on every face ---------- */
-  var markSVG = '<svg xmlns="http://www.w3.org/2000/svg" width="854" height="792" viewBox="-4.27 -3.96 8.54 7.92"><path fill="#F3A21C" d="M-1.65 -1.14L0.08 -2.14L0.08 -0.05L1.65 0.86L1.65 -1.95L-1.65 -3.86ZM1.65 3.86L1.65 2.14L0.87 2.59L0.00 2.09L-0.71 2.50Z"/><path fill="#D9800B" d="M1.03 -2.50L1.81 -2.05L1.81 -1.05L2.52 -0.64L2.52 -3.36ZM-0.08 -1.86L-2.52 -0.45L-2.52 3.36L-0.16 2.00L-1.89 1.00L-0.08 -0.05Z"/><path fill="#FFC23A" d="M1.81 -0.86L1.81 1.14L0.00 0.09L-1.57 1.00L0.87 2.41L2.56 1.43L4.17 0.50ZM-2.56 -1.43L-4.17 -0.50L-2.68 0.36L-2.68 -0.55L-1.81 -1.05L-1.81 -1.86Z"/></svg>';
-  var wordEl = document.querySelector('.brand svg.w path');
-  var wordSVG = wordEl ? '<svg xmlns="http://www.w3.org/2000/svg" width="1514" height="410" viewBox="33 -782 3785 1024"><path fill="#F5F0E8" d="' + wordEl.getAttribute('d') + '"/></svg>' : '';
-  var lc = document.createElement('canvas'); lc.width = lc.height = 1024;
-  var lx = lc.getContext('2d');
-  var logoTex = new T.CanvasTexture(lc);
-  logoTex.encoding = T.sRGBEncoding; logoTex.anisotropy = 8; logoTex.generateMipmaps = true;
-  function img(svg, done) {
-    var im = new Image();
-    im.onload = function () { done(im); };
-    im.onerror = function () { done(null); };
-    im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-  }
-  img(markSVG, function (m) {
-    img(wordSVG, function (w) {
-      lx.clearRect(0, 0, 1024, 1024);
-      if (m) { var mw = 560, mh = mw * 792 / 854; lx.drawImage(m, 512 - mw / 2, w ? 330 - mh / 2 : 512 - mh / 2, mw, mh); }
-      if (w) { var ww = 640, wh = ww * 1024 / 3785; lx.drawImage(w, 512 - ww / 2, 690 - wh / 2, ww, wh); }
-      logoTex.needsUpdate = true;
-    });
-  });
-  var logoMat = new T.MeshBasicMaterial({ map: logoTex, transparent: true, depthWrite: false, toneMapped: false });
-  var faces = [
-    [1, 0, 0, 0, 1, 0], [-1, 0, 0, 0, 1, 0], [0, 1, 0, 0, 0, -1],
-    [0, -1, 0, 0, 0, 1], [0, 0, 1, 0, 1, 0], [0, 0, -1, 0, 1, 0]
-  ];
-  var LS = S * 0.82;
-  faces.forEach(function (f) {
-    var p = new T.Mesh(new T.PlaneGeometry(LS, LS), logoMat);
-    p.position.set(f[0], f[1], f[2]).multiplyScalar(S / 2 + 0.004);
-    p.up.set(f[3], f[4], f[5]);
-    p.lookAt(p.position.x + f[0], p.position.y + f[1], p.position.z + f[2]);
-    p.renderOrder = 2;
-    cube.add(p);
-  });
-
-  /* ---------- resting pose: balanced on one corner, front face tilted up ---------- */
-  var qz = new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 0, 1), Math.PI / 4);
-  var qx = new T.Quaternion().setFromAxisAngle(new T.Vector3(1, 0, 0), -0.6155);   // about 35.26 degrees
-  var q0 = qx.clone().multiply(qz);
-  var pos0 = new T.Vector3();
-  (function () {
-    var lowest = new T.Vector3(), minY = Infinity, h = S / 2;
-    [-1, 1].forEach(function (a) { [-1, 1].forEach(function (b) { [-1, 1].forEach(function (c) {
-      var v = new T.Vector3(a * h, b * h, c * h).applyQuaternion(q0);
-      if (v.y < minY) { minY = v.y; lowest.copy(v); }
-    }); }); });
-    pos0.set(-lowest.x, PIN_H - lowest.y, -lowest.z);
-  })();
+  /* ---------- resting pose: floating, turned a little toward the viewer ---------- */
+  var q0 = new T.Quaternion().setFromEuler(new T.Euler(-0.16, 0.5, 0.03));
+  var pos0 = new T.Vector3(0, LIFT, 0);
   cube.quaternion.copy(q0); cube.position.copy(pos0);
 
   /* ---------- view, sizing ---------- */
@@ -153,8 +107,8 @@
   }
   function placeCamera() {
     var halfTan = Math.tan(camera.fov * Math.PI / 360);
-    var need = 4.5 / (2 * halfTan * camera.aspect);        // keep the base inside the frame width
-    var need2 = 5.7 / (2 * halfTan);                       // and the whole cube inside the frame height
+    var need = 4.8 / (2 * halfTan * camera.aspect);        // keep the base inside the frame width
+    var need2 = 6.2 / (2 * halfTan);                       // and the whole cube inside the frame height
     var dist = Math.max(need, need2, 8.5) / zoom;
     camera.position.set(0, TARGET.y + dist * 0.16, dist);
     camera.lookAt(TARGET);
@@ -256,7 +210,7 @@
     visible = es[0].isIntersecting; if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
   }, { rootMargin: '120px' }).observe(stage);
   function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-  var q1 = new T.Quaternion(), pv = new T.Vector3();
+  var q1 = new T.Quaternion(), pv = new T.Vector3(), swayT = 0;
 
   function frame(now) {
     raf = 0;
@@ -268,14 +222,15 @@
       cube.quaternion.copy(anim.q).slerp(q0, e); cube.position.copy(anim.p).lerp(pos0, e);
       rig.position.copy(anim.r).lerp(pv.set(0, 0, 0), e); rigT.copy(rig.position);
       zoomT = anim.z + (1 - anim.z) * e;
-      if (anim.t >= 1) { anim = null; resting = true; }
+      if (anim.t >= 1) { anim = null; resting = true; swayT = 0; }
     } else {
       if (!dragging && (Math.abs(vel.x) > 0.0002 || Math.abs(vel.y) > 0.0002)) {   // momentum
         turn(vel.x, vel.y); var f = Math.pow(0.0035, dt); vel.multiplyScalar(f);
       }
-      if (resting && !dragging && !reduce) {      // slow turntable about the pin
-        q1.setFromAxisAngle(AY, 0.28 * dt); cube.quaternion.premultiply(q1).normalize();
-        cube.position.applyQuaternion(q1);
+      if (resting && !dragging && !reduce) {      // gentle sway and float, always facing the viewer
+        swayT += dt;
+        q1.setFromAxisAngle(AY, Math.sin(swayT * 0.6) * 0.62); cube.quaternion.copy(q1).multiply(q0);
+        cube.position.set(0, LIFT + Math.sin(swayT * 0.9) * 0.07, 0);
       } else if (!resting && !dragging && now - lastTouch > 9000 && !reduce && Math.abs(vel.x) + Math.abs(vel.y) < 0.0002) {
         reset();                                  // let go for nine seconds: drift home
       }

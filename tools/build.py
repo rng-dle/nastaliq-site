@@ -148,10 +148,10 @@ def home():
         '<section class="cube-band" id="cube"><div class="cube-head">'
         + E('span', 'Nastaliq', 'Nastaliq', 'eyebrow rv')
         + E('h2', 'Everything you run, in one piece.', 'Tout ce que vous gérez, d\'un seul bloc.', 'h2 rv')
-        + E('p', 'Sales, stock, purchasing and books share one system. Pick up the cube and turn it any way you like.', 'Les ventes, les stocks, les achats et la comptabilité partagent un seul système. Prenez le cube et tournez-le comme vous voulez.', 'lede rv')
+        + E('p', 'Sales, stock, purchasing and books share one system. Pick up the mark and turn it any way you like.', 'Les ventes, les stocks, les achats et la comptabilité partagent un seul système. Prenez la marque et tournez-la comme vous voulez.', 'lede rv')
         + '</div>'
-        '<div id="cube-stage" class="rv" role="group" aria-label="Interactive 3D Nastaliq cube" data-aria-fr="Cube Nastaliq interactif en 3D">'
-        '<canvas id="cube-canvas" tabindex="0" aria-label="Glass cube with the Nastaliq logo. Drag to turn, arrow keys to turn, plus and minus to zoom, R to reset." data-aria-fr="Cube de verre avec le logo Nastaliq. Glissez ou utilisez les flèches pour le tourner, plus et moins pour zoomer, R pour réinitialiser."></canvas>'
+        '<div id="cube-stage" class="rv" role="group" aria-label="Interactive 3D Nastaliq mark" data-aria-fr="Marque Nastaliq interactive en 3D">'
+        '<canvas id="cube-canvas" tabindex="0" aria-label="The Nastaliq mark in 3D. Drag or use the arrow keys to turn it, plus and minus to zoom, R to reset." data-aria-fr="La marque Nastaliq en 3D. Glissez ou utilisez les flèches pour la tourner, plus et moins pour zoomer, R pour réinitialiser."></canvas>'
         + E('div', 'Drag to turn · Right-drag to move · Pinch or Ctrl + scroll to zoom', 'Glissez pour tourner · Clic droit pour déplacer · Pincez ou Ctrl + molette pour zoomer', 'cube-hint')
         + '<div class="cube-ui">'
         + E('button', 'Turn freely', 'Tourner librement', '', 'id="cube-turn" type="button" aria-pressed="false"')
