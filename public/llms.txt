@@ -4,12 +4,14 @@
 
 Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: hello@nastaliq.co
 
+French version: https://nastaliq.co/fr/llms.txt
+
 ## Pages
-- [Home](https://nastaliq.co/): overview
-- [Products](https://nastaliq.co/products.html): every product with its real status
-- [Company](https://nastaliq.co/company.html): who we are
-- [Contact](https://nastaliq.co/contact.html): how to reach us
-- [Articles](https://nastaliq.co/articles.html): guides for small business owners
+- [Home](https://nastaliq.co/)
+- [Products](https://nastaliq.co/products.html)
+- [Company](https://nastaliq.co/company.html)
+- [Contact](https://nastaliq.co/contact.html)
+- [Articles](https://nastaliq.co/articles.html)
 
 ## Products and status
 - [Business suite](https://nastaliq.co/products.html#suite): Inventory, purchasing, accounting and sales in one cloud system, set up for your business and hosted by us. (Available)
@@ -17,7 +19,6 @@ Nastaliq LLP is incorporated with the Securities and Exchange Commission of Paki
 - [Janitorial operations](https://nastaliq.co/products.html#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients. (Early access)
 - [Owner dashboard and alerts](https://nastaliq.co/products.html#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention. (Early access)
 - [English and French](https://nastaliq.co/products.html#bilingual): One switch on every screen, with Canadian French terms such as courriel and téléverser. (Available)
-- [Claude-powered assistance](https://nastaliq.co/products.html#claude): Plain-language questions about your data and in-screen guidance. Discrepancy auditing is planned. (Pilot)
 
 ## Guides
 - [How to choose POS and inventory software for a small business](https://nastaliq.co/articles/choosing-pos-and-inventory-software-small-business.html): A practical checklist for owners comparing point of sale and inventory systems: what to test, what to ask and what to ignore.
@@ -37,8 +38,6 @@ Nastaliq LLP is incorporated with the Securities and Exchange Commission of Paki
 **Is Nastaliq available in French?** Yes. Every screen has an English and French switch, with Canadian French terms such as courriel and téléverser.
 
 **Can you bring my existing records in?** Yes. We help bring your existing customers, products and records in during setup. Tell us what you use today and we will say what is possible.
-
-**What does the Claude-powered assistance do?** Plain-language questions about your own data and guidance inside the screen. Both are in Pilot. Automatic discrepancy auditing is only planned. Every AI feature on this site shows its real status.
 
 **Who builds and supports Nastaliq?** Nastaliq LLP, a small team in Lahore, Pakistan, serving clients in North America.
 

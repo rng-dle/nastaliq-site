@@ -36,6 +36,9 @@ nav a.l:hover{color:var(--txt)}
 .lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .lang button{background:none;border:0;color:var(--mut);font:700 .78rem var(--b);padding:8px 12px;cursor:pointer}
 .lang button[aria-pressed=true]{background:var(--yellow);color:var(--on-y)}
+.lang a{color:var(--mut);font:700 .78rem var(--b);padding:8px 12px;text-decoration:none;display:block}
+.lang a[aria-current=true]{background:var(--yellow);color:var(--on-y)}
+.lang a:hover{color:var(--txt)}.lang a[aria-current=true]:hover{color:var(--on-y)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 26px;border-radius:999px;font:700 1rem var(--b);text-decoration:none;border:2px solid var(--yellow);cursor:pointer;transition:transform .15s,box-shadow .15s}
 .btn.pri{background:var(--yellow);color:var(--on-y)}
 .btn.pri:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px #ffc23a88}
@@ -254,7 +257,6 @@ nav a.l[aria-current=page]{color:var(--yellow)}
 /* inner pages */
 .skip{position:absolute;left:-999px;top:8px;background:var(--yellow);color:var(--on-y);padding:10px 16px;border-radius:999px;z-index:100;font-weight:700}
 .skip:focus{left:12px}
-html[data-en-only] .lang{display:none}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
 .pcard{background:#fff;border:1px solid var(--pline);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:14px;min-width:0;scroll-margin-top:90px}
 .pcard h2{font-size:1.6rem;font-weight:800}

@@ -4,7 +4,9 @@
 - Rewrites the <head> (SEO/AEO metadata, JSON-LD), header, footer and FAQ block of the hand-kept public/index.html.
 - Writes sitemap.xml, robots.txt, llms.txt.
 Pricing never appears on the site: prices go out by email only."""
-import html, json, os, re
+import html, json, os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from content_fr import FR as ARTS_FR
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUB = os.path.join(ROOT, 'public')
@@ -15,9 +17,10 @@ FONT = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="p
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">')
 
 def x(s): return html.escape(s, quote=True)
+LANG = 'en'
 def B(en, fr, tag='span'):
-    """bilingual inline text"""
-    return '<span class="en">%s</span><span class="fr">%s</span>' % (en, fr)
+    """pick the text for the language being built"""
+    return fr if LANG == 'fr' else en
 
 # ---------------------------------------------------------------- shared data
 ORG = {
@@ -49,9 +52,6 @@ PRODUCTS = [
     ('bilingual', 'ok', 'Available', 'Disponible', 'English and French', 'Anglais et français',
      'One switch on every screen, with Canadian French terms such as courriel and téléverser.',
      'Un seul bouton sur chaque écran, avec la terminologie du français canadien, comme courriel et téléverser.', []),
-    ('claude', 'warn', 'Pilot', 'Projet pilote', 'Claude-powered assistance', 'Assistance propulsée par Claude',
-     'Plain-language questions about your data and in-screen guidance. Discrepancy auditing is planned.',
-     "Questions en langage courant sur vos données et aide dans l'écran. L'audit des écarts est prévu.", []),
 ]
 
 # FAQ shown on the home page AND emitted as FAQPage JSON-LD (text must match what is visible)
@@ -74,9 +74,6 @@ FAQ = [
     ('Can you bring my existing records in?', 'Pouvez-vous importer mes données existantes?',
      'Yes. We help bring your existing customers, products and records in during setup. Tell us what you use today and we will say what is possible.',
      "Oui. Nous vous aidons à importer vos clients, produits et dossiers existants pendant l'installation. Dites-nous ce que vous utilisez aujourd'hui et nous vous dirons ce qui est possible."),
-    ('What does the Claude-powered assistance do?', "Que fait l'assistance propulsée par Claude?",
-     'Plain-language questions about your own data and guidance inside the screen. Both are in Pilot. Automatic discrepancy auditing is only planned. Every AI feature on this site shows its real status.',
-     "Des questions en langage courant sur vos propres données et de l'aide dans l'écran. Les deux sont en projet pilote. L'audit automatique des écarts est seulement prévu. Chaque fonction d'IA du site affiche son état réel."),
     ('Who builds and supports Nastaliq?', 'Qui conçoit et soutient Nastaliq?',
      'Nastaliq LLP, a small team in Lahore, Pakistan, serving clients in North America.',
      'Nastaliq LLP, une petite équipe à Lahore, au Pakistan, au service de clients nord-américains.'),
@@ -176,61 +173,93 @@ ARTS = [
 <p>Nastaliq is cloud-only. Setup and hosting are handled by us, so a small team spends time selling and receiving stock instead of maintaining a server.</p>'''),
 ]
 
+# ---------------------------------------------------------------- language helpers
+def lp(): return 'fr/' if LANG == 'fr' else ''
+def art_t(a, k): return ARTS_FR[a['slug']][k] if LANG == 'fr' else a[k]
+
+def levels(path):
+    d = path.count('/')
+    return '../' * d, '../' * (d + (1 if LANG == 'fr' else 0))   # (up within language folder, up to site root)
+
+def alt_href(path):
+    up, pre = levels(path)
+    return (pre + path) if LANG == 'fr' else (up + 'fr/' + path)
+
 # ---------------------------------------------------------------- fragments
-def header(pre='', cur='', home=False):
+def header(path, cur='', home=False):
+    up, pre = levels(path)
     def l(href, en, fr, k=''):
         c = ' aria-current="page"' if cur == k and k else ''
         return '<a class="l" href="%s"%s>%s</a>' % (href, c, B(en, fr))
     extra = (l('#sectors', 'Industries', 'Secteurs') + l('#pricing', 'Pricing', 'Tarifs')) if home else ''
-    lang = ('<div class="lang" role="group" aria-label="Language"><button id="b-en" type="button" aria-pressed="true">EN</button>'
-            '<button id="b-fr" type="button" aria-pressed="false">FR</button></div>')
-    cta = '<a class="btn pri sm" href="%s">%s</a>' % ('#contact' if home else pre + 'contact.html', B('Request a demo', 'Demander une démo'))
-    return ('<a class="skip" href="#main">Skip to content</a><header><div class="in bar"><a class="logo" href="%sindex.html" aria-label="Nastaliq, home">'
+    en_h = (pre + path) if LANG == 'fr' else ''
+    fr_h = alt_href(path) if LANG == 'en' else ''
+    lang = ('<div class="lang" role="group" aria-label="%s"><a %s lang="en" hreflang="en">EN</a><a %s lang="fr" hreflang="fr">FR</a></div>'
+            % (B('Language', 'Langue'),
+               'aria-current="true"' if LANG == 'en' else 'href="%s"' % (pre + path),
+               'aria-current="true"' if LANG == 'fr' else 'href="%s"' % fr_h))
+    cta = '<a class="btn pri sm" href="%s">%s</a>' % ('#contact' if home else up + 'contact.html', B('Request a demo', 'Demander une démo'))
+    return ('<a class="skip" href="#main">%s</a><header><div class="in bar"><a class="logo" href="%sindex.html" aria-label="%s">'
             '<img class="mk" src="%simg/mark.svg" width="30" height="28" alt=""><img class="wd" src="%simg/wordmark.svg" width="55" height="15" alt="Nastaliq"></a>'
-            '<nav id="nav" aria-label="Main">%s%s%s%s%s%s%s</nav>'
+            '<nav id="nav" aria-label="%s">%s%s%s%s%s%s%s</nav>'
             '<button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><i></i><i></i></button></div></header>'
-            % (pre, pre, pre, extra, l(pre + 'products.html', 'Products', 'Produits', 'products'), l(pre + 'company.html', 'Company', 'Entreprise', 'company'),
-               l(pre + 'articles.html', 'Articles', 'Articles', 'art'), l(pre + 'contact.html', 'Contact', 'Contact', 'contact'), lang, cta))
+            % (B('Skip to content', 'Aller au contenu'), up, B('Nastaliq, home', 'Nastaliq, accueil'), pre, pre, B('Main', 'Principale'), extra,
+               l(up + 'products.html', 'Products', 'Produits', 'products'), l(up + 'company.html', 'Company', 'Entreprise', 'company'),
+               l(up + 'articles.html', 'Articles', 'Articles', 'art'), l(up + 'contact.html', 'Contact', 'Contact', 'contact'), lang, cta))
 
-def footer(pre=''):
+def footer(path):
+    up, pre = levels(path)
     return ('<div class="in"><footer class="foot2"><div class="fl"><a href="%sproducts.html">%s</a><a href="%scompany.html">%s</a><a href="%sarticles.html">Articles</a>'
             '<a href="%scontact.html">Contact</a><a href="mailto:%s">%s</a></div>'
             '<p>%s</p><span>&copy; 2026 Nastaliq LLP. %s</span></footer></div>'
-            % (pre, B('Products', 'Produits'), pre, B('Company', 'Entreprise'), pre, pre, EMAIL, EMAIL,
-               B('Every feature carries its real status. Available means clients can use it today. Early access, In development, Pilot and Planned are labelled as such. Claude is a product of Anthropic. Trademarks belong to their owners.',
-                 "Chaque fonction affiche son état réel. Disponible signifie que des clients peuvent l'utiliser aujourd'hui. Accès anticipé, En développement, Projet pilote et Prévu sont indiqués tels quels. Claude est un produit d'Anthropic. Les marques citées appartiennent à leurs propriétaires."),
+            % (up, B('Products', 'Produits'), up, B('Company', 'Entreprise'), up, up, EMAIL, EMAIL,
+               B('Every feature carries its real status. Available means clients can use it today. Early access, In development and Planned are labelled as such.',
+                 "Chaque fonction affiche son état réel. Disponible signifie que des clients peuvent l'utiliser aujourd'hui. Accès anticipé, En développement et Prévu sont indiqués tels quels."),
                B('Lahore, Pakistan, serving North America.', "Lahore, Pakistan, au service de l'Amérique du Nord.")))
 
-def head(path, title, desc, schema, pre='', og_type='website', extra='', en_only=False):
-    url = SITE + '/' + path
-    graph = {'@context': 'https://schema.org', '@graph': [ORG, WEBSITE] + schema}
-    return ('<!doctype html>\n<html lang="en"%s><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+def url_for(path, lang=None):
+    lang = lang or LANG
+    return SITE + '/' + ('fr/' if lang == 'fr' else '') + ('' if path == 'index.html' else path)
+
+def head(path, title, desc, schema, og_type='website'):
+    up, pre = levels(path)
+    url = url_for(path)
+    org = dict(ORG)
+    if LANG == 'fr':
+        org['description'] = "Nastaliq conçoit et héberge des logiciels d'affaires infonuagiques pour les petites et moyennes entreprises d'Amérique du Nord : caisse, stocks, achats, comptabilité et ventes dans un seul système, en français et en anglais."
+    web = dict(WEBSITE)
+    graph = {'@context': 'https://schema.org', '@graph': [org, web] + schema}
+    en, fr = url_for(path, 'en'), url_for(path, 'fr')
+    oloc, oalt = ('fr_CA', 'en_CA') if LANG == 'fr' else ('en_CA', 'fr_CA')
+    return ('<!doctype html>\n<html lang="%s"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
             '<title>%s</title><meta name="description" content="%s"><link rel="canonical" href="%s">'
+            '<link rel="alternate" hreflang="en" href="%s"><link rel="alternate" hreflang="fr" href="%s"><link rel="alternate" hreflang="x-default" href="%s">'
             '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1"><meta name="theme-color" content="#000000">'
             '<link rel="icon" href="%sfavicon.svg" type="image/svg+xml">'
-            '<meta property="og:site_name" content="Nastaliq"><meta property="og:locale" content="en_CA"><meta property="og:locale:alternate" content="fr_CA">'
+            '<meta property="og:site_name" content="Nastaliq"><meta property="og:locale" content="%s"><meta property="og:locale:alternate" content="%s">'
             '<meta property="og:type" content="%s"><meta property="og:title" content="%s"><meta property="og:description" content="%s"><meta property="og:url" content="%s">'
-            '<meta property="og:image" content="%s/img/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Nastaliq: cloud business software for small businesses">'
+            '<meta property="og:image" content="%s/img/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="%s">'
             '<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="%s"><meta name="twitter:description" content="%s"><meta name="twitter:image" content="%s/img/og.png">'
-            '%s%s<link rel="stylesheet" href="%scss/home.css">'
+            '%s<link rel="stylesheet" href="%scss/home.css">'
             '<script type="application/ld+json">%s</script></head>'
-            % (' data-en-only' if en_only else '', x(title), x(desc), url, pre, og_type, x(title), x(desc), url, SITE, x(title), x(desc), SITE, extra, FONT, pre, json.dumps(graph, ensure_ascii=False, separators=(',', ':'))))
+            % (LANG, x(title), x(desc), url, en, fr, en, pre, oloc, oalt, og_type, x(title), x(desc), url, SITE,
+               B('Nastaliq: cloud business software for small businesses', "Nastaliq : logiciel d'affaires infonuagique pour petites entreprises"),
+               x(title), x(desc), SITE, FONT, pre, json.dumps(graph, ensure_ascii=False, separators=(',', ':'))))
 
-SPRITE = open(os.path.join(ROOT, 'tools', 'sprite.svg')).read() if os.path.exists(os.path.join(ROOT, 'tools', 'sprite.svg')) else ''
-
-def page(path, title, desc, schema, body, pre='', cur='', og_type='website', extra='', en_only=False):
-    return (head(path, title, desc, schema, pre, og_type, extra, en_only) + '<body>' + header(pre, cur) + '<main id="main">' + body + '</main>'
-            + footer(pre) + '<script src="%sjs/home.js" defer></script></body></html>\n' % pre)
+def page(path, title, desc, schema, body, cur='', og_type='website'):
+    up, pre = levels(path)
+    return (head(path, title, desc, schema, og_type) + '<body>' + header(path, cur) + '<main id="main">' + body + '</main>'
+            + footer(path) + '<script src="%sjs/home.js" defer></script></body></html>\n' % pre)
 
 def crumbs(items):
     return {'@type': 'BreadcrumbList', 'itemListElement': [
-        {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': SITE + '/' + u} for i, (n, u) in enumerate(items)]}
+        {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': u} for i, (n, u) in enumerate(items)]}
 
 def faq_ld(pairs):
-    return {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in pairs]}
+    return {'@type': 'FAQPage', 'inLanguage': LANG, 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in pairs]}
 
 def write(path, s):
-    p = os.path.join(PUB, path); os.makedirs(os.path.dirname(p), exist_ok=True)
+    p = os.path.join(PUB, lp() + path); os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w', encoding='utf-8').write(s)
 
 def hero(h1en, h1fr, lede_en, lede_fr):
@@ -239,6 +268,9 @@ def hero(h1en, h1fr, lede_en, lede_fr):
 
 def badge(cls, en, fr):
     return '<span class="tag%s">%s</span>' % (' w' if cls == 'warn' else '', B(en, fr))
+
+def pg(path, name_en, name_fr):
+    return (name_fr if LANG == 'fr' else name_en, url_for(path))
 
 # ---------------------------------------------------------------- products
 def products():
@@ -254,12 +286,15 @@ def products():
             % (B('Tell us what you run', 'Dites-nous ce que vous exploitez'),
                B('We reply by email with a plan and a price.', 'Nous répondons par courriel avec un plan et un prix.'),
                B('Get in touch', 'Nous joindre')))
-    items = [{'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'SoftwareApplication', 'name': p[4], 'description': p[6], 'applicationCategory': 'BusinessApplication',
-              'operatingSystem': 'Web', 'url': SITE + '/products.html#' + p[0], 'provider': {'@id': SITE + '/#org'}}} for i, p in enumerate(PRODUCTS)]
-    schema = [{'@type': 'CollectionPage', 'name': 'Nastaliq products', 'url': SITE + '/products.html', 'isPartOf': {'@id': SITE + '/#website'}},
-              {'@type': 'ItemList', 'name': 'Nastaliq products', 'itemListElement': items}, crumbs([('Home', ''), ('Products', 'products.html')])]
-    write('products.html', page('products.html', 'Nastaliq Products | POS, inventory, accounting and more',
-          'What Nastaliq builds and where each product stands: business suite, point of sale, janitorial operations, owner dashboard and Claude-powered assistance.',
+    items = [{'@type': 'ListItem', 'position': i + 1, 'item': {'@type': 'SoftwareApplication', 'name': B(p[4], p[5]), 'description': B(p[6], p[7]), 'applicationCategory': 'BusinessApplication',
+              'operatingSystem': 'Web', 'url': url_for('products.html') + '#' + p[0], 'provider': {'@id': SITE + '/#org'}}} for i, p in enumerate(PRODUCTS)]
+    schema = [{'@type': 'CollectionPage', 'name': B('Nastaliq products', 'Produits Nastaliq'), 'url': url_for('products.html'), 'inLanguage': LANG, 'isPartOf': {'@id': SITE + '/#website'}},
+              {'@type': 'ItemList', 'name': B('Nastaliq products', 'Produits Nastaliq'), 'itemListElement': items},
+              crumbs([pg('index.html', 'Home', 'Accueil'), pg('products.html', 'Products', 'Produits')])]
+    write('products.html', page('products.html',
+          B('Nastaliq Products | POS, inventory, accounting and more', 'Produits Nastaliq | Caisse, stocks, comptabilité et plus'),
+          B('What Nastaliq builds and where each product stands: business suite, point of sale, janitorial operations, owner dashboard and English and French.',
+            "Ce que Nastaliq conçoit et où en est chaque produit : suite d'affaires, point de vente, entretien ménager et tableau de bord."),
           schema, body, cur='products'))
 
 # ---------------------------------------------------------------- company
@@ -280,10 +315,11 @@ def company():
                  "Nastaliq conçoit et héberge des logiciels d'affaires infonuagiques pour les petites et moyennes entreprises d'Amérique du Nord.")
             + '<section class="band paper"><div class="in"><h2>%s</h2><dl class="facts">%s</dl></div></section>' % (B('Who we are', 'Qui nous sommes'), dl)
             + '<section class="band yel"><div class="in"><h2>%s</h2><div class="f4" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">%s</div></div></section>' % (B('How we work with clients', 'Notre façon de travailler avec nos clients'), cards))
-    schema = [{'@type': 'AboutPage', 'name': 'About Nastaliq', 'url': SITE + '/company.html', 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
-              crumbs([('Home', ''), ('Company', 'company.html')])]
-    write('company.html', page('company.html', 'About Nastaliq LLP | Cloud business software team',
-          'Nastaliq LLP builds and hosts cloud business software for small and mid-sized businesses in North America. Registered with SECP, based in Lahore, Pakistan.',
+    schema = [{'@type': 'AboutPage', 'name': B('About Nastaliq', 'À propos de Nastaliq'), 'url': url_for('company.html'), 'inLanguage': LANG, 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
+              crumbs([pg('index.html', 'Home', 'Accueil'), pg('company.html', 'Company', 'Entreprise')])]
+    write('company.html', page('company.html', B('About Nastaliq LLP | Cloud business software team', 'À propos de Nastaliq LLP | Équipe de logiciels infonuagiques'),
+          B('Nastaliq LLP builds and hosts cloud business software for small and mid-sized businesses in North America. Registered with SECP, based in Lahore, Pakistan.',
+            "Nastaliq LLP conçoit et héberge des logiciels d'affaires infonuagiques pour les PME d'Amérique du Nord. Établie à Lahore, au Pakistan."),
           schema, body, cur='company'))
 
 # ---------------------------------------------------------------- contact
@@ -292,98 +328,152 @@ def contact():
              ('Your locations', 'Vos emplacements', 'How many, and where.', 'Combien, et où.'),
              ('What you use today', "Ce que vous utilisez aujourd'hui", 'Tills, spreadsheets, another system.', 'Caisses, tableurs, un autre système.')]
     li = ''.join('<li><b>%s</b><span>%s</span></li>' % (B(a, b), B(c, d)) for a, b, c, d in steps)
+    subj = B('Nastaliq%20demo%20request', 'Demande%20de%20d%C3%A9mo%20Nastaliq')
     body = (hero('Tell us about your business.', 'Parlez-nous de votre entreprise.',
                  'Write to us with what you sell, how many locations you run, and what you use today. We reply by email with a plan and a price.',
                  "Écrivez-nous ce que vous vendez, combien d'emplacements vous exploitez et ce que vous utilisez aujourd'hui. Nous répondons par courriel avec un plan et un prix.")
             + '<section class="band"><div class="in"><div class="ct" id="contact"><div><h2>%s</h2><p class="lede" style="margin-top:14px">%s</p>'
-              '<p style="margin-top:22px;font-weight:700;font-size:1.2rem">%s<button type="button" class="copy" id="cp">Copy</button></p></div>'
-              '<div style="display:grid;gap:14px;align-content:center"><a class="btn" href="mailto:%s?subject=Nastaliq%%20demo%%20request">%s</a>'
+              '<p style="margin-top:22px;font-weight:700;font-size:1.2rem">%s<button type="button" class="copy" id="cp" data-done="%s">%s</button></p></div>'
+              '<div style="display:grid;gap:14px;align-content:center"><a class="btn" href="mailto:%s?subject=%s">%s</a>'
               '<ol class="steps">%s</ol></div></div></div></section>'
             % (B('Email us', 'Écrivez-nous'), B('Pricing is sent by email: a flat monthly subscription with unlimited users plus a one-time setup fee.',
                  "Le tarif est envoyé par courriel : un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques."),
-               EMAIL, EMAIL, B('Email us', 'Écrivez-nous'), li))
-    schema = [{'@type': 'ContactPage', 'name': 'Contact Nastaliq', 'url': SITE + '/contact.html', 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
-              crumbs([('Home', ''), ('Contact', 'contact.html')])]
-    write('contact.html', page('contact.html', 'Contact Nastaliq | Get a plan and a price by email',
-          'Tell Nastaliq what you sell, how many locations you run and what you use today. We reply by email with a plan and a price.', schema, body, cur='contact'))
+               EMAIL, B('Copied', 'Copié'), B('Copy', 'Copier'), EMAIL, subj, B('Email us', 'Écrivez-nous'), li))
+    schema = [{'@type': 'ContactPage', 'name': B('Contact Nastaliq', 'Joindre Nastaliq'), 'url': url_for('contact.html'), 'inLanguage': LANG, 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
+              crumbs([pg('index.html', 'Home', 'Accueil'), pg('contact.html', 'Contact', 'Contact')])]
+    write('contact.html', page('contact.html', B('Contact Nastaliq | Get a plan and a price by email', 'Joindre Nastaliq | Un plan et un prix par courriel'),
+          B('Tell Nastaliq what you sell, how many locations you run and what you use today. We reply by email with a plan and a price.',
+            "Dites-nous ce que vous vendez et ce que vous utilisez aujourd'hui. Nous répondons par courriel avec un plan et un prix."),
+          schema, body, cur='contact'))
 
 # ---------------------------------------------------------------- articles
 def art_cards(items, base='articles/'):
-    return ''.join('<a href="%s%s.html"><small>%s</small><h3>%s</h3><p>%s</p></a>' % (base, a['slug'], a['tag'], html.escape(a['title']), html.escape(a['desc'])) for a in items)
+    return ''.join('<a href="%s%s.html"><small>%s</small><h3>%s</h3><p>%s</p></a>' % (base, a['slug'], art_t(a, 'tag'), html.escape(art_t(a, 'title')), html.escape(art_t(a, 'desc'))) for a in items)
 
 def articles():
     for a in ARTS:
         rel = [b for b in ARTS if b['slug'] != a['slug']]
-        faq = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (html.escape(q), html.escape(ans)) for q, ans in a['faq'])
-        body = ('<article class="in art"><div class="crumb"><a href="../index.html">Home</a> / <a href="../articles.html">Articles</a></div>'
-                '<h1>%s</h1><p class="meta">%s &middot; Published <time datetime="%s">October 26, 2026</time> &middot; By the Nastaliq team</p>'
-                '<div class="short"><b>The short answer</b><p>%s</p></div>'
+        faqs = art_t(a, 'faq')
+        faq = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (html.escape(q), html.escape(ans)) for q, ans in faqs)
+        date_h = B('October 26, 2026', '26 octobre 2026')
+        body = ('<article class="in art"><div class="crumb"><a href="../index.html">%s</a> / <a href="../articles.html">Articles</a></div>'
+                '<h1>%s</h1><p class="meta">%s &middot; %s <time datetime="%s">%s</time> &middot; %s</p>'
+                '<div class="short"><b>%s</b><p>%s</p></div>'
                 '<div class="prose">%s</div>'
-                '<section class="prose faq-s"><h2>Common questions</h2>%s</section>'
-                '<div class="cta"><h3>See Nastaliq with your business loaded</h3><p>Tell us what you sell and how you run today. We reply by email with a plan and a price.</p>'
-                '<a class="btn" href="../contact.html">Request a demo</a> <a class="btn" href="../products.html" style="background:none;color:var(--on-y)">See products</a></div>'
-                '<div class="rel"><h2>More guides</h2><div class="ac" style="background:none">%s</div></div></article>'
-                % (html.escape(a['title']), a['tag'], TODAY, html.escape(a['short']), a['body'], faq, art_cards(rel, '')))
-        url = 'articles/%s.html' % a['slug']
-        schema = [{'@type': 'Article', 'headline': a['title'], 'description': a['desc'], 'datePublished': TODAY, 'dateModified': TODAY, 'inLanguage': 'en',
-                   'author': {'@id': SITE + '/#org'}, 'publisher': {'@id': SITE + '/#org'}, 'mainEntityOfPage': SITE + '/' + url,
+                '<section class="prose faq-s"><h2>%s</h2>%s</section>'
+                '<div class="cta"><h3>%s</h3><p>%s</p>'
+                '<a class="btn" href="../contact.html">%s</a> <a class="btn" href="../products.html" style="background:none;color:var(--on-y)">%s</a></div>'
+                '<div class="rel"><h2>%s</h2><div class="ac" style="background:none">%s</div></div></article>'
+                % (B('Home', 'Accueil'), html.escape(art_t(a, 'title')), art_t(a, 'tag'), B('Published', 'Publié le'), TODAY, date_h, B('By the Nastaliq team', "Par l'équipe Nastaliq"),
+                   B('The short answer', 'La réponse courte'), html.escape(art_t(a, 'short')), art_t(a, 'body'),
+                   B('Common questions', 'Questions fréquentes'), faq,
+                   B('See Nastaliq with your business loaded', 'Voyez Nastaliq avec votre entreprise'),
+                   B('Tell us what you sell and how you run today. We reply by email with a plan and a price.', "Dites-nous ce que vous vendez et comment vous fonctionnez aujourd'hui. Nous répondons par courriel avec un plan et un prix."),
+                   B('Request a demo', 'Demander une démo'), B('See products', 'Voir les produits'),
+                   B('More guides', "D'autres guides"), art_cards(rel, '')))
+        path = 'articles/%s.html' % a['slug']
+        title = art_t(a, 'title')
+        suffix = ' | Nastaliq'
+        schema = [{'@type': 'Article', 'headline': title, 'description': art_t(a, 'desc'), 'datePublished': TODAY, 'dateModified': TODAY, 'inLanguage': LANG,
+                   'author': {'@id': SITE + '/#org'}, 'publisher': {'@id': SITE + '/#org'}, 'mainEntityOfPage': url_for(path),
                    'image': SITE + '/img/og.png', 'isPartOf': {'@id': SITE + '/#website'}},
-                  faq_ld(a['faq']), crumbs([('Home', ''), ('Articles', 'articles.html'), (a['title'], url)])]
-        write(url, page(url, (a['title'] + ' | Nastaliq') if len(a['title']) <= 49 else a['title'], a['desc'], schema, body, pre='../', cur='art', og_type='article', en_only=True))
-    cards = art_cards(ARTS)
-    body = ('<section class="pagehead"><div class="in"><h1 style="max-width:16ch">Guides for small business owners</h1>'
-            '<p class="lede" style="margin-top:20px">Plain advice on software, stock and running your shop. No jargon.</p></div></section>'
-            '<section class="band"><div class="in"><div class="ac" style="margin-top:0">%s</div></div></section>' % cards)
-    schema = [{'@type': 'CollectionPage', 'name': 'Articles', 'url': SITE + '/articles.html', 'isPartOf': {'@id': SITE + '/#website'}},
-              {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': SITE + '/articles/%s.html' % a['slug'], 'name': a['title']} for i, a in enumerate(ARTS)]},
-              crumbs([('Home', ''), ('Articles', 'articles.html')])]
-    write('articles.html', page('articles.html', 'Articles for small business owners | Nastaliq',
-          'Guides on choosing POS and inventory software, keeping stock accurate, bilingual systems in Canada and cloud versus on-premise software.', schema, body, cur='art', en_only=True))
+                  faq_ld(faqs), crumbs([pg('index.html', 'Home', 'Accueil'), pg('articles.html', 'Articles', 'Articles'), (title, url_for(path))])]
+        write(path, page(path, (title + suffix) if len(title) <= 49 else title, art_t(a, 'desc'), schema, body, cur='art', og_type='article'))
+    body = ('<section class="pagehead"><div class="in"><h1 style="max-width:16ch">%s</h1>'
+            '<p class="lede" style="margin-top:20px">%s</p></div></section>'
+            '<section class="band"><div class="in"><div class="ac" style="margin-top:0">%s</div></div></section>'
+            % (B('Guides for small business owners', 'Des guides pour les propriétaires de petites entreprises'),
+               B('Plain advice on software, stock and running your shop. No jargon.', 'Des conseils clairs sur les logiciels, les stocks et la gestion de votre commerce. Sans jargon.'),
+               art_cards(ARTS)))
+    schema = [{'@type': 'CollectionPage', 'name': 'Articles', 'url': url_for('articles.html'), 'inLanguage': LANG, 'isPartOf': {'@id': SITE + '/#website'}},
+              {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': url_for('articles/%s.html' % a['slug']), 'name': art_t(a, 'title')} for i, a in enumerate(ARTS)]},
+              crumbs([pg('index.html', 'Home', 'Accueil'), pg('articles.html', 'Articles', 'Articles')])]
+    write('articles.html', page('articles.html', B('Articles for small business owners | Nastaliq', 'Articles pour propriétaires de petites entreprises | Nastaliq'),
+          B('Guides on choosing POS and inventory software, keeping stock accurate, bilingual systems in Canada and cloud versus on-premise software.',
+            "Guides pour choisir un logiciel de caisse, garder des stocks exacts, adopter un système bilingue et comparer infonuagique et sur place."),
+          schema, body, cur='art'))
 
-# ---------------------------------------------------------------- home (hand-kept body; head, header, footer, FAQ regenerated)
+# ---------------------------------------------------------------- home (template in tools/home.tpl.html)
+MOCK_FR = {
+ 'Home': 'Accueil', 'Sales': 'Ventes', 'Stock': 'Stocks', 'Purchasing': 'Achats', 'Accounts': 'Comptabilité', 'Reports': 'Rapports',
+ 'Good morning, Sam': 'Bonjour, Sam', 'Sample data': "Données d'exemple", 'Sales today': "Ventes aujourd'hui", '$4,280': '4 280 $', 'Open orders': 'Commandes ouvertes',
+ '3 due today': "3 à livrer aujourd'hui", 'Below reorder': 'Sous le seuil', 'Act today': "À traiter aujourd'hui", 'Unpaid bills': 'Factures impayées', '$9,115': '9 115 $',
+ '5 suppliers': '5 fournisseurs', 'Sales this week, CAD thousands': 'Ventes de la semaine, en milliers de $ CA',
+ 'Mon': 'Lun', 'Tue': 'Mar', 'Wed': 'Mer', 'Thu': 'Jeu', 'Fri': 'Ven', 'Sat': 'Sam', 'Sun': 'Dim',
+ 'Order #1042': 'Commande 1042', 'Order #1041': 'Commande 1041', '$612.00': '612,00 $', '$1,480.00': '1 480,00 $', 'Paid': 'Payée', 'Due Fri': 'Échéance ven.',
+ 'Receive stock': 'Réception de stock', 'Warehouse A': 'Entrepôt A', 'Floor cleaner 5L': 'Nettoyant à plancher 5 L', 'Nitrile gloves M': 'Gants de nitrile M',
+ 'Mop heads': 'Têtes de vadrouille', '3 left': '3 restantes', 'Trash bags 55gal': 'Sacs à ordures 55 gal', 'Scan barcode': 'Numériser un code-barres',
+ 'Mop heads: 3 left': 'Têtes de vadrouille : 3 restantes', 'Reorder suggested': 'Réapprovisionnement suggéré', 'Order #1042 paid': 'Commande 1042 payée',
+ '$612.00 from Maple Café': '612,00 $ de Maple Café', 'Purchase orders': "Bons de commande", 'Received': 'Reçu', 'In transit': 'En transit', 'Overdue': 'En retard', 'Draft': 'Brouillon',
+ '$2,140': '2 140 $', '$860': '860 $', '$3,975': '3 975 $', '$1,210': '1 210 $', 'Checkout': 'Caisse',
+ 'Tote bag': 'Sac fourre-tout', 'Candle': 'Bougie', 'Mug': 'Tasse', 'Notebook': 'Carnet', 'Cap': 'Casquette', 'Tee': 'T-shirt', 'Total': 'Total',
+ '$18': '18 $', '$24': '24 $', '$14': '14 $', '$12': '12 $', '$22': '22 $', '$30': '30 $', '$18.00': '18,00 $', '$14.00': '14,00 $',
+ 'Order 27': 'Commande 27', 'Croissant': 'Croissant', 'Latte': 'Latte', 'Sourdough': 'Pain au levain', 'Cookie': 'Biscuit', 'Quiche': 'Quiche', 'Tea': 'Thé',
+ '$4': '4 $', '$5': '5 $', '$9': '9 $', '$3': '3 $', '$8': '8 $',
+ 'Lobby inspection': "Inspection du hall d'entrée", 'Floors mopped': 'Planchers lavés', 'Restrooms restocked': 'Toilettes réapprovisionnées',
+ 'Windows wiped': 'Fenêtres nettoyées', 'Photo of finished lobby': 'Photo du hall terminé', 'Pilot': 'Pilote', 'Copy': 'Copier',
+ '$3,100': '3 100 $', '$2,020': '2 020 $', '$1,300': '1 300 $',
+}
+
 def home():
-    p = os.path.join(PUB, 'index.html')
-    s = open(p, encoding='utf-8').read()
-    m = re.search(r'<body>(.*?)</body>', s, re.S)
-    inner = m.group(1)
-    sprite = re.search(r'<svg width="0".*?</svg>', inner, re.S)
-    sprite = sprite.group(0) if sprite else ''
-    inner = re.sub(r'<svg width="0".*?</svg>', '', inner, count=1, flags=re.S)
-    inner = re.sub(r'<a class="skip".*?</a>', '', inner, count=1, flags=re.S)
-    inner = re.sub(r'<header>.*?</header>', '', inner, count=1, flags=re.S)
-    inner = re.sub(r'<div class="in"><footer.*?</footer></div>', '', inner, flags=re.S)
-    inner = re.sub(r'<script src="js/home.js"[^>]*></script>', '', inner)
-    # wrap hero etc in <main>
-    if '<main' not in inner:
-        inner = '<main id="main">' + inner.strip() + '</main>'
-    # FAQ block
+    tpl = open(os.path.join(ROOT, 'tools', 'home.tpl.html'), encoding='utf-8').read()
+    sprite = re.search(r'<svg width="0".*?</svg>', tpl, re.S).group(0)
+    main = re.search(r'<main id="main">.*?</main>', tpl, re.S).group(0)
+    idx = 1 if LANG == 'fr' else 0
+    main = re.sub(r'<span class="en">(.*?)</span><span class="fr">(.*?)</span>', lambda m: m.group(1 + idx), main, flags=re.S)
+    if LANG == 'fr':
+        for k in sorted(MOCK_FR, key=len, reverse=True):
+            main = main.replace('>' + k + '<', '>' + MOCK_FR[k] + '<')
+        main = main.replace('acme-supply.nastaliq.co', 'acme-fournitures.nastaliq.co').replace('ACME SUPPLY', 'ACME FOURNITURES').replace('>Elm Dental<', '>Clinique Elm<').replace('>North Gym<', '>Gym du Nord<')
     faq_html = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (B(q, qf), B(a, af)) for q, qf, a, af in FAQ)
-    inner = re.sub(r'(<section class="band" id="faq">.*?<div style="margin-top:30px;max-width:820px">).*?(</div>\s*</div>\s*</section>)',
-                   lambda m2: m2.group(1) + faq_html + m2.group(2), inner, count=1, flags=re.S)
+    main = re.sub(r'(<section class="band" id="faq">.*?<div style="margin-top:30px;max-width:820px">).*?(</div>\s*</div>\s*</section>)',
+                  lambda m2: m2.group(1) + faq_html + m2.group(2), main, count=1, flags=re.S)
+    main = re.sub(r'(<section class="band paper" id="articles">.*?<div class="ac">).*?(</div>\s*<p style="margin-top:28px">)',
+                  lambda m2: m2.group(1) + art_cards(ARTS) + m2.group(2), main, count=1, flags=re.S)
     app = {'@type': 'SoftwareApplication', 'name': 'Nastaliq', 'applicationCategory': 'BusinessApplication', 'operatingSystem': 'Web',
-           'description': 'Cloud point of sale, inventory, purchasing, accounting and sales for small and mid-sized businesses, in English and French.',
-           'url': SITE + '/', 'provider': {'@id': SITE + '/#org'}, 'inLanguage': ['en', 'fr'], 'featureList': ['Point of sale', 'Inventory with barcode scanning', 'Purchasing', 'Accounting', 'Sales', 'English and French']}
-    schema = [{'@type': 'WebPage', '@id': SITE + '/#webpage', 'url': SITE + '/', 'name': 'Nastaliq', 'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}},
-              app, faq_ld([(q, a) for q, qf, a, af in FAQ])]
-    h = head('', 'Nastaliq | Cloud POS, inventory and accounting',
-             'Cloud business software for North American small businesses: POS, inventory, purchasing, accounting and sales in one system, in English and French.',
-             schema)
-    out = h + '<body>' + sprite + header('', '', True) + inner + footer('') + '<script src="js/home.js" defer></script></body></html>\n'
+           'description': B('Cloud point of sale, inventory, purchasing, accounting and sales for small and mid-sized businesses, in English and French.',
+                            'Caisse, stocks, achats, comptabilité et ventes infonuagiques pour petites et moyennes entreprises, en français et en anglais.'),
+           'url': url_for('index.html'), 'provider': {'@id': SITE + '/#org'}, 'inLanguage': ['en', 'fr'],
+           'featureList': B(['Point of sale', 'Inventory with barcode scanning', 'Purchasing', 'Accounting', 'Sales', 'English and French'],
+                            ['Point de vente', 'Inventaire avec codes-barres', 'Achats', 'Comptabilité', 'Ventes', 'Français et anglais'])}
+    schema = [{'@type': 'WebPage', '@id': url_for('index.html') + '#webpage', 'url': url_for('index.html'), 'name': 'Nastaliq', 'inLanguage': LANG,
+               'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}}, app, faq_ld([(B(q, qf), B(a, af)) for q, qf, a, af in FAQ])]
+    title = B('Nastaliq | Cloud POS, inventory and accounting', 'Nastaliq | Caisse, stocks et comptabilité infonuagiques')
+    desc = B('Cloud business software for North American small businesses: POS, inventory, purchasing, accounting and sales in one system, in English and French.',
+             "Logiciel infonuagique pour petites entreprises : caisse, stocks, achats, comptabilité et ventes dans un seul système, bilingue.")
+    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="js/home.js" defer></script></body></html>\n'
+    out = out.replace('src="js/home.js"', 'src="%sjs/home.js"' % levels('index.html')[1])
     write('index.html', out)
 
 def seo_files():
-    urls = [('', '1.0'), ('products.html', '0.8'), ('company.html', '0.6'), ('contact.html', '0.7'), ('articles.html', '0.8')] + [('articles/%s.html' % a['slug'], '0.7') for a in ARTS]
-    write('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-          + ''.join('<url><loc>%s/%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>\n' % (SITE, u, TODAY, pr) for u, pr in urls) + '</urlset>\n')
+    pages = [('index.html', '1.0'), ('products.html', '0.8'), ('company.html', '0.6'), ('contact.html', '0.7'), ('articles.html', '0.8')] + [('articles/%s.html' % a['slug'], '0.7') for a in ARTS]
+    rows = ''
+    for p, pr in pages:
+        for lg in ('en', 'fr'):
+            alts = ''.join('<xhtml:link rel="alternate" hreflang="%s" href="%s"/>' % (l2, url_for(p, l2)) for l2 in ('en', 'fr')) + '<xhtml:link rel="alternate" hreflang="x-default" href="%s"/>' % url_for(p, 'en')
+            rows += '<url><loc>%s</loc><lastmod>%s</lastmod><priority>%s</priority>%s</url>\n' % (url_for(p, lg), TODAY, pr, alts)
+    open(os.path.join(PUB, 'sitemap.xml'), 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + rows + '</urlset>\n')
     bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']
-    write('robots.txt', 'User-agent: *\nAllow: /\n\n' + ''.join('User-agent: %s\nAllow: /\n\n' % b for b in bots) + 'Sitemap: %s/sitemap.xml\n' % SITE)
-    prod = '\n'.join('- [%s](%s/products.html#%s): %s (%s)' % (p[4], SITE, p[0], p[6], p[2]) for p in PRODUCTS)
-    art = '\n'.join('- [%s](%s/articles/%s.html): %s' % (a['title'], SITE, a['slug'], a['desc']) for a in ARTS)
-    faq = '\n'.join('**%s** %s\n' % (q, a) for q, qf, a, af in FAQ)
-    write('llms.txt', '# Nastaliq\n\n> Nastaliq LLP builds and hosts cloud business software for small and mid-sized businesses in North America: point of sale, inventory, purchasing, accounting and sales in one system, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.\n\n'
-          'Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: %s\n\n## Pages\n- [Home](%s/): overview\n- [Products](%s/products.html): every product with its real status\n- [Company](%s/company.html): who we are\n- [Contact](%s/contact.html): how to reach us\n- [Articles](%s/articles.html): guides for small business owners\n\n## Products and status\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
-          % (EMAIL, SITE, SITE, SITE, SITE, SITE, prod, art, faq))
+    open(os.path.join(PUB, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\n' + ''.join('User-agent: %s\nAllow: /\n\n' % b for b in bots) + 'Sitemap: %s/sitemap.xml\n' % SITE)
+    for lg in ('en', 'fr'):
+        fr = lg == 'fr'
+        prod = '\n'.join('- [%s](%s#%s): %s (%s)' % (p[5] if fr else p[4], url_for('products.html', lg), p[0], p[7] if fr else p[6], p[3] if fr else p[2]) for p in PRODUCTS)
+        art = '\n'.join('- [%s](%s): %s' % (ARTS_FR[a['slug']]['title'] if fr else a['title'], url_for('articles/%s.html' % a['slug'], lg), ARTS_FR[a['slug']]['desc'] if fr else a['desc']) for a in ARTS)
+        faq = '\n'.join('**%s** %s\n' % ((qf, af) if fr else (q, a)) for q, qf, a, af in FAQ)
+        if fr:
+            txt = ('# Nastaliq\n\n> Nastaliq LLP conçoit et héberge des logiciels d\'affaires infonuagiques pour les petites et moyennes entreprises d\'Amérique du Nord : caisse, stocks, achats, comptabilité et ventes dans un seul système, en français et en anglais. Infonuagique seulement. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d\'installation uniques, envoyé par courriel.\n\n'
+                   'Nastaliq LLP est constituée auprès de la Securities and Exchange Commission of Pakistan (SECP) et établie à Lahore, au Pakistan. Courriel : %s\n\n## Pages\n- [Accueil](%s)\n- [Produits](%s)\n- [Entreprise](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Produits et état\n%s\n\n## Guides\n%s\n\n## Questions fréquentes\n%s\n'
+                   % (EMAIL, url_for('index.html', lg), url_for('products.html', lg), url_for('company.html', lg), url_for('contact.html', lg), url_for('articles.html', lg), prod, art, faq))
+            os.makedirs(os.path.join(PUB, 'fr'), exist_ok=True)
+            open(os.path.join(PUB, 'fr', 'llms.txt'), 'w').write(txt)
+        else:
+            txt = ('# Nastaliq\n\n> Nastaliq LLP builds and hosts cloud business software for small and mid-sized businesses in North America: point of sale, inventory, purchasing, accounting and sales in one system, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.\n\n'
+                   'Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: %s\n\nFrench version: %s/fr/llms.txt\n\n## Pages\n- [Home](%s)\n- [Products](%s)\n- [Company](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Products and status\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
+                   % (EMAIL, SITE, url_for('index.html', lg), url_for('products.html', lg), url_for('company.html', lg), url_for('contact.html', lg), url_for('articles.html', lg), prod, art, faq))
+            open(os.path.join(PUB, 'llms.txt'), 'w').write(txt)
 
 if __name__ == '__main__':
-    products(); company(); contact(); articles(); home(); seo_files()
+    for LANG in ('en', 'fr'):
+        products(); company(); contact(); articles(); home()
+    seo_files()
     print('built')
