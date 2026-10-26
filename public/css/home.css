@@ -250,3 +250,30 @@ nav a.l[aria-current=page]{color:var(--yellow)}
 .foot2{border-top:1px solid var(--line);padding-block:40px 56px;color:var(--mut);font-size:.9rem;display:grid;gap:14px}
 .foot2 .fl{display:flex;gap:10px 26px;flex-wrap:wrap}.foot2 .fl a{color:var(--txt);text-decoration:none}.foot2 .fl a:hover{color:var(--yellow)}
 .foot2 p{max-width:80ch;font-size:.82rem}
+
+/* inner pages */
+.skip{position:absolute;left:-999px;top:8px;background:var(--yellow);color:var(--on-y);padding:10px 16px;border-radius:999px;z-index:100;font-weight:700}
+.skip:focus{left:12px}
+html[data-en-only] .lang{display:none}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.pcard{background:#fff;border:1px solid var(--pline);border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:14px;min-width:0;scroll-margin-top:90px}
+.pcard h2{font-size:1.6rem;font-weight:800}
+.pcard p{color:var(--pmut)}
+.pcard ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.pcard li{padding-left:26px;position:relative;color:#3a382a}
+.pcard li::before{content:"";position:absolute;left:0;top:.4em;width:14px;height:14px;background:var(--yellow);outline:2px solid var(--ink);border-radius:4px}
+.cta2{background:var(--yellow);color:var(--on-y);border-radius:28px;padding:44px;display:grid;gap:14px;justify-items:start}
+.cta2 p{color:#3d3b1c}
+.cta2 .btn{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
+.facts{margin:32px 0 0;display:grid;border-top:2px solid var(--ink)}
+.facts>div{display:grid;grid-template-columns:minmax(120px,220px) 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--pline)}
+@media(max-width:600px){.facts>div{grid-template-columns:1fr;gap:4px}}
+.facts dt{font:700 .9rem var(--b);color:var(--pmut)}.facts dd{margin:0;font-size:1.08rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.steps li{background:#14130a14;border-radius:14px;padding:14px 16px;display:grid;gap:2px}
+.steps span{color:#3d3b1c;font-size:.95rem}
+.short{max-width:68ch;background:var(--ink2);border:1px solid var(--line);border-left:4px solid var(--yellow);border-radius:14px;padding:18px 20px;margin:0 0 32px}
+.short b{color:var(--yellow);font:700 .85rem var(--b)}
+.short p{margin-top:6px;font-size:1.1rem;line-height:1.55}
+.faq-s details p{font-size:1rem}
+.prose time{color:inherit}
