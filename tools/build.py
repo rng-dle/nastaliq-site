@@ -86,6 +86,7 @@ def header(cur):
         '<button class="nl" id="nl-products" type="button" aria-expanded="false" aria-controls="mega"><span data-fr="Produits">Products</span><i class="chev"></i></button>'
         + '<div class="mega" id="mega"><div class="mega-in"><span class="mega-lab" data-fr="Ce que nous construisons">What we build</span>' + items + '</div></div>'
         + link('company.html', 'Company', 'Entreprise', 'company')
+        + link('articles.html', 'Articles', 'Articles', 'articles')
         + link('contact.html', 'Contact', 'Contact', 'contact') +
         '<span class="lang" role="group" aria-label="Language" data-aria-fr="Langue"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="fr" aria-pressed="false">FR</button></span>'
         '</nav>'
@@ -321,6 +322,7 @@ def contact():
     return head('contact') + '<body>' + header('contact') + '<main id="main">' + hero + mail + '</main>' + footer() + '</body></html>'
 
 if __name__ == '__main__':
-    for name, fn in (('index', home), ('products', products), ('company', company), ('contact', contact)):
+    # index.html and articles are hand-maintained static pages (new design); not generated here
+    for name, fn in (('products', products), ('company', company), ('contact', contact)):
         open(os.path.join(PUB, name + '.html'), 'w', encoding='utf-8').write(fn())
         print('wrote', name + '.html')
