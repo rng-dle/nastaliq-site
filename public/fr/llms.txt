@@ -1,0 +1,41 @@
+# Nastaliq
+
+> Nastaliq LLP conçoit et héberge des logiciels d'affaires infonuagiques pour les petites et moyennes entreprises d'Amérique du Nord : caisse, stocks, achats, comptabilité et ventes dans un seul système, en français et en anglais. Infonuagique seulement. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques, envoyé par courriel.
+
+Nastaliq LLP est constituée auprès de la Securities and Exchange Commission of Pakistan (SECP) et établie à Lahore, au Pakistan. Courriel : hello@nastaliq.co
+
+## Pages
+- [Accueil](https://nastaliq.co/fr/)
+- [Produits](https://nastaliq.co/fr/products.html)
+- [Entreprise](https://nastaliq.co/fr/company.html)
+- [Contact](https://nastaliq.co/fr/contact.html)
+- [Articles](https://nastaliq.co/fr/articles.html)
+
+## Produits et état
+- [Suite d'affaires](https://nastaliq.co/fr/products.html#suite): Inventaire, achats, comptabilité et ventes dans un seul système infonuagique, configuré pour votre entreprise et hébergé par nous. (Disponible)
+- [Point de vente](https://nastaliq.co/fr/products.html#pos): Une caisse rapide et épurée pour restaurants, restauration rapide et boulangeries. (En développement)
+- [Gestion des services d'entretien](https://nastaliq.co/fr/products.html#janitorial): Gérez une entreprise d'entretien commercial depuis une seule application, pour les employés, les superviseurs et les clients. (Accès anticipé)
+- [Tableau de bord et alertes](https://nastaliq.co/fr/products.html#owner): Un écran d'accueil selon le rôle, des écrans de stock adaptés au téléphone et un courriel matinal sur ce qui demande votre attention. (Accès anticipé)
+- [Anglais et français](https://nastaliq.co/fr/products.html#bilingual): Un seul bouton sur chaque écran, avec la terminologie du français canadien, comme courriel et téléverser. (Disponible)
+
+## Guides
+- [Comment choisir un logiciel de caisse et d'inventaire pour une petite entreprise](https://nastaliq.co/fr/articles/choosing-pos-and-inventory-software-small-business.html): Une liste pratique pour comparer les systèmes de caisse et d'inventaire : quoi tester, quoi demander et quoi ignorer.
+- [Pourquoi les stocks dérivent, et comment le code-barres règle le problème](https://nastaliq.co/fr/articles/why-inventory-counts-drift.html): Les raisons habituelles pour lesquelles vos chiffres de stock ne concordent plus avec la tablette, et les petites habitudes et outils qui comblent l'écart.
+- [Un logiciel d'affaires bilingue pour les petites entreprises canadiennes](https://nastaliq.co/fr/articles/bilingual-business-software-canada.html): Pourquoi le français et l'anglais comptent pour les factures, les reçus et les écrans du personnel, et ce qu'il faut vérifier avant d'acheter.
+- [Logiciel infonuagique ou sur place : lequel convient à une petite entreprise](https://nastaliq.co/fr/articles/cloud-vs-on-premise-for-small-business.html): Une comparaison simple des coûts, de l'entretien, des sauvegardes et des risques pour les propriétaires qui décident où héberger leur système.
+
+## Questions fréquentes
+**Qu'est-ce que Nastaliq?** Nastaliq est un logiciel d'affaires infonuagique pour les petites et moyennes entreprises d'Amérique du Nord. Il réunit caisse, stocks, achats, comptabilité et ventes dans un seul système, en français et en anglais. Nous l'installons pour votre entreprise et l'hébergeons.
+
+**Combien coûte Nastaliq?** Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques. Nous envoyons le plan et le prix exacts par courriel après que vous nous avez décrit votre entreprise.
+
+**Combien de temps avant la mise en service?** La plupart des entreprises démarrent en environ six semaines, installation et hébergement assurés par nous.
+
+**Dois-je installer quelque chose?** Non. Nastaliq fonctionne dans le nuage. Vous vous connectez depuis un navigateur ou votre téléphone.
+
+**Nastaliq est-il offert en français?** Oui. Chaque écran offre un bouton anglais et français, avec la terminologie du français canadien, comme courriel et téléverser.
+
+**Pouvez-vous importer mes données existantes?** Oui. Nous vous aidons à importer vos clients, produits et dossiers existants pendant l'installation. Dites-nous ce que vous utilisez aujourd'hui et nous vous dirons ce qui est possible.
+
+**Qui conçoit et soutient Nastaliq?** Nastaliq LLP, une petite équipe à Lahore, au Pakistan, au service de clients nord-américains.
+

@@ -1,0 +1,43 @@
+# Nastaliq
+
+> Nastaliq LLP builds and hosts cloud business software for small and mid-sized businesses in North America: point of sale, inventory, purchasing, accounting and sales in one system, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.
+
+Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: hello@nastaliq.co
+
+French version: https://nastaliq.co/fr/llms.txt
+
+## Pages
+- [Home](https://nastaliq.co/)
+- [Products](https://nastaliq.co/products.html)
+- [Company](https://nastaliq.co/company.html)
+- [Contact](https://nastaliq.co/contact.html)
+- [Articles](https://nastaliq.co/articles.html)
+
+## Products and status
+- [Business suite](https://nastaliq.co/products.html#suite): Inventory, purchasing, accounting and sales in one cloud system, set up for your business and hosted by us. (Available)
+- [Point of sale](https://nastaliq.co/products.html#pos): A clean, fast till for restaurants, fast food and bakeries. (In development)
+- [Janitorial operations](https://nastaliq.co/products.html#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients. (Early access)
+- [Owner dashboard and alerts](https://nastaliq.co/products.html#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention. (Early access)
+- [English and French](https://nastaliq.co/products.html#bilingual): One switch on every screen, with Canadian French terms such as courriel and téléverser. (Available)
+
+## Guides
+- [How to choose POS and inventory software for a small business](https://nastaliq.co/articles/choosing-pos-and-inventory-software-small-business.html): A practical checklist for owners comparing point of sale and inventory systems: what to test, what to ask and what to ignore.
+- [Why inventory counts drift, and how barcode scanning fixes it](https://nastaliq.co/articles/why-inventory-counts-drift.html): The usual reasons your stock numbers stop matching the shelf, and the small habits and tools that close the gap.
+- [Bilingual business software for Canadian small businesses](https://nastaliq.co/articles/bilingual-business-software-canada.html): Why English and French support matters for invoices, receipts and staff screens, and what to check before you buy.
+- [Cloud or on-premise software: which fits a small business](https://nastaliq.co/articles/cloud-vs-on-premise-for-small-business.html): A plain comparison of costs, upkeep, backups and risk for owners deciding where their business system should live.
+
+## Frequently asked questions
+**What is Nastaliq?** Nastaliq is cloud business software for small and mid-sized businesses in North America. It puts point of sale, inventory, purchasing, accounting and sales in one system, in English and French. We set it up for your business and host it.
+
+**How much does Nastaliq cost?** Pricing is a flat monthly subscription with unlimited users, plus a one-time setup fee. We send the exact plan and price by email after you tell us what you run.
+
+**How long does it take to go live?** Most businesses go live in about six weeks, with setup and hosting handled by us.
+
+**Do I need to install anything?** No. Nastaliq runs in the cloud. You sign in from a browser or your phone.
+
+**Is Nastaliq available in French?** Yes. Every screen has an English and French switch, with Canadian French terms such as courriel and téléverser.
+
+**Can you bring my existing records in?** Yes. We help bring your existing customers, products and records in during setup. Tell us what you use today and we will say what is possible.
+
+**Who builds and supports Nastaliq?** Nastaliq LLP, a small team in Lahore, Pakistan, serving clients in North America.
+
