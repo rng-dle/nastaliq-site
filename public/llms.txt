@@ -8,23 +8,29 @@ French version: https://nastaliq.co/fr/llms.txt
 
 ## Pages
 - [Home](https://nastaliq.co/)
-- [Products](https://nastaliq.co/products.html)
-- [Company](https://nastaliq.co/company.html)
-- [Contact](https://nastaliq.co/contact.html)
-- [Articles](https://nastaliq.co/articles.html)
+- [Products](https://nastaliq.co/products)
+- [Company](https://nastaliq.co/company)
+- [Contact](https://nastaliq.co/contact)
+- [Articles](https://nastaliq.co/articles)
 
 ## Products and status
-- [Business suite](https://nastaliq.co/products.html#suite): Inventory, purchasing, accounting and sales in one cloud system, set up for your business and hosted by us. (Available)
-- [Janitorial operations](https://nastaliq.co/products.html#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients. (Early access)
-- [Owner dashboard and alerts](https://nastaliq.co/products.html#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention. (Early access)
-- [English and French](https://nastaliq.co/products.html#bilingual): One switch on every screen, with Canadian French terms such as courriel and téléverser. (Available)
-- [Point of sale](https://nastaliq.co/products.html#pos): A clean, fast till for restaurants, fast food and bakeries. (In development)
+- [Business suite](https://nastaliq.co/products#suite): Inventory, purchasing, accounting and sales in one cloud system, set up for your business and hosted by us. (Available)
+- [Janitorial operations](https://nastaliq.co/products#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients. (Early access)
+- [Owner dashboard and alerts](https://nastaliq.co/products#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention. (Early access)
+- [English and French](https://nastaliq.co/products#bilingual): One switch on every screen, with Canadian French terms such as courriel and téléverser. (Available)
+- [Point of sale](https://nastaliq.co/products#pos): A clean, fast till for restaurants, fast food and bakeries. (In development)
+
+## Industries
+- [ERP for distribution and wholesale companies](https://nastaliq.co/industries/distribution): Purchasing, receiving, stock and customer pricing in one private cloud system, set up from a distribution preset and hosted by us. (Available)
+- [ERP for retail businesses](https://nastaliq.co/industries/retail): Stock, purchasing, sales records and accounting in one private cloud system, set up from a retail preset and hosted by us. (Available)
+- [Operations software for commercial cleaning companies](https://nastaliq.co/industries/janitorial): Crews, inspections, clients and supplies in one app, for cleaners, supervisors and the companies you serve. Now in early access. (Early access)
 
 ## Guides
-- [How to choose POS and inventory software for a small business](https://nastaliq.co/articles/choosing-pos-and-inventory-software-small-business.html): A practical checklist for owners comparing point of sale and inventory systems: what to test, what to ask and what to ignore.
-- [Why inventory counts drift, and how barcode scanning fixes it](https://nastaliq.co/articles/why-inventory-counts-drift.html): The usual reasons your stock numbers stop matching the shelf, and the small habits and tools that close the gap.
-- [Bilingual business software for Canadian small businesses](https://nastaliq.co/articles/bilingual-business-software-canada.html): Why English and French support matters for invoices, receipts and staff screens, and what to check before you buy.
-- [Cloud or on-premise software: which fits a small business](https://nastaliq.co/articles/cloud-vs-on-premise-for-small-business.html): A plain comparison of costs, upkeep, backups and risk for owners deciding where their business system should live.
+- [Seven signs you have outgrown spreadsheets and accounting software](https://nastaliq.co/articles/outgrowing-spreadsheets-and-accounting-software): How to tell when spreadsheets and entry-level accounting software are holding the business back, and what to move into an ERP first.
+- [How to choose an ERP for a growing business](https://nastaliq.co/articles/how-to-choose-an-erp): A practical checklist for companies comparing ERP systems: what to test live, what to ask about your data and hosting, and what to ignore in the demo.
+- [Shared SaaS, private cloud or on-premise: where should your ERP live?](https://nastaliq.co/articles/private-cloud-erp-vs-saas-vs-on-premise): A plain comparison of the three ways to host an ERP, and what each one means for control of your operations data, upkeep and cost.
+- [Why inventory counts drift, and how barcode scanning fixes it](https://nastaliq.co/articles/why-inventory-counts-drift): The usual reasons your stock numbers stop matching the shelf, and the small habits and tools that close the gap.
+- [Bilingual ERP software for Canadian businesses](https://nastaliq.co/articles/bilingual-business-software-canada): Why English and French support matters for invoices, receipts and staff screens, and what to check before you buy.
 
 ## Frequently asked questions
 **What is Nastaliq?** Nastaliq is a cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own private instance, in English and French. We set it up for your business and host it.

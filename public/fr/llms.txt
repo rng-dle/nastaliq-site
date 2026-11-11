@@ -6,23 +6,29 @@ Nastaliq LLP est constituée auprès de la Securities and Exchange Commission of
 
 ## Pages
 - [Accueil](https://nastaliq.co/fr/)
-- [Produits](https://nastaliq.co/fr/products.html)
-- [Entreprise](https://nastaliq.co/fr/company.html)
-- [Contact](https://nastaliq.co/fr/contact.html)
-- [Articles](https://nastaliq.co/fr/articles.html)
+- [Produits](https://nastaliq.co/fr/products)
+- [Entreprise](https://nastaliq.co/fr/company)
+- [Contact](https://nastaliq.co/fr/contact)
+- [Articles](https://nastaliq.co/fr/articles)
 
 ## Produits et état
-- [Suite d'affaires](https://nastaliq.co/fr/products.html#suite): Inventaire, achats, comptabilité et ventes dans un seul système infonuagique, configuré pour votre entreprise et hébergé par nous. (Disponible)
-- [Gestion des services d'entretien](https://nastaliq.co/fr/products.html#janitorial): Gérez une entreprise d'entretien commercial depuis une seule application, pour les employés, les superviseurs et les clients. (Accès anticipé)
-- [Tableau de bord et alertes](https://nastaliq.co/fr/products.html#owner): Un écran d'accueil selon le rôle, des écrans de stock adaptés au téléphone et un courriel matinal sur ce qui demande votre attention. (Accès anticipé)
-- [Anglais et français](https://nastaliq.co/fr/products.html#bilingual): Un seul bouton sur chaque écran, avec la terminologie du français canadien, comme courriel et téléverser. (Disponible)
-- [Point de vente](https://nastaliq.co/fr/products.html#pos): Une caisse rapide et épurée pour restaurants, restauration rapide et boulangeries. (En développement)
+- [Suite d'affaires](https://nastaliq.co/fr/products#suite): Inventaire, achats, comptabilité et ventes dans un seul système infonuagique, configuré pour votre entreprise et hébergé par nous. (Disponible)
+- [Gestion des services d'entretien](https://nastaliq.co/fr/products#janitorial): Gérez une entreprise d'entretien commercial depuis une seule application, pour les employés, les superviseurs et les clients. (Accès anticipé)
+- [Tableau de bord et alertes](https://nastaliq.co/fr/products#owner): Un écran d'accueil selon le rôle, des écrans de stock adaptés au téléphone et un courriel matinal sur ce qui demande votre attention. (Accès anticipé)
+- [Anglais et français](https://nastaliq.co/fr/products#bilingual): Un seul bouton sur chaque écran, avec la terminologie du français canadien, comme courriel et téléverser. (Disponible)
+- [Point de vente](https://nastaliq.co/fr/products#pos): Une caisse rapide et épurée pour restaurants, restauration rapide et boulangeries. (En développement)
+
+## Secteurs
+- [ERP pour les entreprises de distribution et de gros](https://nastaliq.co/fr/industries/distribution): Achats, réception, stocks et prix par client dans un seul système infonuagique privé, configuré à partir d'un préréglage pour la distribution et hébergé par nous. (Offert)
+- [ERP pour les commerces de détail](https://nastaliq.co/fr/industries/retail): Stocks, achats, ventes et comptabilité dans un seul système infonuagique privé, configuré à partir d'un préréglage pour le détail et hébergé par nous. (Offert)
+- [Logiciel de gestion pour les entreprises d'entretien commercial](https://nastaliq.co/fr/industries/janitorial): Équipes, inspections, clients et fournitures dans une seule application, pour les employés, les superviseurs et vos clients. Maintenant en accès anticipé. (Accès anticipé)
 
 ## Guides
-- [Comment choisir un logiciel de caisse et d'inventaire pour une petite entreprise](https://nastaliq.co/fr/articles/choosing-pos-and-inventory-software-small-business.html): Une liste pratique pour comparer les systèmes de caisse et d'inventaire : quoi tester, quoi demander et quoi ignorer.
-- [Pourquoi les stocks dérivent, et comment le code-barres règle le problème](https://nastaliq.co/fr/articles/why-inventory-counts-drift.html): Les raisons habituelles pour lesquelles vos chiffres de stock ne concordent plus avec la tablette, et les petites habitudes et outils qui comblent l'écart.
-- [Un logiciel d'affaires bilingue pour les petites entreprises canadiennes](https://nastaliq.co/fr/articles/bilingual-business-software-canada.html): Pourquoi le français et l'anglais comptent pour les factures, les reçus et les écrans du personnel, et ce qu'il faut vérifier avant d'acheter.
-- [Logiciel infonuagique ou sur place : lequel convient à une petite entreprise](https://nastaliq.co/fr/articles/cloud-vs-on-premise-for-small-business.html): Une comparaison simple des coûts, de l'entretien, des sauvegardes et des risques pour les propriétaires qui décident où héberger leur système.
+- [Sept signes que vous avez dépassé les tableurs et le logiciel comptable](https://nastaliq.co/fr/articles/outgrowing-spreadsheets-and-accounting-software): Comment savoir quand les tableurs et un logiciel comptable d'entrée de gamme freinent l'entreprise, et quoi transférer en premier dans un ERP.
+- [Comment choisir un ERP pour une entreprise en croissance](https://nastaliq.co/fr/articles/how-to-choose-an-erp): Une liste pratique pour comparer les systèmes ERP : quoi tester en direct, quoi demander sur vos données et l'hébergement, et quoi ignorer dans la démo.
+- [SaaS partagé, nuage privé ou sur place : où héberger votre ERP?](https://nastaliq.co/fr/articles/private-cloud-erp-vs-saas-vs-on-premise): Une comparaison claire des trois façons d'héberger un ERP, et de ce que chacune implique pour le contrôle de vos données, l'entretien et les coûts.
+- [Pourquoi les stocks dérivent, et comment le code-barres règle le problème](https://nastaliq.co/fr/articles/why-inventory-counts-drift): Les raisons habituelles pour lesquelles vos chiffres de stock ne concordent plus avec la tablette, et les petites habitudes et outils qui comblent l'écart.
+- [Un ERP bilingue pour les entreprises canadiennes](https://nastaliq.co/fr/articles/bilingual-business-software-canada): Pourquoi le français et l'anglais comptent pour les factures, les reçus et les écrans du personnel, et ce qu'il faut vérifier avant d'acheter.
 
 ## Questions fréquentes
 **Qu'est-ce que Nastaliq?** Nastaliq est un ERP infonuagique pour les entreprises en croissance d'Amérique du Nord, généralement celles dont les revenus annuels atteignent 1 M$ ou plus. Il réunit stocks, achats, ventes et comptabilité dans un seul système, sur votre propre instance privée, en français et en anglais. Nous l'installons pour votre entreprise et l'hébergeons.
