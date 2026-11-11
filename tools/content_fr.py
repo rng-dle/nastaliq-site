@@ -81,7 +81,7 @@ FR = {
 <h2>Questions à poser à tout fournisseur</h2>
 <ol><li>Obtenons-nous notre propre instance, ou une place dans une instance partagée?</li><li>Pouvons-nous exporter toutes nos données quand nous le voulons?</li><li>Qui, de votre côté, peut accéder à nos données, et cet accès est-il consigné?</li><li>À quelle fréquence les sauvegardes sont-elles faites et où sont-elles conservées?</li><li>Qu'advient-il de nos données si nous cessons d'être clients?</li></ol>
 <h2>Notre point de vue</h2>
-<p>Nastaliq est entièrement infonuagique, et chaque client fonctionne sur sa propre instance, avec son propre site à son image. Nous nous occupons de l'installation et de l'hébergement : votre équipe consacre son temps aux opérations plutôt qu'aux serveurs. Nous ne vendons pas d'installations sur place. Si un contrat exige que vos données restent dans vos locaux, nous ne sommes pas le bon choix, et nous vous le dirons.</p>'''),
+<p>Nastaliq fonctionne uniquement en nuage privé : chaque client, peu importe sa taille, a son propre serveur dédié et son propre site à son image. Nous nous occupons de l'installation et de l'hébergement : votre équipe consacre son temps aux opérations plutôt qu'aux serveurs. Nous ne vendons pas d'installations sur place. Si un contrat exige que vos données restent dans vos locaux, nous ne sommes pas le bon choix, et nous vous le dirons.</p>'''),
 'why-inventory-counts-drift': dict(
  tag='Inventaire',
  title='Pourquoi les stocks dérivent, et comment le code-barres règle le problème',

@@ -38,7 +38,7 @@ ORG = {
     'disambiguatingDescription': 'Software company that builds and hosts a cloud ERP for businesses in North America.',
     'logo': SITE + '/img/mark.svg', 'email': EMAIL, 'foundingDate': '2026-10-16',
     'identifier': {'@type': 'PropertyValue', 'propertyID': 'SECP LLP Incorporation No.', 'value': REG_NO},
-    'description': 'Nastaliq builds and hosts cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one private system, in English and French.',
+    'description': 'Nastaliq builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in English and French.',
     'address': {'@type': 'PostalAddress', 'addressLocality': 'Lahore', 'addressCountry': 'PK'},
     'areaServed': ['CA', 'US'], 'knowsLanguage': ['en', 'fr'],
     'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'email': EMAIL, 'availableLanguage': ['English', 'French']},
@@ -54,7 +54,7 @@ PRODUCTS = [
       ('Purchasing: purchase orders, receiving and supplier bills in one flow', 'Achats : bons de commande, réception et factures fournisseurs en un seul flux'),
       ('Sales: sales orders, invoices and customer-specific prices', 'Ventes : commandes, factures et prix par client'),
       ('Accounting: books that follow every sale and purchase', 'Comptabilité : des livres alimentés par chaque vente et achat'),
-      ('Your own instance, with your name and logo on the login', 'Votre propre instance, avec votre nom et votre logo à la connexion')]),
+      ('Your own dedicated server, with your name and logo on the login', 'Votre propre serveur dédié, avec votre nom et votre logo à la connexion')]),
     ('janitorial', 'warn', 'Early access', 'Accès anticipé', 'Janitorial operations', "Gestion des services d'entretien",
      'Run a commercial cleaning company from one app, for cleaners, supervisors and clients.',
      "Gérez une entreprise d'entretien commercial depuis une seule application, pour les employés, les superviseurs et les clients.",
@@ -80,8 +80,11 @@ PRODUCTS = [
 # FAQ shown on the home page AND emitted as FAQPage JSON-LD (text must match what is visible)
 FAQ = [
     ('What is Nastaliq?', "Qu'est-ce que Nastaliq?",
-     'Nastaliq is a cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own private instance, in English and French. We set it up for your business and host it.',
-     "Nastaliq est un ERP infonuagique pour les entreprises en croissance d'Amérique du Nord, généralement celles dont les revenus annuels atteignent 1 M$ ou plus. Il réunit stocks, achats, ventes et comptabilité dans un seul système, sur votre propre instance privée, en français et en anglais. Nous l'installons pour votre entreprise et l'hébergeons."),
+     'Nastaliq is a private cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in English and French. We set it up for your business and host it.',
+     "Nastaliq est un ERP en nuage privé pour les entreprises en croissance d'Amérique du Nord, généralement celles dont les revenus annuels atteignent 1 M$ ou plus. Il réunit stocks, achats, ventes et comptabilité dans un seul système, sur votre propre serveur dédié, en français et en anglais. Nous l'installons pour votre entreprise et l'hébergeons."),
+    ('Is our data shared with other clients?', "Nos données sont-elles partagées avec d'autres clients?",
+     'No. Every client, whatever its size, runs on its own dedicated server with its own site. Your system and data are not shared with any other company.',
+     "Non. Chaque client, peu importe sa taille, fonctionne sur son propre serveur dédié, avec son propre site. Votre système et vos données ne sont partagés avec aucune autre entreprise."),
     ('How much does Nastaliq cost?', 'Combien coûte Nastaliq?',
      'Pricing is a flat monthly subscription with unlimited users, plus a one-time setup fee. We send the exact plan and price by email after you tell us what you run.',
      "Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques. Nous envoyons le plan et le prix exacts par courriel après que vous nous avez décrit votre entreprise."),
@@ -129,7 +132,7 @@ def header(path, cur='', home=False):
                'aria-current="true"' if LANG == 'fr' else 'href="%s"' % fr_h))
     cta = '<a class="btn sm" href="%s">%s</a>' % ('#contact' if home else up + 'contact.html', B('Book a free demo', 'Réserver une démo gratuite'))
     top = ('<div class="top"><div class="in"><span>%s</span><div><a href="%scontact.html">Contact</a><a href="mailto:%s">%s</a></div></div></div>'
-           % (B('Cloud ERP for growing businesses in North America', "ERP infonuagique pour les entreprises en croissance d'Amérique du Nord"), up, EMAIL, EMAIL))
+           % (B('Private cloud ERP for growing businesses in North America', "ERP en nuage privé pour les entreprises en croissance d'Amérique du Nord"), up, EMAIL, EMAIL))
     return ('<a class="skip" href="#main">%s</a>@@TOP@@<header><div class="in bar"><a class="logo" href="%sindex.html" aria-label="%s">'
             '<img class="mk" src="%simg/mark.svg" width="30" height="28" alt=""><img class="wd" src="%simg/wordmark.svg" width="55" height="15" alt="Nastaliq"></a>'
             '<nav id="nav" aria-label="%s">%s%s%s%s%s%s%s</nav>'
@@ -147,8 +150,8 @@ def footer(path):
             '<p>%s</p><p>%s</p><a href="mailto:%s">%s</a></div>%s%s%s</div>'
             '<p class="legal">&copy; 2026 Nastaliq LLP. %s %s. %s <i>|</i> <a href="%sprivacy.html">%s</a> <i>|</i> <a href="%sterms.html">%s</a></p></div></footer>'
             % (home, pre, pre,
-               B('Cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one private system, in English and French.',
-                 "ERP infonuagique pour entreprises en croissance : stocks, achats, ventes et comptabilité dans un seul système privé, en français et en anglais."),
+               B('Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on your own dedicated server, in English and French.',
+                 "ERP en nuage privé pour entreprises en croissance : stocks, achats, ventes et comptabilité sur votre propre serveur dédié, en français et en anglais."),
                B('Lahore, Pakistan, serving North America.', "Lahore, Pakistan, au service de l'Amérique du Nord."), EMAIL, EMAIL,
                col(B('Product', 'Produit'), [(up + 'products.html', B('Products', 'Produits')), (home + '#pricing', B('Pricing', 'Tarifs')), (home + '#faq', 'FAQ')])
                + col(B('Industries', 'Secteurs'), [(up + 'industries/%s.html' % i['slug'], B(*i['name'])) for i in INDUSTRIES]),
@@ -166,7 +169,7 @@ def head(path, title, desc, schema, og_type='website', robots='index,follow,max-
     url = url_for(path)
     org = dict(ORG)
     if LANG == 'fr':
-        org['description'] = "Nastaliq conçoit et héberge des un ERP infonuagique pour les entreprises en croissance d'Amérique du Nord : stocks, achats, ventes et comptabilité dans un seul système privé, en français et en anglais."
+        org['description'] = "Nastaliq conçoit et héberge des un ERP en nuage privé pour les entreprises en croissance d'Amérique du Nord : stocks, achats, ventes et comptabilité dans un seul système, chaque client ayant son propre serveur dédié, en français et en anglais."
     web = dict(WEBSITE)
     graph = {'@context': 'https://schema.org', '@graph': [org, web] + schema}
     en, fr = url_for(path, 'en'), url_for(path, 'fr')
@@ -183,7 +186,7 @@ def head(path, title, desc, schema, og_type='website', robots='index,follow,max-
             '%s<link rel="stylesheet" href="%scss/home.css">'
             '<script type="application/ld+json">%s</script></head>'
             % (LANG, x(title), x(desc), url, en, fr, en, robots, pre, pre, oloc, oalt, og_type, x(title), x(desc), url, SITE,
-               B('Nastaliq: cloud ERP for growing businesses', "Nastaliq : ERP infonuagique pour entreprises en croissance"),
+               B('Nastaliq: private cloud ERP for growing businesses', "Nastaliq : ERP en nuage privé pour entreprises en croissance"),
                x(title), x(desc), SITE, FONT, pre, json.dumps(graph, ensure_ascii=False, separators=(',', ':'))))
 
 def page(path, title, desc, schema, body, cur='', og_type='website', **kw):
@@ -343,19 +346,19 @@ def company():
              ('Delivery base', 'Base de livraison', 'Lahore, Pakistan', 'Lahore, Pakistan'),
              ('Serving', 'Clientèle', 'North America', 'Amérique du Nord'),
              ('Team', 'Équipe', 'A small team: software engineering, accounting, and marketing and operations.', 'Une petite équipe : génie logiciel, comptabilité, ainsi que marketing et opérations.'),
-             ('Hosting model', "Modèle d'hébergement", 'Cloud only. We do not sell on-premise installs.', "Infonuagique seulement. Nous ne vendons pas d'installations sur place.")]
+             ('Hosting model', "Modèle d'hébergement", 'Private cloud only: each client on its own dedicated server. We do not sell on-premise installs.', "Nuage privé seulement : chaque client sur son propre serveur dédié. Nous ne vendons pas d'installations sur place.")]
     dl = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % (B(a, b), B(c, d)) for a, b, c, d in facts)
     pr = [('Say what is real', 'Dire ce qui est réel', 'Every feature is labelled with its actual status, from Available to Planned.', 'Chaque fonction est étiquetée selon son état réel, de Disponible à Prévu.'),
           ('Accounting first', "La comptabilité d'abord", 'Accounting expertise is part of the team, so the books are set up properly from day one.', "L'expertise comptable fait partie de l'équipe, ce qui garantit des livres bien configurés dès le premier jour."),
           ('Your language', 'Votre langue', 'English and French throughout, because Canadian businesses work in both.', 'Anglais et français partout, parce que les entreprises canadiennes travaillent dans les deux langues.')]
     cards = ''.join('<div><h3>%s</h3><p>%s</p></div>' % (B(a, b), B(c, d)) for a, b, c, d in pr)
     body = (hero('A small team that sets up your system and keeps it running.', 'Une petite équipe qui installe votre système et le maintient en marche.',
-                 'Nastaliq builds and hosts a cloud ERP for growing businesses in North America.',
-                 "Nastaliq conçoit et héberge un ERP infonuagique pour les entreprises en croissance d'Amérique du Nord.")
+                 'Nastaliq builds and hosts a private cloud ERP for growing businesses in North America.',
+                 "Nastaliq conçoit et héberge un ERP en nuage privé pour les entreprises en croissance d'Amérique du Nord.")
             + '<section class="band paper"><div class="in"><h2>%s</h2><div class="prose" style="margin-top:22px"><p>%s</p><p>%s</p></div></div></section>'
             % (B('What we do', 'Ce que nous faisons'),
-               B('Nastaliq sets up and hosts a cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system. Each client runs on its own instance, with its own name and logo, and its data on its own site.',
-                 "Nastaliq installe et héberge un ERP infonuagique pour les entreprises en croissance : stocks, achats, ventes et comptabilité dans un seul système. Chaque client fonctionne sur sa propre instance, à son nom et avec son logo, et ses données sont sur son propre site."),
+               B('Nastaliq sets up and hosts a private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system. Each client runs on its own dedicated server, with its own name and logo, and its data is never shared with another company.',
+                 "Nastaliq installe et héberge un ERP en nuage privé pour les entreprises en croissance : stocks, achats, ventes et comptabilité dans un seul système. Chaque client fonctionne sur son propre serveur dédié, à son nom et avec son logo, et ses données ne sont jamais partagées avec une autre entreprise."),
                B('We start from a preset for your industry, bring in your existing records and stay responsible for hosting, updates and support after go-live. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee.',
                  "Nous partons d'un préréglage pour votre secteur, importons vos dossiers existants et demeurons responsables de l'hébergement, des mises à jour et du soutien après la mise en service. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques."))
             + '<section class="band"><div class="in"><h2>%s</h2><dl class="facts">%s</dl></div></section>' % (B('Who we are', 'Qui nous sommes'), dl)
@@ -364,7 +367,7 @@ def company():
     schema = [{'@type': 'AboutPage', 'name': B('About Nastaliq', 'À propos de Nastaliq'), 'url': url_for('company.html'), 'inLanguage': LANG, 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
               crumbs([pg('index.html', 'Home', 'Accueil'), pg('company.html', 'Company', 'Entreprise')])]
     write('company.html', page('company.html', B('About Nastaliq LLP | Cloud business software team', 'À propos de Nastaliq LLP | Équipe de logiciels infonuagiques'),
-          B('Nastaliq LLP builds and hosts a cloud ERP for growing businesses in North America. Registered with SECP, based in Lahore, Pakistan.',
+          B('Nastaliq LLP builds and hosts a private cloud ERP for growing businesses in North America. Registered with SECP, based in Lahore, Pakistan.',
             "Nastaliq LLP conçoit et héberge des logiciels d'affaires infonuagiques pour les PME d'Amérique du Nord. Établie à Lahore, au Pakistan."),
           schema, body, cur='company'))
 
@@ -543,16 +546,16 @@ def home():
         main = main.replace(k, v)
     assert '@@' not in main and '<!--' not in main
     app = {'@type': 'SoftwareApplication', 'name': 'Nastaliq ERP', 'applicationCategory': 'BusinessApplication', 'operatingSystem': 'Web',
-           'description': B('Cloud ERP for growing businesses: inventory, purchasing, sales and accounting on a private instance, in English and French.',
-                            'ERP infonuagique pour entreprises en croissance : stocks, achats, ventes et comptabilité sur une instance privée, en français et en anglais.'),
+           'description': B('Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on a dedicated server, in English and French.',
+                            'ERP en nuage privé pour entreprises en croissance : stocks, achats, ventes et comptabilité sur un serveur dédié, en français et en anglais.'),
            'url': url_for('index.html'), 'provider': {'@id': SITE + '/#org'}, 'inLanguage': ['en', 'fr'],
            'featureList': B(['Inventory with barcode scanning', 'Purchasing', 'Accounting', 'Sales', 'English and French'],
                             ['Inventaire avec codes-barres', 'Achats', 'Comptabilité', 'Ventes', 'Français et anglais'])}
     schema = [{'@type': 'WebPage', '@id': url_for('index.html') + '#webpage', 'url': url_for('index.html'), 'name': 'Nastaliq', 'inLanguage': LANG,
                'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}}, app, faq_ld([(B(q, qf), B(a, af)) for q, qf, a, af in FAQ])]
-    title = B('Nastaliq ERP | Cloud ERP for inventory, sales and accounting', 'Nastaliq ERP | Stocks, ventes et comptabilité infonuagiques')
-    desc = B('Cloud ERP for growing North American businesses: inventory, purchasing, sales and accounting in one private system, in English and French.',
-             "ERP infonuagique pour entreprises en croissance : stocks, achats, ventes et comptabilité dans un seul système privé, bilingue.")
+    title = B('Nastaliq | Private cloud ERP for inventory and accounting', 'Nastaliq | ERP en nuage privé : stocks, ventes, comptabilité')
+    desc = B('Private cloud ERP for growing North American businesses: inventory, purchasing, sales and accounting on your own dedicated server, in English and French.',
+             "ERP en nuage privé pour entreprises en croissance : stocks, achats, ventes et comptabilité sur votre propre serveur dédié, bilingue.")
     out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="js/home.js" defer></script></body></html>\n'
     out = out.replace('src="js/home.js"', 'src="%sjs/home.js"' % levels('index.html')[1])
     write('index.html', out)
@@ -576,13 +579,13 @@ def seo_files():
         art = '\n'.join('- [%s](%s): %s' % (ARTS_FR[a['slug']]['title'] if fr else a['title'], url_for('articles/%s.html' % a['slug'], lg), ARTS_FR[a['slug']]['desc'] if fr else a['desc']) for a in ARTS)
         faq = '\n'.join('**%s** %s\n' % ((qf, af) if fr else (q, a)) for q, qf, a, af in FAQ)
         if fr:
-            txt = ('# Nastaliq\n\n> Nastaliq LLP conçoit et héberge des un ERP infonuagique pour les entreprises en croissance d\'Amérique du Nord : stocks, achats, ventes et comptabilité dans un seul système privé, en français et en anglais. Infonuagique seulement. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d\'installation uniques, envoyé par courriel.\n\n'
+            txt = ('# Nastaliq\n\n> Nastaliq LLP conçoit et héberge des un ERP en nuage privé pour les entreprises en croissance d\'Amérique du Nord : stocks, achats, ventes et comptabilité dans un seul système, chaque client ayant son propre serveur dédié, en français et en anglais. Infonuagique seulement. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d\'installation uniques, envoyé par courriel.\n\n'
                    'Nastaliq LLP est constituée auprès de la Securities and Exchange Commission of Pakistan (SECP) et établie à Lahore, au Pakistan. Courriel : %s\n\n## Pages\n- [Accueil](%s)\n- [Produits](%s)\n- [Entreprise](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Produits et état\n%s\n\n## Secteurs\n%s\n\n## Guides\n%s\n\n## Questions fréquentes\n%s\n'
                    % (EMAIL, url_for('index.html', lg), url_for('products.html', lg), url_for('company.html', lg), url_for('contact.html', lg), url_for('articles.html', lg), prod, ind, art, faq))
             os.makedirs(os.path.join(PUB, 'fr'), exist_ok=True)
             open(os.path.join(PUB, 'fr', 'llms.txt'), 'w').write(txt)
         else:
-            txt = ('# Nastaliq\n\n> Nastaliq LLP builds and hosts cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one private system, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.\n\n'
+            txt = ('# Nastaliq\n\n> Nastaliq LLP builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.\n\n'
                    'Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: %s\n\nFrench version: %s/fr/llms.txt\n\n## Pages\n- [Home](%s)\n- [Products](%s)\n- [Company](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Products and status\n%s\n\n## Industries\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
                    % (EMAIL, SITE, url_for('index.html', lg), url_for('products.html', lg), url_for('company.html', lg), url_for('contact.html', lg), url_for('articles.html', lg), prod, ind, art, faq))
             open(os.path.join(PUB, 'llms.txt'), 'w').write(txt)

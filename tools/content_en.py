@@ -81,7 +81,7 @@ dict(slug='private-cloud-erp-vs-saas-vs-on-premise',
 <h2>Questions to ask any vendor</h2>
 <ol><li>Do we get our own instance, or a place in a shared one?</li><li>Can we export all of our data whenever we want?</li><li>Who on your side can access our data, and is that access recorded?</li><li>How often are backups taken and where are they kept?</li><li>What happens to our data if we stop being a customer?</li></ol>
 <h2>Our view</h2>
-<p>Nastaliq is cloud-only, and each client runs on its own instance with its own branded site. We handle setup and hosting, so your team spends its time on operations instead of servers. We do not sell on-premise installs. If a contract requires your data to stay inside your building, we are not the right fit, and we will say so.</p>'''),
+<p>Nastaliq is private cloud only: every client, whatever its size, runs on its own dedicated server with its own branded site. We handle setup and hosting, so your team spends its time on operations instead of servers. We do not sell on-premise installs. If a contract requires your data to stay inside your building, we are not the right fit, and we will say so.</p>'''),
 dict(slug='why-inventory-counts-drift',
  tag='Inventory',
  title='Why inventory counts drift, and how barcode scanning fixes it',

@@ -1,6 +1,6 @@
 # Nastaliq
 
-> Nastaliq LLP builds and hosts cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one private system, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.
+> Nastaliq LLP builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.
 
 Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: hello@nastaliq.co
 
@@ -33,7 +33,9 @@ French version: https://nastaliq.co/fr/llms.txt
 - [Bilingual ERP software for Canadian businesses](https://nastaliq.co/articles/bilingual-business-software-canada): Why English and French support matters for invoices, receipts and staff screens, and what to check before you buy.
 
 ## Frequently asked questions
-**What is Nastaliq?** Nastaliq is a cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own private instance, in English and French. We set it up for your business and host it.
+**What is Nastaliq?** Nastaliq is a private cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in English and French. We set it up for your business and host it.
+
+**Is our data shared with other clients?** No. Every client, whatever its size, runs on its own dedicated server with its own site. Your system and data are not shared with any other company.
 
 **How much does Nastaliq cost?** Pricing is a flat monthly subscription with unlimited users, plus a one-time setup fee. We send the exact plan and price by email after you tell us what you run.
 

@@ -1,6 +1,6 @@
 # Nastaliq
 
-> Nastaliq LLP conçoit et héberge des un ERP infonuagique pour les entreprises en croissance d'Amérique du Nord : stocks, achats, ventes et comptabilité dans un seul système privé, en français et en anglais. Infonuagique seulement. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques, envoyé par courriel.
+> Nastaliq LLP conçoit et héberge des un ERP en nuage privé pour les entreprises en croissance d'Amérique du Nord : stocks, achats, ventes et comptabilité dans un seul système, chaque client ayant son propre serveur dédié, en français et en anglais. Infonuagique seulement. Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques, envoyé par courriel.
 
 Nastaliq LLP est constituée auprès de la Securities and Exchange Commission of Pakistan (SECP) et établie à Lahore, au Pakistan. Courriel : hello@nastaliq.co
 
@@ -31,7 +31,9 @@ Nastaliq LLP est constituée auprès de la Securities and Exchange Commission of
 - [Un ERP bilingue pour les entreprises canadiennes](https://nastaliq.co/fr/articles/bilingual-business-software-canada): Pourquoi le français et l'anglais comptent pour les factures, les reçus et les écrans du personnel, et ce qu'il faut vérifier avant d'acheter.
 
 ## Questions fréquentes
-**Qu'est-ce que Nastaliq?** Nastaliq est un ERP infonuagique pour les entreprises en croissance d'Amérique du Nord, généralement celles dont les revenus annuels atteignent 1 M$ ou plus. Il réunit stocks, achats, ventes et comptabilité dans un seul système, sur votre propre instance privée, en français et en anglais. Nous l'installons pour votre entreprise et l'hébergeons.
+**Qu'est-ce que Nastaliq?** Nastaliq est un ERP en nuage privé pour les entreprises en croissance d'Amérique du Nord, généralement celles dont les revenus annuels atteignent 1 M$ ou plus. Il réunit stocks, achats, ventes et comptabilité dans un seul système, sur votre propre serveur dédié, en français et en anglais. Nous l'installons pour votre entreprise et l'hébergeons.
+
+**Nos données sont-elles partagées avec d'autres clients?** Non. Chaque client, peu importe sa taille, fonctionne sur son propre serveur dédié, avec son propre site. Votre système et vos données ne sont partagés avec aucune autre entreprise.
 
 **Combien coûte Nastaliq?** Le tarif est un abonnement mensuel fixe avec utilisateurs illimités, plus des frais d'installation uniques. Nous envoyons le plan et le prix exacts par courriel après que vous nous avez décrit votre entreprise.
 
