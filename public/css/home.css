@@ -204,6 +204,7 @@ nav a.l:hover{color:var(--txt)}nav a.l[aria-current=page]{color:var(--yellow)}
 .ac a:hover{transform:translateY(-3px);box-shadow:0 24px 40px -28px #16150c88}
 .ac small{font:700 .7rem var(--b);letter-spacing:.1em;text-transform:uppercase;color:#8a6500}
 .ac p{color:var(--pmut);font-size:.95rem}
+.ac h2{font-size:1.2rem;font-weight:700;letter-spacing:-.01em;line-height:1.2}
 
 /* faq */
 .faq{max-width:860px;margin:0 auto}

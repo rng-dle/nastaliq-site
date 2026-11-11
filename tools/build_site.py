@@ -16,6 +16,7 @@ EMAIL = 'hello@nastaliq.co'
 REG_NO = '0361484'   # SECP LLP incorporation number (certificate dated 16 October 2026)
 REG_URL = 'https://leap.secp.gov.pk/#/verify-company-info/' + REG_NO
 LEGAL_DATE = '2026-11-11'
+UPDATED = '2026-11-11'   # sitemap lastmod; bump when pages change
 FONT = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">')
 
@@ -362,8 +363,8 @@ def contact():
           schema, body, cur='contact'))
 
 # ---------------------------------------------------------------- articles
-def art_cards(items, base='articles/'):
-    return ''.join('<a href="%s%s.html"><small>%s</small><h3>%s</h3><p>%s</p></a>' % (base, a['slug'], art_t(a, 'tag'), html.escape(art_t(a, 'title')), html.escape(art_t(a, 'desc'))) for a in items)
+def art_cards(items, base='articles/', h='h3'):
+    return ''.join('<a href="%s%s.html"><small>%s</small><%s>%s</%s><p>%s</p></a>' % (base, a['slug'], art_t(a, 'tag'), h, html.escape(art_t(a, 'title')), h, html.escape(art_t(a, 'desc'))) for a in items)
 
 def articles():
     for a in ARTS:
@@ -399,7 +400,7 @@ def articles():
             '<section class="band paper"><div class="in"><div class="ac">%s</div></div></section>'
             % (B('Guides for business owners', "Des guides pour les propriétaires d'entreprise"),
                B('Plain advice on software, stock and running your operations. No jargon.', 'Des conseils clairs sur les logiciels, les stocks et la gestion de vos opérations. Sans jargon.'),
-               art_cards(ARTS)))
+               art_cards(ARTS, h='h2')))
     schema = [{'@type': 'CollectionPage', 'name': 'Articles', 'url': url_for('articles.html'), 'inLanguage': LANG, 'isPartOf': {'@id': SITE + '/#website'}},
               {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': url_for('articles/%s.html' % a['slug']), 'name': art_t(a, 'title')} for i, a in enumerate(ARTS)]},
               crumbs([pg('index.html', 'Home', 'Accueil'), pg('articles.html', 'Articles', 'Articles')])]
@@ -529,7 +530,7 @@ def seo_files():
     for p, pr in pages:
         for lg in ('en', 'fr'):
             alts = ''.join('<xhtml:link rel="alternate" hreflang="%s" href="%s"/>' % (l2, url_for(p, l2)) for l2 in ('en', 'fr')) + '<xhtml:link rel="alternate" hreflang="x-default" href="%s"/>' % url_for(p, 'en')
-            rows += '<url><loc>%s</loc><lastmod>%s</lastmod><priority>%s</priority>%s</url>\n' % (url_for(p, lg), TODAY, pr, alts)
+            rows += '<url><loc>%s</loc><lastmod>%s</lastmod><priority>%s</priority>%s</url>\n' % (url_for(p, lg), UPDATED, pr, alts)
     open(os.path.join(PUB, 'sitemap.xml'), 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' + rows + '</urlset>\n')
     bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended']
     open(os.path.join(PUB, 'robots.txt'), 'w').write('User-agent: *\nAllow: /\n\n' + ''.join('User-agent: %s\nAllow: /\n\n' % b for b in bots) + 'Sitemap: %s/sitemap.xml\n' % SITE)
