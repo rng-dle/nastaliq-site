@@ -20,3 +20,14 @@
     };
   }
 })();
+(function(){
+  var f=document.getElementById('lead');
+  if(!f)return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!f.reportValidity())return;
+    var lines=[];
+    f.querySelectorAll('[name]').forEach(function(el){if(el.value.trim())lines.push(el.getAttribute('data-l')+': '+el.value.trim())});
+    location.href='mailto:hello@nastaliq.co?subject='+encodeURIComponent(f.getAttribute('data-subject'))+'&body='+encodeURIComponent(lines.join('\n'));
+  });
+})();
