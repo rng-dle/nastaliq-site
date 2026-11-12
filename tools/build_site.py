@@ -119,7 +119,7 @@ def footer(path):
     company = [(up + 'company.html', 'About'), (up + 'articles.html', 'Articles'), (up + 'contact.html', 'Contact')]
     return ('<footer class="foot"><div class="in"><div class="fg"><div><a class="logo" href="%s" aria-label="Nastaliq"><img class="mk" src="%simg/mark.svg" width="32" height="30" alt=""><img class="wd" src="%simg/wordmark.svg" width="59" height="16" alt="Nastaliq"></a>'
             '<p>Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on your own dedicated server, in your language.</p>'
-            '<p>Lahore, Pakistan, serving North America.</p><a href="mailto:%s">%s</a></div>%s%s%s</div>'
+            '<a href="mailto:%s">%s</a></div>%s%s%s</div>'
             '<div class="legal"><p>&copy; 2026 Nastaliq LLP. Registration No. %s. All rights reserved.</p>'
             '<p><a href="%sprivacy.html">Privacy Policy</a><i>|</i><a href="%sterms.html">Terms of Service</a></p></div></div></footer>'
             % (home, pre, pre, EMAIL, EMAIL,
