@@ -17,21 +17,21 @@
 
   var scene = new T.Scene();
   var camera = new T.PerspectiveCamera(30, 1, 0.1, 100);
-  scene.add(new T.AmbientLight(0xffffff, 0.85));
-  var key = new T.DirectionalLight(0xffffff, 0.6); key.position.set(3, 5, 6); scene.add(key);
-  var fill = new T.DirectionalLight(0xfff0c8, 0.4); fill.position.set(-5, -3, -4); scene.add(fill);
+  scene.add(new T.AmbientLight(0xffffff, 0.8));
+  var key = new T.DirectionalLight(0xffffff, 0.35); key.position.set(3, 5, 6); scene.add(key);
+  var fill = new T.DirectionalLight(0xffffff, 0.15); fill.position.set(-5, -3, -4); scene.add(fill);
 
   /* three solid cards, one per axis, all the same pale yellow */
   var L = 2.4, W = 1.2, TH = 0.12;
   var geo = new T.BoxGeometry(L, W, TH);
   var edges = new T.EdgesGeometry(geo);
-  var mat = new T.MeshStandardMaterial({ color: new T.Color(0xFFC23A).convertSRGBToLinear(), roughness: 0.55, metalness: 0.05 });
+  var shades = [0xFFC23A, 0xF3A21C, 0xD9800B].map(function (c) { return new T.MeshStandardMaterial({ color: new T.Color(c).convertSRGBToLinear(), roughness: 0.6, metalness: 0 }); });
   var line = new T.LineBasicMaterial({ color: 0x000000 });
   var rig = new T.Group(); scene.add(rig);
   [new T.Matrix4(),
    new T.Matrix4().set(0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1),
    new T.Matrix4().set(0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1)].forEach(function (r) {
-    var m = new T.Mesh(geo, mat);
+    var m = new T.Mesh(geo, shades[rig.children.length]);
     m.quaternion.setFromRotationMatrix(r);
     m.add(new T.LineSegments(edges, line));
     rig.add(m);
