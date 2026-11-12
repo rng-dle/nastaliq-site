@@ -1,8 +1,8 @@
 # Nastaliq
 
-> Nastaliq LLP builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time implementation fee, sent by email. Data migration is charged separately.
+> Nastaliq LLP builds and hosts private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time implementation fee, sent by email. Data migration is charged separately.
 
-Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: hello@nastaliq.co
+Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP). Contact: hello@nastaliq.co
 
 ## Pages
 - [Home](https://nastaliq.co/)
@@ -40,7 +40,7 @@ Nastaliq LLP is incorporated with the Securities and Exchange Commission of Paki
 - [ERP data migration: what to clean up before you move](https://nastaliq.co/articles/erp-data-migration-guide): How to prepare for an ERP data migration: which records to move, how to clean item, customer and supplier lists, and how to check the result.
 
 ## Frequently asked questions
-**What is Nastaliq?** Nastaliq is a private cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in the language your team works in. We implement it for your business and host it.
+**What is Nastaliq?** Nastaliq is a private cloud ERP for growing businesses, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in the language your team works in. We implement it for your business and host it.
 
 **Is our data shared with other clients?** No. Every client, whatever its size, runs on its own dedicated server with its own site. Your system and data are not shared with any other company.
 

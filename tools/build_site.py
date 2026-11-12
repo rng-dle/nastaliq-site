@@ -35,12 +35,10 @@ def nice_date(iso): d = datetime.date.fromisoformat(iso); return '%s %d, %d' % (
 # ---------------------------------------------------------------- shared data
 ORG = {
     '@type': 'Organization', '@id': SITE + '/#org', 'name': 'Nastaliq', 'legalName': 'Nastaliq LLP', 'alternateName': ['Nastaliq LLP', 'Nastaliq ERP'], 'url': SITE + '/',
-    'disambiguatingDescription': 'Software company that builds and hosts a cloud ERP for businesses in North America.',
+    'disambiguatingDescription': 'Software company that builds and hosts a cloud ERP for growing businesses.',
     'logo': SITE + '/img/mark.svg', 'email': EMAIL, 'foundingDate': '2026-10-16',
     'identifier': {'@type': 'PropertyValue', 'propertyID': 'SECP LLP Incorporation No.', 'value': REG_NO},
-    'description': 'Nastaliq builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in.',
-    'address': {'@type': 'PostalAddress', 'addressLocality': 'Lahore', 'addressCountry': 'PK'},
-    'areaServed': ['CA', 'US'],
+    'description': 'Nastaliq builds and hosts private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in.',
     'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'email': EMAIL, 'availableLanguage': 'English'},
 }
 if SAME_AS: ORG['sameAs'] = SAME_AS
@@ -71,7 +69,7 @@ PRODUCTS = [
 # FAQ shown on the home page AND emitted as FAQPage JSON-LD (text must match what is visible)
 FAQ = [
     ('What is Nastaliq?',
-     'Nastaliq is a private cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in the language your team works in. We implement it for your business and host it.'),
+     'Nastaliq is a private cloud ERP for growing businesses, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in the language your team works in. We implement it for your business and host it.'),
     ('Is our data shared with other clients?',
      'No. Every client, whatever its size, runs on its own dedicated server with its own site. Your system and data are not shared with any other company.'),
     ('How much does Nastaliq cost?',
@@ -319,7 +317,7 @@ def industries():
                 + '<section class="band" style="padding-top:0"><div class="in"><div class="cta2"><h2>See it with your industry loaded</h2><p>Tell us what you run. We reply by email with a demo, a plan and a price.</p><a class="btn" href="../contact.html">Get in touch</a></div></div></section>')
         schema = [{'@type': 'WebPage', 'name': I['h1'], 'url': url_for(path), 'inLanguage': 'en', 'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}},
                   {'@type': 'Service', 'name': I['h1'], 'serviceType': 'Cloud ERP implementation and hosting', 'description': I['lede'],
-                   'provider': {'@id': SITE + '/#org'}, 'areaServed': ['CA', 'US'], 'url': url_for(path)},
+                   'provider': {'@id': SITE + '/#org'}, 'url': url_for(path)},
                   faq_ld(I['faq']), crumbs([pg('index.html', 'Home'), (I['name'], url_for(path))])]
         write(path, page(path, I['title'], I['lede'], schema, body))
 
@@ -350,13 +348,13 @@ def company():
              ('Registered', 'Incorporated on 16 October 2026 with the Securities and Exchange Commission of Pakistan (SECP) under the Limited Liability Partnership Act, 2017.'),
              ('Registration No.', '%s (<a href="%s" rel="noopener">verify with SECP</a>)' % (REG_NO, REG_URL))]
     dl = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % f for f in facts)
-    body = (hero('A committed team that implements your system and keeps it running.', 'Nastaliq builds and hosts a private cloud ERP for growing businesses in North America.')
+    body = (hero('A committed team that implements your system and keeps it running.', 'Nastaliq builds and hosts a private cloud ERP for growing businesses.')
             + '<section class="band paper"><div class="in"><h2>What we do</h2><div class="prose" style="margin-top:22px"><p>Nastaliq implements and hosts a private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system. Each client runs on its own dedicated server, with its own name and logo, and its data is never shared with another company.</p></div></div></section>'
             + '<section class="band"><div class="in"><h2>Who we are</h2><dl class="facts">%s</dl></div></section>' % dl)
     schema = [{'@type': 'AboutPage', 'name': 'About Nastaliq', 'url': url_for('company.html'), 'inLanguage': 'en', 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
               crumbs([pg('index.html', 'Home'), pg('company.html', 'Company')])]
     write('company.html', page('company.html', 'About Nastaliq LLP | Cloud business software team',
-          'Nastaliq LLP builds and hosts a private cloud ERP for growing businesses in North America. Registered with SECP, based in Lahore, Pakistan.', schema, body, cur='company'))
+          'Nastaliq LLP builds and hosts a private cloud ERP for growing businesses. Registered with SECP.', schema, body, cur='company'))
 
 # ---------------------------------------------------------------- contact
 MAIL_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>'
@@ -416,7 +414,7 @@ LEGAL = {
    d='How Nastaliq LLP handles personal information on nastaliq.co and when you contact us.',
    s=[
       ('Who we are',
-       'Nastaliq LLP is a limited liability partnership incorporated with the Securities and Exchange Commission of Pakistan (Registration No. %s), based in Lahore, Pakistan. This policy covers the website nastaliq.co and the messages you send us. You can reach us at <a href="mailto:%s">%s</a>.' % (REG_NO, EMAIL, EMAIL)),
+       'Nastaliq LLP is a limited liability partnership incorporated with the Securities and Exchange Commission of Pakistan (Registration No. %s). This policy covers the website nastaliq.co and the messages you send us. You can reach us at <a href="mailto:%s">%s</a>.' % (REG_NO, EMAIL, EMAIL)),
       ('What this website collects',
        'The website has no accounts, no advertising trackers and no analytics scripts, and we set no cookies of our own. The demo form on the home page does not send anything to our servers: it opens your own email app with your answers filled in, and nothing reaches us unless you send that email.'),
       ('Service providers',
@@ -471,6 +469,25 @@ def home():
     opts = ''.join('<option>%s</option>' % html.escape(i['name']) for i in INDUSTRIES) + '<option>Other</option>'
     cats = ''.join('<option value="%s">' % html.escape(c) for c in sorted(set([i['name'] for i in INDUSTRIES] + EXTRA_CATEGORIES)))
     chips = ''.join('<a href="industries/%s.html">%s</a>' % (s, by_slug[s]['name']) for s in OTHER_INDUSTRIES)
+    panels = dict(re.findall(r'<div class="sp" id="(p\d)"( hidden)?>(.*?)\n    </div>', main, re.S) and [(m[0], m[2]) for m in re.findall(r'<div class="sp" id="(p\d)"( hidden)?>(.*?)\n    </div>', main, re.S)])
+    hand = {'distribution': 'p1', 'retail': 'p2', 'janitorial': 'p4'}
+    icons = {'distribution': 'box', 'retail': 'bag', 'manufacturing': 'site', 'food-and-beverage': 'cup', 'construction': 'roles', 'professional-services': 'book', 'ecommerce': 'cart', 'janitorial': 'brush'}
+    tabs_h, sp_h = '', ''
+    for n, i in enumerate(INDUSTRIES):
+        pid = 'p%d' % (n + 1) if i['slug'] not in hand else hand[i['slug']]
+        pid = 'ind-' + i['slug']
+        tabs_h += '<button role="tab" aria-selected="%s" data-p="%s"><svg><use href="#i-%s"/></svg>%s</button>' % ('true' if n == 0 else 'false', pid, icons[i['slug']], i['name'])
+        if i['slug'] in hand:
+            inner = panels[hand[i['slug']]]
+        else:
+            fs = i['feats'][:4]
+            inner = ('\n      <div>\n        <h3>%s</h3>\n        <ul>%s</ul>\n        <a class="btn dk sm" href="#contact">Book a free demo</a> <a class="btn ol sm" href="industries/%s.html">More on %s</a></div>\n'
+                     '      <div class="mini"><div class="h"><b>Included</b><span>%s</span></div>%s</div>\n    ') % (
+                i['h1'], ''.join('<li>%s</li>' % f[0] for f in fs), i['slug'], i['name'].lower(), i['name'],
+                ''.join('<div class="chk d"><i></i><span>%s</span></div>' % f[0] for f in i['feats']))
+        sp_h += '<div class="sp" id="%s"%s>%s</div>\n    ' % (pid, '' if n == 0 else ' hidden', inner)
+    main = re.sub(r'<div class="tabs" role="tablist">.*?</div>', lambda m: '<div class="tabs" role="tablist">' + tabs_h + '</div>', main, count=1, flags=re.S)
+    main = re.sub(r'    <div class="sp" id="p1">.*?<div class="more">.*?</div></div>\n', lambda m: '    ' + sp_h + '\n', main, count=1, flags=re.S)
     faq_html = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (q, a) for q, a in FAQ)
     main = (main.replace('<!--FAQ-->', faq_html).replace('<!--ARTS-->', art_cards(ARTS[:6]))
             .replace('<!--IND-OPTS-->', opts).replace('<!--IND-LIST-->', cats).replace('<!--IND-CHIPS-->', chips))
@@ -482,7 +499,7 @@ def home():
     schema = [{'@type': 'WebPage', '@id': url_for('index.html') + '#webpage', 'url': url_for('index.html'), 'name': 'Nastaliq', 'inLanguage': 'en',
                'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}}, app, faq_ld(FAQ)]
     title = 'Nastaliq | Private cloud ERP for inventory and accounting'
-    desc = 'Private cloud ERP for growing North American businesses: inventory, purchasing, sales and accounting on your own dedicated server, in your language.'
+    desc = 'Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on your own dedicated server, in your language.'
     out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="vendor/three.min.js" defer></script><script src="js/cube.js" defer></script><script src="js/home.js" defer></script></body></html>\n'
     write('index.html', out)
 
@@ -503,8 +520,8 @@ def seo_files():
     prod = '\n'.join('- [%s](%s#%s): %s' % (p[1], url_for('products.html'), p[0], p[2]) for p in PRODUCTS)
     art = '\n'.join('- [%s](%s): %s' % (a['title'], url_for('articles/%s.html' % a['slug']), a['desc']) for a in ARTS)
     faq = '\n'.join('**%s** %s\n' % qa for qa in FAQ)
-    txt = ('# Nastaliq\n\n> Nastaliq LLP builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time implementation fee, sent by email. Data migration is charged separately.\n\n'
-           'Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: %s\n\n## Pages\n- [Home](%s)\n- [Products](%s)\n- [Company](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Products\n%s\n\n## Industries\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
+    txt = ('# Nastaliq\n\n> Nastaliq LLP builds and hosts private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time implementation fee, sent by email. Data migration is charged separately.\n\n'
+           'Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP). Contact: %s\n\n## Pages\n- [Home](%s)\n- [Products](%s)\n- [Company](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Products\n%s\n\n## Industries\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
            % (EMAIL, url_for('index.html'), url_for('products.html'), url_for('company.html'), url_for('contact.html'), url_for('articles.html'), prod, ind, art, faq))
     open(os.path.join(PUB, 'llms.txt'), 'w').write(txt)
 
