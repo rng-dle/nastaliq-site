@@ -1,10 +1,8 @@
 # Nastaliq
 
-> Nastaliq LLP builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in English and French. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time setup fee, sent by email.
+> Nastaliq LLP builds and hosts private cloud ERP for growing businesses in North America: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time implementation fee, sent by email. Data migration is charged separately.
 
 Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP) and based in Lahore, Pakistan. Contact: hello@nastaliq.co
-
-French version: https://nastaliq.co/fr/llms.txt
 
 ## Pages
 - [Home](https://nastaliq.co/)
@@ -13,39 +11,44 @@ French version: https://nastaliq.co/fr/llms.txt
 - [Contact](https://nastaliq.co/contact)
 - [Articles](https://nastaliq.co/articles)
 
-## Products and status
-- [Business suite](https://nastaliq.co/products#suite): Inventory, purchasing, accounting and sales in one cloud system, set up for your business and hosted by us. (Available)
-- [Janitorial operations](https://nastaliq.co/products#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients. (Early access)
-- [Owner dashboard and alerts](https://nastaliq.co/products#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention. (Early access)
-- [English and French](https://nastaliq.co/products#bilingual): One switch on every screen, with Canadian French terms such as courriel and téléverser. (Available)
-- [Point of sale](https://nastaliq.co/products#pos): A clean, fast till for restaurants, fast food and bakeries. (In development)
+## Products
+- [Business suite](https://nastaliq.co/products#suite): Inventory, purchasing, accounting and sales in one cloud system, implemented for your business and hosted by us.
+- [Janitorial operations](https://nastaliq.co/products#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients.
+- [Owner dashboard and alerts](https://nastaliq.co/products#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention.
+- [Every language](https://nastaliq.co/products#languages): Each user picks their own language on every screen, and documents print in the language your customer reads.
+- [Point of sale](https://nastaliq.co/products#pos): A clean, fast till for restaurants, fast food and bakeries.
 
 ## Industries
-- [ERP for distribution and wholesale companies](https://nastaliq.co/industries/distribution): Purchasing, receiving, stock and customer pricing in one private cloud system, set up from a distribution preset and hosted by us. (Available)
-- [ERP for retail businesses](https://nastaliq.co/industries/retail): Stock, purchasing, sales records and accounting in one private cloud system, set up from a retail preset and hosted by us. (Available)
-- [Operations software for commercial cleaning companies](https://nastaliq.co/industries/janitorial): Crews, inspections, clients and supplies in one app, for cleaners, supervisors and the companies you serve. Now in early access. (Early access)
+- [ERP for distribution and wholesale companies](https://nastaliq.co/industries/distribution): Purchasing, receiving, stock and customer pricing in one private cloud system, implemented for distribution and hosted by us.
+- [ERP for retail businesses](https://nastaliq.co/industries/retail): Stock, purchasing, sales records and accounting in one private cloud system, implemented for retail and hosted by us.
+- [ERP for manufacturing companies](https://nastaliq.co/industries/manufacturing): Bills of materials, work orders, purchasing and stock in one private cloud system, with the books following every job.
+- [ERP for food and beverage companies](https://nastaliq.co/industries/food-and-beverage): Stock, purchasing, sales and accounting for food and drink producers and wholesalers, with batch and expiry tracking.
+- [ERP for construction and trades businesses](https://nastaliq.co/industries/construction): Projects, purchasing, timesheets and invoicing in one private cloud system for contractors and trades businesses.
+- [ERP for professional services firms](https://nastaliq.co/industries/professional-services): Timesheets, projects, billing and accounting in one private cloud system for agencies, consultancies and firms that sell time.
+- [ERP for e-commerce businesses](https://nastaliq.co/industries/ecommerce): Stock, purchasing, orders and accounting behind your online store, in one private cloud system.
+- [Operations software for commercial cleaning companies](https://nastaliq.co/industries/janitorial): Crews, inspections, clients and supplies in one app, for cleaners, supervisors and the companies you serve.
 
 ## Guides
 - [Seven signs you have outgrown spreadsheets and accounting software](https://nastaliq.co/articles/outgrowing-spreadsheets-and-accounting-software): How to tell when spreadsheets and entry-level accounting software are holding the business back, and what to move into an ERP first.
 - [How to choose an ERP for a growing business](https://nastaliq.co/articles/how-to-choose-an-erp): A practical checklist for companies comparing ERP systems: what to test live, what to ask about your data and hosting, and what to ignore in the demo.
 - [Shared SaaS, private cloud or on-premise: where should your ERP live?](https://nastaliq.co/articles/private-cloud-erp-vs-saas-vs-on-premise): A plain comparison of the three ways to host an ERP, and what each one means for control of your operations data, upkeep and cost.
 - [Why inventory counts drift, and how barcode scanning fixes it](https://nastaliq.co/articles/why-inventory-counts-drift): The usual reasons your stock numbers stop matching the shelf, and the small habits and tools that close the gap.
-- [Bilingual ERP software for Canadian businesses](https://nastaliq.co/articles/bilingual-business-software-canada): Why English and French support matters for invoices, receipts and staff screens, and what to check before you buy.
+- [Multilingual ERP software: what to check before you buy](https://nastaliq.co/articles/multilingual-erp-software): How to judge language support in an ERP: staff screens, customer documents, reports and emails, and the questions to ask a vendor.
+- [ERP implementation checklist for growing businesses](https://nastaliq.co/articles/erp-implementation-checklist): A practical ERP implementation checklist: scope, data, accounts, users, testing and go-live, so the project finishes on a plan instead of a hope.
+- [What drives the cost of an ERP, and what to ask vendors](https://nastaliq.co/articles/erp-cost-what-drives-the-price): The parts of ERP cost beyond the licence: users, implementation, data migration, hosting and support, and how to compare quotes fairly.
+- [What to look for in inventory management software](https://nastaliq.co/articles/inventory-management-software-buyers-guide): A buyer guide to inventory management software: barcode scanning, locations, reorder levels, purchasing and accounting links, and when to choose an ERP instead.
+- [ERP data migration: what to clean up before you move](https://nastaliq.co/articles/erp-data-migration-guide): How to prepare for an ERP data migration: which records to move, how to clean item, customer and supplier lists, and how to check the result.
 
 ## Frequently asked questions
-**What is Nastaliq?** Nastaliq is a private cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in English and French. We set it up for your business and host it.
+**What is Nastaliq?** Nastaliq is a private cloud ERP for growing businesses in North America, typically companies with $1M or more in annual revenue. It puts inventory, purchasing, sales and accounting in one system, on your own dedicated server, in the language your team works in. We implement it for your business and host it.
 
 **Is our data shared with other clients?** No. Every client, whatever its size, runs on its own dedicated server with its own site. Your system and data are not shared with any other company.
 
-**How much does Nastaliq cost?** Pricing is a flat monthly subscription with unlimited users, plus a one-time setup fee. We send the exact plan and price by email after you tell us what you run.
-
-**How long does it take to go live?** Most businesses go live in about six weeks, with setup and hosting handled by us.
+**How much does Nastaliq cost?** Pricing is a flat monthly subscription with unlimited users, plus a one-time implementation fee. Data migration is charged separately. We send the exact plan and price by email after you tell us what you run.
 
 **Do I need to install anything?** No. Nastaliq runs in the cloud. You sign in from a browser or your phone.
 
-**Is Nastaliq available in French?** Yes. Every screen has an English and French switch, with Canadian French terms such as courriel and téléverser.
+**Does Nastaliq support my language?** Yes. Every screen can be switched to the language your team works in, each user picks their own, and documents print in the language your customer reads.
 
-**Can you bring my existing records in?** Yes. We help bring your existing customers, products and records in during setup. Tell us what you use today and we will say what is possible.
-
-**Who builds and supports Nastaliq?** Nastaliq LLP, a small team in Lahore, Pakistan, serving clients in North America.
+**Can you bring my existing records in?** Yes, as a paid add-on. Data migration is not part of the implementation fee. Tell us what you use today and we will say what is possible and what it costs.
 
