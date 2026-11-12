@@ -24,7 +24,7 @@ PUBLISHED = {'outgrowing-spreadsheets-and-accounting-software': '2026-11-11', 'h
              'multilingual-erp-software': '2026-11-12', 'erp-implementation-checklist': '2026-11-12', 'erp-cost-what-drives-the-price': '2026-11-12',
              'inventory-management-software-buyers-guide': '2026-11-12', 'erp-data-migration-guide': '2026-11-12'}   # any other article uses TODAY
 # Company social profiles, shown in the footer and emitted as schema sameAs. A blank URL hides that link.
-SOCIAL = [('LinkedIn', ''), ('Instagram', '')]
+SOCIAL = [('LinkedIn', 'https://www.linkedin.com/company/nastaliq-systems/'), ('Instagram', 'https://www.instagram.com/nastaliq.systems')]
 SAME_AS = [u for _, u in SOCIAL if u]
 FONT = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">')
@@ -437,7 +437,7 @@ LEGAL = {
       ('About these terms',
        'These terms apply to the website nastaliq.co, operated by Nastaliq LLP (Registration No. %s). By using the site you agree to them. The business software we provide to clients is covered by a separate written agreement with each client.' % REG_NO),
       ('Information on the site',
-       'The site describes our products for general information. Features and availability can change, and some features described may still be in development, so what you receive is set by your written agreement. Screens shown on the site use sample data. Guides and articles are general information and are not legal, tax or accounting advice.'),
+       'The site describes our products for general information. Screens shown on the site use sample data. Guides and articles are general information and are not legal, tax or accounting advice.'),
       ('Pricing and offers',
        'Nothing on the site is a binding offer. Plans and prices are sent by email and take effect only in a written agreement.'),
       ('Our content',
