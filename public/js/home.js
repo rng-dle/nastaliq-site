@@ -1,5 +1,4 @@
 (function(){
-  var root=document.documentElement;
   var tabs=document.querySelectorAll('.tabs button');
   tabs.forEach(function(b){b.onclick=function(){
     tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
@@ -10,19 +9,15 @@
     mb.onclick=function(){var o=nv.classList.toggle('open');mb.setAttribute('aria-expanded',o)};
     nv.addEventListener('click',function(e){if(e.target.closest('a')){nv.classList.remove('open');mb.setAttribute('aria-expanded','false')}});
   }
-  var cp=document.getElementById('cp');
-  if(cp){
-    var label=cp.textContent;
-    cp.onclick=function(){
-      var done=cp.getAttribute('data-done')||'Copied';
-      function ok(){cp.textContent=done;setTimeout(function(){cp.textContent=label},1800)}
-      try{navigator.clipboard.writeText('hello@nastaliq.co').then(ok,function(){})}catch(e){}
-    };
-  }
 })();
 (function(){
   var f=document.getElementById('lead');
   if(!f)return;
+  var sel=f.querySelector('#ind'),wrap=f.querySelector('#other-wrap'),other=f.querySelector('#other');
+  if(sel&&wrap){sel.addEventListener('change',function(){
+    var on=sel.value==='Other';wrap.hidden=!on;
+    if(on)other.focus();else other.value='';
+  })}
   f.addEventListener('submit',function(e){
     e.preventDefault();
     if(!f.reportValidity())return;

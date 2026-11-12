@@ -1,8 +1,11 @@
 /articles/choosing-pos-and-inventory-software-small-business /articles/how-to-choose-an-erp 301
 /articles/choosing-pos-and-inventory-software-small-business.html /articles/how-to-choose-an-erp 301
-/fr/articles/choosing-pos-and-inventory-software-small-business /fr/articles/how-to-choose-an-erp 301
-/fr/articles/choosing-pos-and-inventory-software-small-business.html /fr/articles/how-to-choose-an-erp 301
 /articles/cloud-vs-on-premise-for-small-business /articles/private-cloud-erp-vs-saas-vs-on-premise 301
 /articles/cloud-vs-on-premise-for-small-business.html /articles/private-cloud-erp-vs-saas-vs-on-premise 301
-/fr/articles/cloud-vs-on-premise-for-small-business /fr/articles/private-cloud-erp-vs-saas-vs-on-premise 301
-/fr/articles/cloud-vs-on-premise-for-small-business.html /fr/articles/private-cloud-erp-vs-saas-vs-on-premise 301
+/articles/bilingual-business-software-canada /articles/multilingual-erp-software 301
+/articles/bilingual-business-software-canada.html /articles/multilingual-erp-software 301
+/fr/articles/bilingual-business-software-canada /articles/multilingual-erp-software 301
+/fr/articles/:slug /articles/:slug 301
+/fr/industries/:slug /industries/:slug 301
+/fr / 301
+/fr/* /:splat 301
