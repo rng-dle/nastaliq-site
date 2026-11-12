@@ -14,7 +14,6 @@ SITE = 'https://nastaliq.co'
 TODAY = '2026-10-26'
 EMAIL = 'hello@nastaliq.co'
 REG_NO = '0361484'   # SECP LLP incorporation number (certificate dated 16 October 2026)
-REG_URL = 'https://leap.secp.gov.pk/#/verify-company-info/' + REG_NO
 LEGAL_DATE = '2026-11-12'
 UPDATED = '2026-11-12'   # sitemap lastmod; bump when pages change
 # Article author. None = "the Nastaliq team". To name a person:
@@ -37,7 +36,7 @@ ORG = {
     '@type': 'Organization', '@id': SITE + '/#org', 'name': 'Nastaliq', 'legalName': 'Nastaliq LLP', 'alternateName': ['Nastaliq LLP', 'Nastaliq ERP'], 'url': SITE + '/',
     'disambiguatingDescription': 'Software company that builds and hosts a cloud ERP for growing businesses.',
     'logo': SITE + '/img/mark.svg', 'email': EMAIL, 'foundingDate': '2026-10-16',
-    'identifier': {'@type': 'PropertyValue', 'propertyID': 'SECP LLP Incorporation No.', 'value': REG_NO},
+    'identifier': {'@type': 'PropertyValue', 'propertyID': 'LLP Incorporation No.', 'value': REG_NO},
     'description': 'Nastaliq builds and hosts private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in.',
     'contactPoint': {'@type': 'ContactPoint', 'contactType': 'sales', 'email': EMAIL, 'availableLanguage': 'English'},
 }
@@ -345,8 +344,8 @@ def products():
 # ---------------------------------------------------------------- company
 def company():
     facts = [('Legal name', 'Nastaliq LLP'),
-             ('Registered', 'Incorporated on 16 October 2026 with the Securities and Exchange Commission of Pakistan (SECP) under the Limited Liability Partnership Act, 2017.'),
-             ('Registration No.', '%s (<a href="%s" rel="noopener">verify with SECP</a>)' % (REG_NO, REG_URL))]
+             ('Incorporated', '16 October 2026, as a limited liability partnership.'),
+             ('Registration No.', REG_NO)]
     dl = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % f for f in facts)
     body = (hero('A committed team that implements your system and keeps it running.', 'Nastaliq builds and hosts a private cloud ERP for growing businesses.')
             + '<section class="band paper"><div class="in"><h2>What we do</h2><div class="prose" style="margin-top:22px"><p>Nastaliq implements and hosts a private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system. Each client runs on its own dedicated server, with its own name and logo, and its data is never shared with another company.</p></div></div></section>'
@@ -354,7 +353,7 @@ def company():
     schema = [{'@type': 'AboutPage', 'name': 'About Nastaliq', 'url': url_for('company.html'), 'inLanguage': 'en', 'about': {'@id': SITE + '/#org'}, 'isPartOf': {'@id': SITE + '/#website'}},
               crumbs([pg('index.html', 'Home'), pg('company.html', 'Company')])]
     write('company.html', page('company.html', 'About Nastaliq LLP | Cloud business software team',
-          'Nastaliq LLP builds and hosts a private cloud ERP for growing businesses. Registered with SECP.', schema, body, cur='company'))
+          'Nastaliq LLP builds and hosts a private cloud ERP for growing businesses.', schema, body, cur='company'))
 
 # ---------------------------------------------------------------- contact
 MAIL_ICON = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>'
@@ -414,7 +413,7 @@ LEGAL = {
    d='How Nastaliq LLP handles personal information on nastaliq.co and when you contact us.',
    s=[
       ('Who we are',
-       'Nastaliq LLP is a limited liability partnership incorporated with the Securities and Exchange Commission of Pakistan (Registration No. %s). This policy covers the website nastaliq.co and the messages you send us. You can reach us at <a href="mailto:%s">%s</a>.' % (REG_NO, EMAIL, EMAIL)),
+       'Nastaliq LLP is a limited liability partnership registered (Registration No. %s). This policy covers the website nastaliq.co and the messages you send us. You can reach us at <a href="mailto:%s">%s</a>.' % (REG_NO, EMAIL, EMAIL)),
       ('What this website collects',
        'The website has no accounts, no advertising trackers and no analytics scripts, and we set no cookies of our own. The demo form on the home page does not send anything to our servers: it opens your own email app with your answers filled in, and nothing reaches us unless you send that email.'),
       ('Service providers',
@@ -445,7 +444,7 @@ LEGAL = {
       ('Liability',
        'The site is provided as is. To the extent the law allows, Nastaliq LLP is not liable for loss arising from use of the site or reliance on its content. Links to other websites are provided for convenience and we are not responsible for their content.'),
       ('Governing law and contact',
-       'These terms are governed by the laws of Pakistan. Questions about them can be sent to <a href="mailto:%s">%s</a>.' % (EMAIL, EMAIL)),
+       'Questions about these terms can be sent to <a href="mailto:%s">%s</a>.' % (EMAIL, EMAIL)),
    ]),
 }
 
@@ -521,7 +520,7 @@ def seo_files():
     art = '\n'.join('- [%s](%s): %s' % (a['title'], url_for('articles/%s.html' % a['slug']), a['desc']) for a in ARTS)
     faq = '\n'.join('**%s** %s\n' % qa for qa in FAQ)
     txt = ('# Nastaliq\n\n> Nastaliq LLP builds and hosts private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system, with each client on its own dedicated server, in the language your team works in. Cloud only. Pricing is a flat monthly subscription with unlimited users plus a one-time implementation fee, sent by email. Data migration is charged separately.\n\n'
-           'Nastaliq LLP is incorporated with the Securities and Exchange Commission of Pakistan (SECP). Contact: %s\n\n## Pages\n- [Home](%s)\n- [Products](%s)\n- [Company](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Products\n%s\n\n## Industries\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
+           'Nastaliq LLP, Registration No. 0361484. Contact: %s\n\n## Pages\n- [Home](%s)\n- [Products](%s)\n- [Company](%s)\n- [Contact](%s)\n- [Articles](%s)\n\n## Products\n%s\n\n## Industries\n%s\n\n## Guides\n%s\n\n## Frequently asked questions\n%s\n'
            % (EMAIL, url_for('index.html'), url_for('products.html'), url_for('company.html'), url_for('contact.html'), url_for('articles.html'), prod, ind, art, faq))
     open(os.path.join(PUB, 'llms.txt'), 'w').write(txt)
 
