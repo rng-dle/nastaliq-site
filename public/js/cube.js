@@ -1,6 +1,6 @@
-/* Nastaliq mark in 3D: the three interlocking planes of the logo, extruded and lit like a polished object.
-   Drag to turn it any way, right-drag or shift-drag (two fingers on touch) to move it,
-   pinch or Ctrl + scroll to zoom. Needs three.js r149 (vendor/three.min.js). */
+/* Nastaliq mark as a real 3D object: three interlocking cards, one per axis.
+   Drag the background to turn it any way; drag a card to pull it out along its own axis.
+   Needs three.js r149 (vendor/three.min.js). */
 (function () {
   'use strict';
   var stage = document.getElementById('cube-stage');
@@ -12,238 +12,145 @@
   stage.classList.add('loading');
 
   var renderer;
-  try {
-    renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, alpha: false, powerPreference: 'high-performance' });
-  } catch (e) { fail(); return; }
-  var BG = 0x0a0a0b;
-  renderer.setClearColor(BG, 1);          // transmission samples the clear colour
+  try { renderer = new T.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true }); } catch (e) { fail(); return; }
   renderer.outputEncoding = T.sRGBEncoding;
-  renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.15;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
   var scene = new T.Scene();
-  scene.background = new T.Color(BG);
-  var camera = new T.PerspectiveCamera(28, 1, 0.1, 100);
-  var TARGET = new T.Vector3(0, 1.45, 0);
+  var camera = new T.PerspectiveCamera(30, 1, 0.1, 100);
+  scene.add(new T.AmbientLight(0xffffff, 0.75));
+  var key = new T.DirectionalLight(0xffffff, 0.9); key.position.set(3, 5, 6); scene.add(key);
+  var fill = new T.DirectionalLight(0xffe2b0, 0.35); fill.position.set(-5, -3, -4); scene.add(fill);
 
-  /* ---------- studio lighting baked into an environment map ---------- */
-  function panel(root, w, h, x, y, z, k, col) {
-    var c = new T.Color(col || 0xffffff).multiplyScalar(k);
-    var m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ color: c, side: T.DoubleSide }));
-    m.position.set(x, y, z); m.lookAt(0, 0, 0); root.add(m);
-  }
-  var envScene = new T.Scene();
-  envScene.add(new T.Mesh(new T.SphereGeometry(60, 32, 16), new T.MeshBasicMaterial({ color: 0x15161a, side: T.BackSide })));
-  panel(envScene, 34, 14, 0, 28, 6, 3.2);                 // overhead softbox
-  panel(envScene, 5, 30, -24, 6, 7, 5);                 // left strip
-  panel(envScene, 5, 30, 24, 5, 5, 3.5);                  // right strip
-  panel(envScene, 28, 5, 0, 7, -28, 5, 0xffe2a8);       // warm rim behind
-  panel(envScene, 22, 4, 0, -10, 22, 1.4);              // low front fill
-  panel(envScene, 8, 8, 14, 12, 20, 2.4, 0xfff1d0);       // key accent
-  var pmrem = new T.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(envScene, 0.02).texture;
-  pmrem.dispose();
+  /* ---------- the three cards ----------
+     Each card is a plate with a slot open at its back end. Card k+1 sits in the slot of card k, so the
+     set interlocks, and each card slides out along its own long axis (its +x) without touching the others. */
+  var L = 2.2, W = 1.1, TH = 0.12, CL = 0.02;            // length, width, thickness, clearance
+  var s = TH / 2 + CL, e = W / 2 + CL;
+  var outline = [[-L / 2, -W / 2], [L / 2, -W / 2], [L / 2, W / 2], [-L / 2, W / 2], [-L / 2, s], [e, s], [e, -s], [-L / 2, -s]];
+  var shape = new T.Shape(outline.map(function (p) { return new T.Vector2(p[0], p[1]); }));
+  var cardGeo = new T.ExtrudeGeometry(shape, { depth: TH, bevelEnabled: false });
+  cardGeo.translate(0, 0, -TH / 2);
+  var edgeGeo = new T.EdgesGeometry(cardGeo, 20);
 
-  /* ---------- materials: one per plane of the mark ---------- */
-  function amber(hex) {
-    return new T.MeshPhysicalMaterial({ color: hex, metalness: 0.45, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.1 });
-  }
-  var PLANES = [   // [colour, z layer, path from the logo]
-    [0xD9800B, -1, 'M1.03 -2.50L1.81 -2.05L1.81 -1.05L2.52 -0.64L2.52 -3.36ZM-0.08 -1.86L-2.52 -0.45L-2.52 3.36L-0.16 2.00L-1.89 1.00L-0.08 -0.05Z'],
-    [0xF3A21C,  0, 'M-1.65 -1.14L0.08 -2.14L0.08 -0.05L1.65 0.86L1.65 -1.95L-1.65 -3.86ZM1.65 3.86L1.65 2.14L0.87 2.59L0.00 2.09L-0.71 2.50Z'],
-    [0xFFC23A,  1, 'M1.81 -0.86L1.81 1.14L0.00 0.09L-1.57 1.00L0.87 2.41L2.56 1.43L4.17 0.50ZM-2.56 -1.43L-4.17 -0.50L-2.68 0.36L-2.68 -0.55L-1.81 -1.05L-1.81 -1.86Z']
-  ];
-
-  /* ---------- geometry: logo polygons pulled out into solid shapes ---------- */
-  var K = 0.44, DEPTH = 0.3, LIFT = 1.8;
   var rig = new T.Group(); scene.add(rig);
-  var cube = new T.Group();                         // the mark; named cube in the controls below
-  PLANES.forEach(function (pl) {
-    var mat = amber(pl[0]);
-    pl[2].split('Z').forEach(function (sub) {
-      var pts = [], re = /(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/g, m;
-      while ((m = re.exec(sub))) pts.push(new T.Vector2(parseFloat(m[1]) * K, -parseFloat(m[2]) * K));
-      if (pts.length < 3) return;
-      var geo = new T.ExtrudeGeometry(new T.Shape(pts), {
-        depth: DEPTH, bevelEnabled: true, bevelThickness: 0.035, bevelSize: 0.03, bevelSegments: 4, curveSegments: 1
-      });
-      geo.translate(0, 0, pl[1] * DEPTH - DEPTH / 2);
-      cube.add(new T.Mesh(geo, mat));
-    });
+  var cardDefs = [   // colour as in the logo; rotation maps the local frame onto world axes
+    { color: 0xF3A21C, rot: new T.Matrix4(), axis: new T.Vector3(1, 0, 0) },
+    { color: 0xD9800B, rot: new T.Matrix4().set(0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1), axis: new T.Vector3(0, 1, 0) },
+    { color: 0xFFC23A, rot: new T.Matrix4().set(0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1), axis: new T.Vector3(0, 0, 1) }
+  ];
+  var cards = cardDefs.map(function (d) {
+    var mat = new T.MeshStandardMaterial({ color: new T.Color(d.color).convertSRGBToLinear(), roughness: 0.5, metalness: 0.1 });
+    var m = new T.Mesh(cardGeo, mat);
+    m.quaternion.setFromRotationMatrix(d.rot);
+    m.add(new T.LineSegments(edgeGeo, new T.LineBasicMaterial({ color: 0x000000 })));
+    m.userData = { axis: d.axis, off: 0, tgt: 0 };
+    rig.add(m);
+    return m;
   });
-  rig.add(cube);
+  var PULL = 1.9;
 
-  /* studio backdrop and floor: opaque, so the glass has something to refract */
-  var bc = document.createElement('canvas'); bc.width = 4; bc.height = 256;
-  var bx = bc.getContext('2d'), bgr = bx.createLinearGradient(0, 0, 0, 256);
-  bgr.addColorStop(0, '#202024'); bgr.addColorStop(0.48, '#2e2a24'); bgr.addColorStop(0.56, '#17161a'); bgr.addColorStop(1, '#09090a');
-  bx.fillStyle = bgr; bx.fillRect(0, 0, 4, 256);
-  var bgTex = new T.CanvasTexture(bc); bgTex.encoding = T.sRGBEncoding;
-  var dome = new T.Mesh(new T.SphereGeometry(40, 32, 24), new T.MeshBasicMaterial({ map: bgTex, side: T.BackSide, toneMapped: false, depthWrite: false }));
-  dome.position.y = 1.2; dome.renderOrder = -2; scene.add(dome);
-  var floor = new T.Mesh(new T.CircleGeometry(40, 64), new T.MeshStandardMaterial({ color: 0x060607, roughness: 0.5, metalness: 0.3, envMapIntensity: 0.22 }));
-  floor.rotation.x = -Math.PI / 2; floor.position.y = -0.215; scene.add(floor);
-
-  /* soft contact shadow */
-  var sh = document.createElement('canvas'); sh.width = sh.height = 128;
-  var sg = sh.getContext('2d'), gr = sg.createRadialGradient(64, 64, 4, 64, 64, 64);
-  gr.addColorStop(0, 'rgba(0,0,0,.75)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
-  sg.fillStyle = gr; sg.fillRect(0, 0, 128, 128);
-  var shadow = new T.Mesh(new T.PlaneGeometry(5.2, 5.2), new T.MeshBasicMaterial({ map: new T.CanvasTexture(sh), transparent: true, opacity: 0.7, depthWrite: false }));
-  shadow.rotation.x = -Math.PI / 2; shadow.position.y = -0.21; rig.add(shadow);
-
-  /* ---------- resting pose: floating, turned a little toward the viewer ---------- */
-  var q0 = new T.Quaternion().setFromEuler(new T.Euler(-0.16, 0.5, 0.03));
-  var pos0 = new T.Vector3(0, LIFT, 0);
-  cube.quaternion.copy(q0); cube.position.copy(pos0);
-
-  /* ---------- view, sizing ---------- */
-  var zoom = 1, zoomT = 1, rigT = new T.Vector3(), W = 1, H = 1;
+  /* ---------- pose, view ---------- */
+  var HOME = new T.Quaternion().setFromUnitVectors(new T.Vector3(1, 1, 1).normalize(), new T.Vector3(0, 0, 1));
+  var up = new T.Vector3(0, 1, 0).applyQuaternion(HOME);           // roll so the model's up edge points up the screen
+  var roll = Math.atan2(up.x, up.y);
+  HOME.premultiply(new T.Quaternion().setFromAxisAngle(new T.Vector3(0, 0, 1), roll));
+  rig.quaternion.copy(HOME);
+  var BASE = 7.2, zoom = 1, dist = BASE, W_PX = 1, H_PX = 1;
   function size() {
-    W = Math.max(1, stage.clientWidth); H = Math.max(1, stage.clientHeight);
-    renderer.setSize(W, H, false);
-    camera.aspect = W / H; camera.updateProjectionMatrix();
+    W_PX = Math.max(1, stage.clientWidth); H_PX = Math.max(1, stage.clientHeight);
+    renderer.setSize(W_PX, H_PX, false); camera.aspect = W_PX / H_PX; camera.updateProjectionMatrix();
   }
-  function placeCamera() {
-    var halfTan = Math.tan(camera.fov * Math.PI / 360);
-    var need = 4.8 / (2 * halfTan * camera.aspect);        // keep the base inside the frame width
-    var need2 = 6.2 / (2 * halfTan);                       // and the whole cube inside the frame height
-    var dist = Math.max(need, need2, 8.5) / zoom;
-    camera.position.set(0, TARGET.y + dist * 0.16, dist);
-    camera.lookAt(TARGET);
-  }
-  size(); placeCamera();
-  if (window.ResizeObserver) new ResizeObserver(function () { size(); placeCamera(); }).observe(stage);
-  else window.addEventListener('resize', function () { size(); placeCamera(); });
+  size();
+  if (window.ResizeObserver) new ResizeObserver(size).observe(stage); else window.addEventListener('resize', size);
 
   /* ---------- interaction ---------- */
+  var ray = new T.Raycaster(), ndc = new T.Vector2();
+  var mode = null, active = null, lastX = 0, lastY = 0, pxPerUnit = 1, dirX = 1, dirY = 0, idleAt = 0;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var coarse = window.matchMedia && matchMedia('(pointer: coarse)').matches;
-  if (coarse) stage.classList.add('coarse');
-  var resting = true, lastTouch = 0, vel = new T.Vector2(), dragging = false;
-  var ptrs = {}, nptr = 0, mode = null, pinch0 = 0, zoom0 = 1, cen0 = null;
-  var AX = new T.Vector3(1, 0, 0), AY = new T.Vector3(0, 1, 0), tq = new T.Quaternion();
-  var anim = null;
-
-  function turn(dx, dy) {                       // world-space turn, any axis, no limits
-    tq.setFromAxisAngle(AY, dx); cube.quaternion.premultiply(tq);
-    tq.setFromAxisAngle(AX, dy); cube.quaternion.premultiply(tq);
-    cube.quaternion.normalize();
+  function pick(ev) {
+    var r = canvas.getBoundingClientRect();
+    ndc.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    var hit = ray.intersectObjects(cards, false)[0];
+    return hit ? hit.object : null;
   }
-  function touched() { resting = false; anim = null; lastTouch = performance.now(); }
-  function pts() { var a = []; for (var k in ptrs) a.push(ptrs[k]); return a; }
-
-  canvas.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-  canvas.addEventListener('pointerdown', function (e) {
-    try { canvas.setPointerCapture(e.pointerId); } catch (x) {}
-    ptrs[e.pointerId] = { x: e.clientX, y: e.clientY }; nptr++;
-    touched(); vel.set(0, 0);
-    if (nptr === 1) { mode = (e.button === 2 || e.shiftKey || e.ctrlKey) ? 'pan' : 'rot'; dragging = true; }
-    else if (nptr === 2) {
-      var p = pts(); mode = 'pinch'; pinch0 = Math.hypot(p[0].x - p[1].x, p[0].y - p[1].y) || 1; zoom0 = zoomT;
-      cen0 = { x: (p[0].x + p[1].x) / 2, y: (p[0].y + p[1].y) / 2 };
+  function screenAxis(card) {      // where the card's pull axis points on screen
+    var a = card.userData.axis.clone().transformDirection(rig.matrixWorld);
+    var p0 = card.getWorldPosition(new T.Vector3()), p1 = p0.clone().add(a);
+    p0.project(camera); p1.project(camera);
+    var dx = (p1.x - p0.x) * W_PX / 2, dy = -(p1.y - p0.y) * H_PX / 2, len = Math.hypot(dx, dy) || 1;
+    dirX = dx / len; dirY = dy / len; pxPerUnit = Math.max(len, 8);
+  }
+  canvas.addEventListener('pointerdown', function (ev) {
+    if (ev.button > 0) return;
+    canvas.setPointerCapture(ev.pointerId);
+    lastX = ev.clientX; lastY = ev.clientY;
+    active = pick(ev);
+    mode = active ? 'pull' : 'turn';
+    if (active) screenAxis(active);
+    canvas.style.cursor = 'grabbing';
+  });
+  canvas.addEventListener('pointermove', function (ev) {
+    if (!mode) { canvas.style.cursor = pick(ev) ? 'pointer' : 'grab'; return; }
+    var dx = ev.clientX - lastX, dy = ev.clientY - lastY; lastX = ev.clientX; lastY = ev.clientY;
+    if (mode === 'pull') {
+      var u = active.userData;
+      u.tgt = Math.max(0, Math.min(PULL, u.tgt + (dx * dirX + dy * dirY) / pxPerUnit));
+      u.off = u.tgt;
+    } else {
+      var q = new T.Quaternion().setFromEuler(new T.Euler(dy * 0.008, dx * 0.008, 0, 'XYZ'));
+      rig.quaternion.premultiply(q).normalize();
     }
   });
-  canvas.addEventListener('pointermove', function (e) {
-    var p = ptrs[e.pointerId]; if (!p) return;
-    var dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY;
-    if (mode === 'rot') {
-      var k = 0.0085; turn(dx * k, dy * k); vel.set(dx * k, dy * k);
-    } else if (mode === 'pan') {
-      movePan(dx, dy);
-    } else if (mode === 'pinch' && nptr >= 2) {
-      var a = pts(), d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y) || 1;
-      zoomT = clamp(zoom0 * d / pinch0, 0.55, 2.2); zoom = zoomT; placeCamera();
-      var c = { x: (a[0].x + a[1].x) / 2, y: (a[0].y + a[1].y) / 2 };
-      movePan(c.x - cen0.x, c.y - cen0.y); cen0 = c;
-    }
-  });
-  function end(e) {
-    if (!ptrs[e.pointerId]) return;
-    delete ptrs[e.pointerId]; nptr = Math.max(0, nptr - 1);
-    try { canvas.releasePointerCapture(e.pointerId); } catch (x) {}
-    if (nptr === 0) { dragging = false; mode = null; }
-    else if (nptr === 1) { mode = 'rot'; vel.set(0, 0); }
-    lastTouch = performance.now();
-  }
-  canvas.addEventListener('pointerup', end);
-  canvas.addEventListener('pointercancel', end);
-  canvas.addEventListener('lostpointercapture', end);
-  canvas.addEventListener('wheel', function (e) {
-    if (!(e.ctrlKey || e.metaKey)) return;       // plain scroll still scrolls the page
-    e.preventDefault(); zoomT = clamp(zoomT * Math.exp(-e.deltaY * 0.0022), 0.55, 2.2);
+  function end() { mode = null; active = null; canvas.style.cursor = 'grab'; idleAt = performance.now() + 2500; }
+  canvas.addEventListener('pointerup', end); canvas.addEventListener('pointercancel', end);
+  canvas.addEventListener('wheel', function (ev) {
+    if (!ev.ctrlKey) return;
+    ev.preventDefault(); zoom = Math.max(0.6, Math.min(1.8, zoom * Math.exp(ev.deltaY * 0.002)));
   }, { passive: false });
-  canvas.addEventListener('dblclick', reset);
-  function movePan(dx, dy) {
-    var u = (2 * camera.position.distanceTo(TARGET) * Math.tan(camera.fov * Math.PI / 360)) / H;
-    rigT.x = clamp(rigT.x + dx * u, -3.2, 3.2); rigT.y = clamp(rigT.y - dy * u, -2.2, 2.2);
-  }
-  function clamp(v, a, b) { return Math.min(b, Math.max(a, v)); }
 
-  function reset() {
-    anim = { t: 0, q: cube.quaternion.clone(), p: cube.position.clone(), r: rig.position.clone(), z: zoomT };
-    vel.set(0, 0);
-  }
-  var bReset = document.getElementById('cube-reset'), bIn = document.getElementById('cube-in'),
-      bOut = document.getElementById('cube-out'), bTurn = document.getElementById('cube-turn');
-  if (bReset) bReset.addEventListener('click', reset);
-  if (bIn) bIn.addEventListener('click', function () { zoomT = clamp(zoomT * 1.18, 0.55, 2.2); });
-  if (bOut) bOut.addEventListener('click', function () { zoomT = clamp(zoomT / 1.18, 0.55, 2.2); });
-  if (bTurn) bTurn.addEventListener('click', function () {
-    var on = !stage.classList.contains('free'); stage.classList.toggle('free', on); bTurn.setAttribute('aria-pressed', String(on));
-  });
-  canvas.addEventListener('keydown', function (e) {
-    var k = 0.12, used = true;
-    if (e.key === 'ArrowLeft') turn(-k, 0); else if (e.key === 'ArrowRight') turn(k, 0);
-    else if (e.key === 'ArrowUp') turn(0, -k); else if (e.key === 'ArrowDown') turn(0, k);
-    else if (e.key === '+' || e.key === '=') zoomT = clamp(zoomT * 1.12, 0.55, 2.2);
-    else if (e.key === '-') zoomT = clamp(zoomT / 1.12, 0.55, 2.2);
-    else if (e.key === 'r' || e.key === 'R' || e.key === '0') reset();
-    else used = false;
-    if (used) { e.preventDefault(); touched(); }
+  var pullBtn = document.getElementById('cube-pull'), zin = document.getElementById('cube-in'), zout = document.getElementById('cube-out'), rst = document.getElementById('cube-reset');
+  function setAll(v) { cards.forEach(function (c) { c.userData.tgt = v; }); }
+  function allOut() { return cards.every(function (c) { return c.userData.tgt > PULL * 0.5; }); }
+  function sync() { if (pullBtn) pullBtn.setAttribute('aria-pressed', allOut()); }
+  if (pullBtn) pullBtn.addEventListener('click', function () { setAll(allOut() ? 0 : PULL); sync(); });
+  if (zin) zin.addEventListener('click', function () { zoom = Math.max(0.6, zoom / 1.2); });
+  if (zout) zout.addEventListener('click', function () { zoom = Math.min(1.8, zoom * 1.2); });
+  var homing = false;
+  if (rst) rst.addEventListener('click', function () { setAll(0); zoom = 1; homing = true; sync(); });
+  canvas.addEventListener('keydown', function (ev) {
+    var k = ev.key, step = 0.12, q = null;
+    if (k === 'ArrowLeft') q = new T.Euler(0, -step, 0); else if (k === 'ArrowRight') q = new T.Euler(0, step, 0);
+    else if (k === 'ArrowUp') q = new T.Euler(-step, 0, 0); else if (k === 'ArrowDown') q = new T.Euler(step, 0, 0);
+    else if (k === '+' || k === '=') zoom = Math.max(0.6, zoom / 1.2); else if (k === '-') zoom = Math.min(1.8, zoom * 1.2);
+    else if (k === 'p' || k === 'P') { setAll(allOut() ? 0 : PULL); sync(); } else if (k === 'r' || k === 'R') { setAll(0); zoom = 1; homing = true; sync(); }
+    else return;
+    ev.preventDefault();
+    if (q) rig.quaternion.premultiply(new T.Quaternion().setFromEuler(q)).normalize();
   });
 
   /* ---------- loop ---------- */
-  var visible = true, last = performance.now(), raf = 0, first = true;
-  if (window.IntersectionObserver) new IntersectionObserver(function (es) {
-    visible = es[0].isIntersecting; if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
-  }, { rootMargin: '120px' }).observe(stage);
-  function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-  var q1 = new T.Quaternion(), pv = new T.Vector3(), swayT = 0;
-
+  var visible = true, first = true, spin = new T.Quaternion();
+  if (window.IntersectionObserver) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(stage);
   function frame(now) {
-    raf = 0;
+    requestAnimationFrame(frame);
     if (!visible) return;
-    var dt = Math.min(0.05, (now - last) / 1000); last = now;
-
-    if (anim) {                                  // glide back to the corner pose
-      anim.t = Math.min(1, anim.t + dt / 0.95); var e = ease(anim.t);
-      cube.quaternion.copy(anim.q).slerp(q0, e); cube.position.copy(anim.p).lerp(pos0, e);
-      rig.position.copy(anim.r).lerp(pv.set(0, 0, 0), e); rigT.copy(rig.position);
-      zoomT = anim.z + (1 - anim.z) * e;
-      if (anim.t >= 1) { anim = null; resting = true; swayT = 0; }
-    } else {
-      if (!dragging && (Math.abs(vel.x) > 0.0002 || Math.abs(vel.y) > 0.0002)) {   // momentum
-        turn(vel.x, vel.y); var f = Math.pow(0.0035, dt); vel.multiplyScalar(f);
-      }
-      if (resting && !dragging && !reduce) {      // gentle sway and float, always facing the viewer
-        swayT += dt;
-        q1.setFromAxisAngle(AY, Math.sin(swayT * 0.6) * 0.62); cube.quaternion.copy(q1).multiply(q0);
-        cube.position.set(0, LIFT + Math.sin(swayT * 0.9) * 0.07, 0);
-      } else if (!resting && !dragging && now - lastTouch > 9000 && !reduce && Math.abs(vel.x) + Math.abs(vel.y) < 0.0002) {
-        reset();                                  // let go for nine seconds: drift home
-      }
-      rig.position.x += (rigT.x - rig.position.x) * Math.min(1, dt * 10);
-      rig.position.y += (rigT.y - rig.position.y) * Math.min(1, dt * 10);
-    }
-    if (Math.abs(zoom - zoomT) > 0.0005) { zoom += (zoomT - zoom) * Math.min(1, dt * 10); placeCamera(); }
-
+    var far = 0;
+    cards.forEach(function (c) {
+      var u = c.userData;
+      if (mode !== 'pull' || c !== active) u.off += (u.tgt - u.off) * 0.14;
+      c.position.copy(u.axis).multiplyScalar(u.off);
+      far = Math.max(far, u.off);
+    });
+    if (homing) { rig.quaternion.slerp(HOME, 0.12); if (rig.quaternion.angleTo(HOME) < 0.002) homing = false; }
+    else if (!mode && !reduce && now > idleAt) { spin.setFromAxisAngle(new T.Vector3(0, 1, 0), 0.004); rig.quaternion.premultiply(spin).normalize(); }
+    var want = (BASE + far * 1.9) * zoom * (camera.aspect < 1 ? 1 / Math.max(camera.aspect, 0.6) : 1);
+    dist += (want - dist) * 0.1;
+    camera.position.set(0, 0, dist);
     renderer.render(scene, camera);
     if (first) { first = false; stage.classList.remove('loading'); }
-    raf = requestAnimationFrame(frame);
   }
-  raf = requestAnimationFrame(frame);
-
-  canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); fail(); });
+  canvas.style.cursor = 'grab';
+  requestAnimationFrame(frame);
 })();
