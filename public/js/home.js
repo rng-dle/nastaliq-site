@@ -20,7 +20,7 @@
   })}
   var t0=Date.now(),note=f.querySelector('#lead-note'),btn=f.querySelector('button[type=submit]'),biz=f.querySelector('[name=business]'),bizTouched=false;
   biz.addEventListener('input',function(){bizTouched=true});
-  var pn=document.getElementById('pv-name');
+  var fnm=f.querySelector('[name=name]');if(fnm)fnm.addEventListener('input',function(){fnm.dataset.t=1});var pn=document.getElementById('pv-name');
   if(pn)pn.addEventListener('input',function(){if(!bizTouched)biz.value=pn.value});
   function mailto(lines){location.href='mailto:hello@nastaliq.co?subject='+encodeURIComponent(f.getAttribute('data-subject'))+'&body='+encodeURIComponent(lines.join('\n'))}
   f.addEventListener('submit',function(e){
