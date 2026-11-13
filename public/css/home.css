@@ -449,3 +449,11 @@ input:focus,select:focus,textarea:focus{outline:0;border-color:var(--ink);box-sh
 .dn2 text{pointer-events:none}
 .pv-win .pvt h4 .me{display:inline-block;width:auto;min-height:0;padding:0 2px;border:0;border-bottom:2px dashed color-mix(in srgb,var(--ac) 60%,#fff);border-radius:0;background:none;box-shadow:none;font:inherit;color:var(--ac-ink,#16160f);max-width:100%}
 .pv-win .pvt h4 .me:focus{border-bottom-style:solid}
+/* fit the dashboard to the visitor's screen (desktop): window height follows the viewport, content scrolls inside */
+@media(min-width:701px){
+.pv-win{display:flex;flex-direction:column;height:clamp(500px,calc(100svh - 270px),900px);min-height:0}
+.pv-win .top{flex:none}
+.pv-win .app{flex:1;min-height:0}
+.pv-win aside{overflow-y:auto;min-height:0}
+.pv-win main{overflow-y:auto;min-height:0;scrollbar-width:thin;scrollbar-color:#cfcfc3 transparent}
+}
