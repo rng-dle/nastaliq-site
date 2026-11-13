@@ -107,6 +107,34 @@
         <li>One-time implementation fee, known up front</li></ul>
         <p class="res"><b>Result</b>Hiring doesn't raise your bill.</p></div>
     </div>
+    <div class="pv" id="preview">
+      <div class="pv-ctl">
+        <p class="eye">Try it</p>
+        <h3>See it with your name on it</h3>
+        <p class="lede">Add your business name, logo and colour. The dashboard below uses sample data for your industry, so you can see roughly what your team would open each morning.</p>
+        <label>Business name<input id="pv-name" maxlength="40" autocomplete="off" placeholder="e.g. Acme Supply Co."></label>
+        <label>Industry<select id="pv-ind"></select></label>
+        <label>Logo (PNG, JPG or WebP)<input id="pv-logo" type="file" accept="image/png,image/jpeg,image/webp"></label>
+        <p class="pv-err" id="pv-err" role="status"></p>
+        <div class="pv-row"><span class="pv-lab">Accent colour</span><div class="pv-sws"><button type="button" class="sw" data-c="#ffc23a" aria-label="Yellow" aria-pressed="true"></button><button type="button" class="sw" data-c="#2f6fed" aria-label="Blue" aria-pressed="false"></button><button type="button" class="sw" data-c="#1d8a4c" aria-label="Green" aria-pressed="false"></button><button type="button" class="sw" data-c="#c2402e" aria-label="Red" aria-pressed="false"></button><button type="button" class="sw" data-c="#7a3fd1" aria-label="Purple" aria-pressed="false"></button><input id="pv-color" type="color" value="#ffc23a" aria-label="Pick any colour"></div></div>
+        <p class="fine"><button type="button" class="lnk" id="pv-clear">Remove logo</button> &middot; The preview runs in your browser. Nothing is uploaded until you send the demo form below, and then we receive it so we can tailor our reply.</p>
+      </div>
+      <div class="pv-win" id="pv-win" role="img" aria-label="Preview of a Nastaliq dashboard with your name and colours. Sample data.">
+        <div class="pv-top"><i></i><i></i><i></i><span>erp.yourcompany.com</span></div>
+        <div class="pv-app">
+          <aside><div class="pv-brand"><span class="pv-lo" id="pv-lo"></span><b id="pv-nm"></b></div><ul><li class="on">Home</li><li>Sales</li><li>Inventory</li><li>Purchasing</li><li>Accounting</li><li>Reports</li></ul></aside>
+          <div class="pv-main">
+            <div class="pv-h"><h4 id="pv-hi"></h4><span>Sample data</span></div>
+            <div class="pv-kpis" id="pv-kpis"></div>
+            <div class="pv-two">
+              <div class="pv-box"><h5 id="pv-ct"></h5><div class="pv-bars" id="pv-bars"></div></div>
+              <div class="pv-box"><h5>Needs attention</h5><ul class="pv-al" id="pv-al"></ul></div>
+            </div>
+            <div class="pv-box"><h5 id="pv-tt"></h5><table class="pv-tb" id="pv-tb"></table></div>
+          </div>
+        </div>
+      </div>
+    </div>
     <p class="mid"><a class="btn dk" href="#contact">Book a free demo</a></p>
   </div>
 </section>
@@ -266,12 +294,14 @@
       </div>
       <form id="lead" data-subject="Nastaliq demo request" novalidate>
         <label>Your name<input name="name" autocomplete="name" required data-l="Name"></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" required data-l="Email"></label>
         <label>Business name<input name="business" autocomplete="organization" required data-l="Business"></label>
         <label>Industry<select name="industry" id="ind" data-l="Industry"><!--IND-OPTS--></select></label>
         <label id="other-wrap" hidden>Your category (optional)<input name="other" id="other" list="ind-list" autocomplete="off" autocorrect="on" autocapitalize="words" spellcheck="true" placeholder="Start typing, e.g. Furniture" data-l="Category"><datalist id="ind-list"><!--IND-LIST--></datalist></label>
         <label>What do you use today?<textarea name="today" rows="3" data-l="Using today"></textarea></label>
+        <input class="hp" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn pri" type="submit">Book a free demo</button>
-        <p class="fine">This opens your email app with the details filled in. Nothing is sent until you press send.</p>
+        <p class="fine" id="lead-note">We reply by email with a demo, a plan and a price. If you tried the dashboard preview above, we receive it too, so we can tailor the demo.</p>
       </form>
     </div>
   </div>
