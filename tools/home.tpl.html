@@ -81,7 +81,17 @@
       <h2>One system that closes the gaps</h2>
       <p class="lede">Every sale, delivery and bill is entered once and shows up everywhere it should.</p>
     </div>
-    <div class="g4">
+    <div class="pv" id="preview">
+      <div class="pv-bar">
+        <label class="f"><span>Your business name</span><input id="pv-name" maxlength="40" autocomplete="off" placeholder="e.g. Acme Supply Co."></label>
+        <label class="f"><span>Industry</span><select id="pv-ind"></select></label>
+        <div class="f"><span>Logo</span><div class="pv-logo"><label class="pv-up" for="pv-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V5m0 0-4 4m4-4 4 4M5 19h14"/></svg><b>Upload logo</b><small>or drop it here</small></label><input class="vh" id="pv-logo" type="file" accept="image/png,image/jpeg,image/webp"><span class="pv-chip" id="pv-chip" hidden><img id="pv-chip-img" alt="Your logo"><button type="button" id="pv-clear" aria-label="Remove logo">&times;</button></span></div></div>
+        <div class="f"><span>Colour</span><div class="pv-sw"><div class="pv-sws" id="pv-sws"></div><input id="pv-color" type="color" value="#ffc23a" aria-label="Pick any colour"></div></div>
+      </div>
+      <p class="pv-err" id="pv-err" role="status"></p>
+      <div class="pv-win" id="pv-win"></div>
+    </div>
+    <div class="g4" style="margin-top:56px">
       <div class="card good"><h3>Enter it once</h3><ul>
         <li>A sale updates stock and the books by itself</li>
         <li>Purchase orders, receiving and bills in one flow</li>
@@ -106,34 +116,6 @@
         <li>Hosting, updates and support included</li>
         <li>One-time implementation fee, known up front</li></ul>
         <p class="res"><b>Result</b>Hiring doesn't raise your bill.</p></div>
-    </div>
-    <div class="pv" id="preview">
-      <div class="pv-ctl">
-        <p class="eye">Try it</p>
-        <h3>See it with your name on it</h3>
-        <p class="lede">Add your business name, logo and colour. The dashboard below uses sample data for your industry, so you can see roughly what your team would open each morning.</p>
-        <label>Business name<input id="pv-name" maxlength="40" autocomplete="off" placeholder="e.g. Acme Supply Co."></label>
-        <label>Industry<select id="pv-ind"></select></label>
-        <label>Logo (PNG, JPG or WebP)<input id="pv-logo" type="file" accept="image/png,image/jpeg,image/webp"></label>
-        <p class="pv-err" id="pv-err" role="status"></p>
-        <div class="pv-row"><span class="pv-lab">Accent colour</span><div class="pv-sws"><button type="button" class="sw" data-c="#ffc23a" aria-label="Yellow" aria-pressed="true"></button><button type="button" class="sw" data-c="#2f6fed" aria-label="Blue" aria-pressed="false"></button><button type="button" class="sw" data-c="#1d8a4c" aria-label="Green" aria-pressed="false"></button><button type="button" class="sw" data-c="#c2402e" aria-label="Red" aria-pressed="false"></button><button type="button" class="sw" data-c="#7a3fd1" aria-label="Purple" aria-pressed="false"></button><input id="pv-color" type="color" value="#ffc23a" aria-label="Pick any colour"></div></div>
-        <p class="fine"><button type="button" class="lnk" id="pv-clear">Remove logo</button> &middot; The preview runs in your browser. Nothing is uploaded until you send the demo form below, and then we receive it so we can tailor our reply.</p>
-      </div>
-      <div class="pv-win" id="pv-win" role="img" aria-label="Preview of a Nastaliq dashboard with your name and colours. Sample data.">
-        <div class="pv-top"><i></i><i></i><i></i><span>erp.yourcompany.com</span></div>
-        <div class="pv-app">
-          <aside><div class="pv-brand"><span class="pv-lo" id="pv-lo"></span><b id="pv-nm"></b></div><ul><li class="on">Home</li><li>Sales</li><li>Inventory</li><li>Purchasing</li><li>Accounting</li><li>Reports</li></ul></aside>
-          <div class="pv-main">
-            <div class="pv-h"><h4 id="pv-hi"></h4><span>Sample data</span></div>
-            <div class="pv-kpis" id="pv-kpis"></div>
-            <div class="pv-two">
-              <div class="pv-box"><h5 id="pv-ct"></h5><div class="pv-bars" id="pv-bars"></div></div>
-              <div class="pv-box"><h5>Needs attention</h5><ul class="pv-al" id="pv-al"></ul></div>
-            </div>
-            <div class="pv-box"><h5 id="pv-tt"></h5><table class="pv-tb" id="pv-tb"></table></div>
-          </div>
-        </div>
-      </div>
     </div>
     <p class="mid"><a class="btn dk" href="#contact">Book a free demo</a></p>
   </div>
