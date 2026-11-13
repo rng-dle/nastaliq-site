@@ -415,7 +415,7 @@ LEGAL = {
       ('Who we are',
        'Nastaliq LLP is a limited liability partnership registered (Registration No. %s). This policy covers the website nastaliq.co and the messages you send us. You can reach us at <a href="mailto:%s">%s</a>.' % (REG_NO, EMAIL, EMAIL)),
       ('What this website collects',
-       'The website has no accounts, no advertising trackers and no analytics scripts, and we set no cookies of our own. The demo form on the home page does not send anything to our servers: it opens your own email app with your answers filled in, and nothing reaches us unless you send that email.'),
+       'The website has no accounts, no advertising trackers and no analytics scripts, and we set no cookies of our own. When you send the demo form on the home page, your answers go to us by email through our site server (a Cloudflare Worker). If you used the dashboard preview first, the business name, industry, colour and logo you entered there are sent with the form. The preview itself runs in your browser, and nothing from it leaves your device unless you send the form. We do not store form submissions on the site: they arrive in our inbox.'),
       ('Service providers',
        'The site is delivered through a content delivery network and loads its fonts from Google Fonts. Like any web host, these providers process technical data such as your IP address and browser type in order to deliver pages and keep the service secure.'),
       ('When you email us',
@@ -499,7 +499,7 @@ def home():
                'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}}, app, faq_ld(FAQ)]
     title = 'Nastaliq | Private cloud ERP for inventory and accounting'
     desc = 'Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on your own dedicated server, in your language.'
-    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="vendor/three.min.js" defer></script><script src="js/cube.js" defer></script><script src="js/home.js" defer></script></body></html>\n'
+    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="vendor/three.min.js" defer></script><script src="js/cube.js" defer></script><script src="js/home.js" defer></script><script src="js/preview.js" defer></script></body></html>\n'
     write('index.html', out)
 
 def seo_files():
