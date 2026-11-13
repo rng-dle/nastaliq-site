@@ -11,10 +11,10 @@
     {s:'#pv-win aside ul',t:'Every part of the business',d:'Sales, stock, purchasing, accounting and reports in one place.',v:'home'},
     {s:'#pv-win .kpis',t:'Numbers that matter',d:'Click any card to jump to the screen behind it.',v:'home'},
     {s:'#pv-win .pvc.chart',t:'Charts you can poke',d:'Hover the line, switch between breakdown and over time, click any bar for the record.',v:'home'},
-    {s:'#pv-win .plus',t:'Create anything fast',d:'Start a sale or a purchase order from anywhere.',v:'home'},
-    {s:'#pv-win [data-bell]',t:'Your day in one place',d:'Tasks and alerts collect here, so the home screen stays clear.',v:'home'},
     {s:'#pv-win .lsel',t:'Your language',d:'The interface switches between 20 languages. Try Arabic or Urdu for right-to-left.',v:'home'},
+    {s:'#pv-win .plus',t:'Create anything fast',d:'Start a sale or a purchase order from anywhere.',v:'home'},
     {s:'#pv-win .thm[data-theme]',t:'Light or dark',d:'One tap. Your team picks what suits them.',v:'home'},
+    {s:'#pv-win [data-bell]',t:'Your day in one place',d:'Tasks and alerts collect here, so the home screen stays clear.',v:'home'},
     {s:'#pv-win .rpt',t:'Reports with detail',d:'Overview, breakdown, trend and financials, each exportable to CSV.',v:'reports'},
     {s:'#pv-win .apps',t:'Connect your apps',d:'Gmail, Slack, QuickBooks, Shopify and more through Composio.',v:'integrations'},
     {s:'#lead button[type=submit]',t:'Say hi',d:'Send us your details and we will build this for your business, with your own numbers.',last:1,v:'home'}
