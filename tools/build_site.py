@@ -499,7 +499,7 @@ def home():
                'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}}, app, faq_ld(FAQ)]
     title = 'Nastaliq | Private cloud ERP for inventory and accounting'
     desc = 'Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on your own dedicated server, in your language.'
-    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="vendor/three.min.js" defer></script><script src="js/cube.js" defer></script><script src="js/home.js" defer></script><script src="js/preview-data.js" defer></script><script src="js/preview.js" defer></script></body></html>\n'
+    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="vendor/three.min.js" defer></script><script src="js/cube.js" defer></script><script src="js/home.js" defer></script><script src="js/preview-data.js" defer></script><script src="js/preview-i18n.js" defer></script><script src="js/preview-tour.js" defer></script><script src="js/preview.js" defer></script></body></html>\n'
     write('index.html', out)
 
 def seo_files():

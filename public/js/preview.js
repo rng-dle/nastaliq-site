@@ -3,13 +3,16 @@
   var root=document.getElementById('preview'),D=window.NQ_DATA;
   if(!root||!D)return;
   var $=function(id){return document.getElementById(id)},win=$('pv-win');
-  var VIEWS=[['home','Home'],['sales','Sales'],['inventory','Inventory'],['purchasing','Purchasing'],['accounting','Accounting'],['reports','Reports']];
+  var VIEWS=[['home','Home'],['sales','Sales'],['inventory','Inventory'],['purchasing','Purchasing'],['accounting','Accounting'],['reports','Reports'],['integrations','Integrations']];
   var PRESETS=['#ffc23a','#2f6fed','#1d8a4c','#e0483a','#7a3fd1','#0f172a'];
-  var st={name:'',ind:'Distribution',accent:'#ffc23a',from:'preset',logo:null,palette:[],dirty:false,view:'home',chart:'auto',pre:'hq',host:'',done:{},me:'',sort:null,q:'',low:false,sel:null,bell:false,orders:{},approved:{},seen:{home:1}};
+  var st={name:'',ind:'Distribution',accent:'#ffc23a',from:'preset',logo:null,palette:[],dirty:false,view:'home',chart:'auto',pre:'hq',host:'',done:{},me:'',dark:false,rep:'overview',apps:{},lang:'en',plus:false,sort:null,q:'',low:false,sel:null,bell:false,orders:{},approved:{},seen:{home:1}};
 
+  var I=window.NQ_I18N||{names:[['en','English']],T:{},rtl:{}};
+  (function(){var n=((navigator.language||'en')+'').slice(0,2).toLowerCase();if(I.T[n])st.lang=n})();
+  function tr(s){var m=I.T[st.lang];return m&&m[s]||s}
   /* ---------- helpers ---------- */
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-  function money(m){var d=m*1000;return d>=1e6?'$'+(d/1e6).toFixed(d>=1e7?1:2)+'M':'$'+Math.round(d/1e3)+'K'}
+  function money(m){var d=m*1000;if(st.lang!=='en'){try{return new Intl.NumberFormat(st.lang,{style:'currency',currency:'USD',currencyDisplay:'narrowSymbol',notation:'compact',maximumFractionDigits:d>=1e7?1:2}).format(d)}catch(e){}}return d>=1e6?'$'+(d/1e6).toFixed(d>=1e7?1:2)+'M':'$'+Math.round(d/1e3)+'K'}
   function val(d,v){return d.unit==='%'?v+'%':money(v)}
   function chg(c,p){return p==null||!p?null:(c-p)/p*100}
   function fmtChg(x){return x==null?'—':(x>=0?'+':'')+x.toFixed(1)+'%'}
@@ -28,12 +31,12 @@
     Object.keys(st.orders).forEach(function(k){if(st.orders[k])out.unshift({id:'PO-'+(4300+Object.keys(st.orders).indexOf(k)),l:k,amt:Math.round(cur().mix[0][1]*.004*10)/10,key:'o-'+k,fresh:1})});return out}
   function sortTh(k,l,cls){var a=st.sort&&st.sort.k===k;return'<th class="'+(cls||'')+'"><button type="button" data-sort="'+k+'"'+(a?' aria-sort="'+(st.sort.d>0?'ascending':'descending')+'"':'')+'>'+l+(a?(st.sort.d>0?' ▲':' ▼'):'')+'</button></th>'}
   var ICONS=['M4 18 9 12l4 3 7-9','M4 7h16v11H4zM4 11h16M16 15h2','M12 4 3 20h18zM12 10v5M12 17.5v.1','M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2'];
-  var SL=['var(--ac)','#16160f','color-mix(in srgb,var(--ac) 55%,#fff)','#6a6a5c','color-mix(in srgb,var(--ac) 30%,#fff)','#b8b8aa','color-mix(in srgb,var(--ac) 75%,#000)'],PRE=['hq','ops','portal','cloud','app'];
+  var SL=['var(--ac)','var(--t)','color-mix(in srgb,var(--ac) 55%,var(--w))','var(--m)','color-mix(in srgb,var(--ac) 30%,var(--w))','var(--l2)','color-mix(in srgb,var(--ac) 75%,#000)'],PRE=['hq','ops','portal','cloud','app'];
   function slug(){return(st.name||'').toLowerCase().replace(/[^a-z0-9]+/g,'')||'yourcompany'}
   function eff(d){return st.chart==='auto'?(d.trend.length>=3?'trend':'mix'):st.chart}
   function curve(p){var s='M'+p[0][0].toFixed(1)+','+p[0][1].toFixed(1);for(var i=0;i<p.length-1;i++){var a=p[i-1]||p[i],b=p[i],c=p[i+1],e=p[i+2]||c,t=.2;s+=' C'+(b[0]+(c[0]-a[0])*t).toFixed(1)+','+(b[1]+(c[1]-a[1])*t).toFixed(1)+' '+(c[0]-(e[0]-b[0])*t).toFixed(1)+','+(c[1]-(e[1]-b[1])*t).toFixed(1)+' '+c[0].toFixed(1)+','+c[1].toFixed(1)}return s}
   function area(d){
-    var s=d.trend,W=640,H=310,L=14,R=14,T=16,B=30,vs=s.map(function(x){return x[1]}),hi=Math.max.apply(null,vs),lo0=Math.min.apply(null,vs),lo=Math.max(0,lo0-(hi-lo0||hi*.1)*1.1),top=hi+(hi-lo)*.12,
+    var s=d.trend,W=640,H=230,L=14,R=14,T=16,B=30,vs=s.map(function(x){return x[1]}),hi=Math.max.apply(null,vs),lo0=Math.min.apply(null,vs),lo=Math.max(0,lo0-(hi-lo0||hi*.1)*1.1),top=hi+(hi-lo)*.12,
       P=s.map(function(x,i){return[L+i*(W-L-R)/Math.max(1,s.length-1),T+(1-(x[1]-lo)/(top-lo))*(H-T-B)]}),ln=curve(P),g='';
     for(var k=0;k<4;k++){var y=T+k*(H-T-B)/3;g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'"/>'}
     var ch=chg(vs[vs.length-1],vs[0]);
@@ -50,17 +53,14 @@
   function donut(d){
     var m=d.mix,tot=m.reduce(function(a,x){return a+x[1]},0),C=2*Math.PI*54,off=0,seg='';
     m.forEach(function(x,i){var len=x[1]/tot*C;seg+='<circle class="sl" data-slice="'+i+'" r="54" cx="70" cy="70" style="stroke:'+SL[i%SL.length]+'" stroke-dasharray="'+Math.max(0,len-2).toFixed(2)+' '+C.toFixed(2)+'" stroke-dashoffset="'+(-off).toFixed(2)+'"><title>'+esc(x[0])+'</title></circle>';off+=len});
-    return'<section class="pvc"><div class="pvh"><h5>Share of total</h5></div><div class="dn2"><svg viewBox="0 0 140 140" role="img" aria-label="Share by '+esc(d.mixLabel)+'">'+seg+'<text x="70" y="68" text-anchor="middle" class="dv">'+(d.unit==='%'?'100%':money(tot))+'</text><text x="70" y="86" text-anchor="middle" class="dl">total</text></svg><ul class="lg">'+m.map(function(x,i){return'<li><button type="button" data-slice="'+i+'"><s style="background:'+SL[i%SL.length]+'"></s><span>'+esc(x[0].replace(' (derived)','').split(',')[0])+'</span><b>'+(x[1]/tot*100).toFixed(0)+'%</b></button></li>'}).join('')+'</ul></div></section>'}
-  function tasks(d){
+    return'<section class="pvc"><div class="pvh"><h5>'+tr('Share of total')+'</h5></div><div class="dn2"><svg viewBox="0 0 140 140" role="img" aria-label="'+esc(d.mixLabel)+'">'+seg+'<text x="70" y="75" text-anchor="middle" class="dv"'+((d.unit==='%'?'100%':money(tot)).length>8?' style="font-size:11px"':'')+'>'+(d.unit==='%'?'100%':money(tot))+'</text></svg><ul class="lg">'+m.slice(0,5).map(function(x,i){return'<li><button type="button" data-slice="'+i+'"><s style="background:'+SL[i%SL.length]+'"></s><span>'+esc(x[0].replace(' (derived)','').split(',')[0])+'</span><b>'+(x[1]/tot*100).toFixed(0)+'%</b></button></li>'}).join('')+'</ul></div></section>'}
+  function todo(d){
     var m=d.mix,R=rng(st.ind+'t'),T=['Approve purchase order PO-'+(4180+Math.round(R()*9)),'Review '+m[0][0].replace(' (derived)','').split(',')[0]+' numbers','Follow up on the overdue bill','Send the morning digest to the team'],n=0;
     var li=T.map(function(x,i){var k=st.ind+i,on=st.done[k];if(on)n++;return'<li><button type="button" class="tk'+(on?' on':'')+'" data-task="'+k+'" aria-pressed="'+!!on+'"><i></i><span>'+esc(x)+'</span></button></li>'}).join('');
-    return'<section class="pvc"><div class="pvh"><h5>Today</h5><span class="pill'+(n===T.length?' ok':'')+'">'+n+' of '+T.length+' done</span></div><ul class="tks">'+li+'</ul></section>'}
-
-  /* ---------- views ---------- */
+    return{html:li,n:n,total:T.length}}
   function vHome(d){
     var k=d.kpis.map(function(x,i){return'<button type="button" class="kpi" data-go="'+x[4]+'"><span class="ki"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+ICONS[i%4]+'"/></svg></span><span class="kl">'+esc(x[0])+'</span><b>'+esc(x[1])+'</b><i class="pl '+(x[3]?'up':'dn')+'">'+esc(x[2])+'</i></button>'}).join('');
-    var hl=d.hl.map(function(x,i){return'<li><button type="button" data-hl="'+i+'"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></button></li>'}).join('');
-    return'<div class="qa"><p>Here is what needs you today.</p><div><button type="button" class="pvm" data-act="sale">+ New sale</button><button type="button" class="pvm ghost" data-act="po">+ Purchase order</button></div></div><div class="kpis">'+k+'</div><div class="g32">'+chartCard(d)+donut(d)+'</div><div class="two">'+tasks(d)+'<section class="pvc"><div class="pvh"><h5>Highlights from the filings</h5></div><ul class="hl">'+hl+'</ul></section></div>'}
+    return'<div class="kpis">'+k+'</div><div class="g32">'+chartCard(d)+donut(d)+'</div>'}
   function tableCard(d,short){
     var r=rows(),h=short?'<h5>'+esc(tt(d))+'</h5><button type="button" class="lnk" data-go="sales">See all</button>':'<h5>'+esc(tt(d))+'</h5>';
     var body=r.length?r.map(function(x){return'<tr data-row="'+esc(x.l)+'" tabindex="0"><td>'+esc(x.l)+'</td><td class="n">'+val(d,x.v)+'</td><td class="n '+(x.g==null?'':x.g>=0?'up':'dn')+'">'+fmtChg(x.g)+'</td><td class="pvs"><u style="width:'+x.s.toFixed(0)+'%"></u></td></tr>'}).join(''):'<tr><td colspan="4" class="empty">Nothing matches "'+esc(st.q)+'".</td></tr>';
@@ -78,19 +78,38 @@
   function vAccounting(d){
     var b=d.fin.map(function(x){var c=chg(x[1],x[2]);return'<tr data-fin="'+esc(x[0])+'" tabindex="0"><td>'+esc(x[0])+'</td><td class="n">'+money(x[1])+'</td><td class="n">'+(x[2]==null?'—':money(x[2]))+'</td><td class="n '+(c==null?'':c>=0?'up':'dn')+'">'+fmtChg(c)+'</td></tr>'}).join('');
     return'<section class="pvc tbl"><div class="pvh"><h5>Reported figures, '+esc(d.per)+'</h5></div><table><thead><tr><th>Line</th><th class="n">This year</th><th class="n">Last year</th><th class="n">Change</th></tr></thead><tbody>'+b+'</tbody></table></section>'}
-  function vReports(d){return'<div class="rep">'+chartCard(d)+'<section class="pvc"><div class="pvh"><h5>Export</h5></div><p class="note" style="margin:0 0 14px">Every table in Nastaliq exports. Try it on this one.</p><button type="button" class="btn sm dk" data-csv="1">Download CSV</button></section></div>'}
-  var TITLES={home:'Good morning',sales:'Sales',inventory:'Inventory',purchasing:'Purchasing',accounting:'Accounting',reports:'Reports'};
+  function stat(l,v,s){return'<div class="pvst"><span>'+esc(l)+'</span><b>'+esc(v)+'</b><i>'+esc(s)+'</i></div>'}
+  function lbl(x){return x.replace(' (derived)','')}
+  function movers(d){var r=d.mix.map(function(m,i){var g=chg(m[1],m[2]);return{i:i,l:lbl(m[0]),g:g!=null?g:m[3]}}).filter(function(x){return x.g!=null}).sort(function(a,b){return b.g-a.g});
+    if(!r.length)return'';return'<section class="pvc"><div class="pvh"><h5>'+tr('Growth')+'</h5></div><ul class="mv">'+r.map(function(x){return'<li><button type="button" data-bar="'+x.i+'" data-w="mix"><span>'+esc(x.l)+'</span><i class="pl '+(x.g>=0?'up':'dn')+'">'+fmtChg(x.g)+'</i></button></li>'}).join('')+'</ul></section>'}
+  function vReports(d){
+    var tabs=[['overview','Overview'],['breakdown','Breakdown'],['trend','Over time'],['fin','Financials']],r=st.rep,m=d.mix,body='';
+    var hi=m.reduce(function(a,x){return x[1]>a[1]?x:a},m[0]),lo=m.reduce(function(a,x){return x[1]<a[1]?x:a},m[0]),tot=m.reduce(function(a,x){return a+x[1]},0),tr0=d.trend,gr=tr0.length>1?chg(tr0[tr0.length-1][1],tr0[0][1]):null;
+    if(r==='overview'){
+      body='<div class="pvsts">'+stat(tr('Highest'),val(d,hi[1]),lbl(hi[0]))+stat(tr('Lowest'),val(d,lo[1]),lbl(lo[0]))+stat(tr('Average'),val(d,d.unit==='%'?Math.round(tot/m.length*10)/10:tot/m.length),m.length+' · '+d.mixLabel.split(',')[0].toLowerCase())+stat(tr('Growth'),gr==null?'—':fmtChg(gr),gr==null?d.trendLabel:lbl(tr0[0][0])+' → '+lbl(tr0[tr0.length-1][0]))+'</div><div class="g32">'+chartCard(d)+movers(d)+'</div>'}
+    else if(r==='breakdown')body=tableCard(d,false);
+    else if(r==='trend'){
+      var rows=tr0.map(function(x,i){var c=i?chg(x[1],tr0[i-1][1]):null;return'<tr><td>'+esc(lbl(x[0]))+'</td><td class="n">'+money(x[1])+'</td><td class="n '+(c==null?'':c>=0?'up':'dn')+'">'+(c==null?'—':fmtChg(c))+'</td></tr>'}).join('');
+      body='<section class="pvc"><div class="pvh"><h5>'+esc(d.trendLabel)+'</h5></div>'+(tr0.length>=3?area(d):'<p class="note">Only '+tr0.length+' periods are filed for this company.</p>')+'</section><section class="pvc tbl"><table><thead><tr><th>Period</th><th class="n">Amount</th><th class="n">'+tr('Growth')+'</th></tr></thead><tbody>'+rows+'</tbody></table></section>'}
+    else body=vAccounting(d);
+    return'<div class="rpt"><div class="seg" role="tablist">'+tabs.map(function(x){return'<button type="button" data-rep="'+x[0]+'" aria-pressed="'+(r===x[0])+'">'+tr(x[1])+'</button>'}).join('')+'</div><div><button type="button" class="pvm ghost" data-act="mail">Email weekly</button><button type="button" class="pvm" data-csv="1">'+tr('Download CSV')+'</button></div></div>'+body}
+  var APPS=[['Gmail','Email'],['Slack','Chat'],['Google Sheets','Spreadsheets'],['QuickBooks','Accounting'],['Shopify','Ecommerce'],['HubSpot','CRM'],['Stripe','Payments'],['Notion','Docs'],['Outlook','Email'],['Microsoft Teams','Chat'],['Xero','Accounting'],['Google Calendar','Calendar']];
+  function vIntegrations(d){
+    var n=Object.keys(st.apps).filter(function(k){return st.apps[k]}).length;
+    return'<section class="pvc int"><div><h3>Connect your apps</h3><p>Nastaliq connects to 1,000+ apps through <b>Composio</b>, so orders, invoices and customers flow in and out without custom work.</p></div><span class="pill'+(n?' ok':'')+'">'+n+' '+tr('Connected').toLowerCase()+'</span></section><div class="apps">'+APPS.map(function(a){var on=st.apps[a[0]];return'<div class="app-t"><span class="lo">'+esc(a[0].charAt(0))+'</span><div><b>'+esc(a[0])+'</b><i>'+esc(a[1])+'</i></div><button type="button" class="pvm'+(on?' ghost':'')+'" data-app="'+esc(a[0])+'" aria-pressed="'+!!on+'">'+(on?'✓ '+tr('Connected'):tr('Connect'))+'</button></div>'}).join('')+'</div><p class="note">Plus 1,000+ more. Logos omitted in this preview.</p>'}
+  var VF={home:vHome,sales:vSales,inventory:vInventory,purchasing:vPurchasing,accounting:vAccounting,reports:vReports,integrations:vIntegrations};
 
   /* ---------- shell ---------- */
   function shell(){
     var d=cur(),name=st.name||'Your Company',logo=st.logo?'<span class="lo img"><img alt="" src="'+st.logo+'"></span>':'<span class="lo">'+esc(name.charAt(0).toUpperCase())+'</span>';
-    var nav=VIEWS.map(function(v){return'<li><button type="button" data-view="'+v[0]+'"'+(st.view===v[0]?' aria-current="page"':'')+'>'+v[1]+'</button></li>'}).join('');
-    var v={home:vHome,sales:vSales,inventory:vInventory,purchasing:vPurchasing,accounting:vAccounting,reports:vReports}[st.view](d);
-    var title=st.view==='home'?'Good morning, <input id="pv-me" class="me" value="'+esc(st.me)+'" placeholder="your name" maxlength="30" size="'+Math.max(9,st.me.length+1)+'" autocomplete="off" aria-label="Your first name">':TITLES[st.view];
-    var bell='<div class="pop" id="pv-pop"'+(st.bell?'':' hidden')+'><h6>Needs attention</h6>'+d.hl.map(function(x,i){return'<button type="button" data-hl="'+i+'"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></button>'}).join('')+'</div>';
+    var nav=VIEWS.map(function(v){return'<li><button type="button" data-view="'+v[0]+'"'+(st.view===v[0]?' aria-current="page"':'')+'>'+tr(v[1])+'</button></li>'}).join('');
+    var v=VF[st.view](d);
+    var title=st.view==='home'?tr('Good morning')+', <input id="pv-me" class="me" value="'+esc(st.me)+'" placeholder="'+esc(tr('your name'))+'" maxlength="30" size="'+Math.max(9,st.me.length+1)+'" autocomplete="off" aria-label="Your first name">':tr(VIEWS.filter(function(x){return x[0]===st.view})[0][1]);
+    var td=todo(d),open=td.total-td.n+d.hl.length;
+    var bell='<div class="pop" id="pv-pop"'+(st.bell?'':' hidden')+'><h6>'+tr('Today')+' <span class="pill'+(td.n===td.total?' ok':'')+'">'+td.n+'/'+td.total+'</span></h6><ul class="tks">'+td.html+'</ul><h6>'+tr('Notifications')+'</h6>'+d.hl.map(function(x,i){return'<button type="button" data-hl="'+i+'"><b>'+esc(x[0])+'</b><span>'+esc(x[1])+'</span></button>'}).join('')+'</div>';
     win.innerHTML='<div class="top"><i></i><i></i><i></i><span class="url"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><select id="pv-pre" aria-label="Address prefix">'+PRE.map(function(p){return'<option'+(p===st.pre?' selected':'')+'>'+p+'</option>'}).join('')+'</select><em>.</em><input id="pv-host" value="'+esc(st.host)+'" placeholder="'+slug()+'.com" aria-label="Your website address" maxlength="40" spellcheck="false" autocomplete="off"></span></div>'
-      +'<div class="app"><aside><div class="brand">'+logo+'<b>'+esc(name)+'</b></div><ul>'+nav+'</ul><p class="co">Sample data modelled on <b>'+esc(d.co)+'</b></p></aside>'
-      +'<main><div class="pvt"><h4>'+title+'</h4><label class="srch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="pv-q" type="search" placeholder="Search" value="'+esc(st.q)+'" aria-label="Search this page"></label><div class="bellw"><button type="button" class="bell" data-bell="1" aria-label="Notifications" aria-expanded="'+st.bell+'"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5h4"/></svg><em>'+d.hl.length+'</em></button>'+bell+'</div></div>'
+      +'<div class="app"><aside><div class="brand">'+logo+'<b>'+esc(name)+'</b></div><ul>'+nav+'</ul><p class="co">'+tr('Sample data')+' · <b>'+esc(d.co)+'</b></p></aside>'
+      +'<main><div class="pvt"><h4>'+title+'</h4><label class="srch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input id="pv-q" type="search" placeholder="'+esc(tr('Search'))+'" value="'+esc(st.q)+'" aria-label="Search this page"></label><select id="pv-lang" class="lsel" aria-label="'+esc(tr('Language'))+'">'+I.names.map(function(n){return'<option value="'+n[0]+'"'+(n[0]===st.lang?' selected':'')+' title="'+n[1]+'">'+n[0].toUpperCase()+'</option>'}).join('')+'</select><div class="bellw"><button type="button" class="thm plus" data-plus="1" aria-label="New" aria-expanded="'+st.plus+'"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><div class="pop pm"'+(st.plus?'':' hidden')+'><button type="button" data-act="sale"><b>+ '+esc(tr('New sale'))+'</b></button><button type="button" data-act="po"><b>+ '+esc(tr('Purchase order'))+'</b></button></div></div><button type="button" class="thm" data-theme="1" aria-pressed="'+st.dark+'" aria-label="'+esc(st.dark?tr('Light'):tr('Dark'))+'" title="'+esc(st.dark?tr('Light'):tr('Dark'))+'"><svg viewBox="0 0 24 24">'+(st.dark?'<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>':'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>')+'</svg></button><div class="bellw"><button type="button" class="bell" data-bell="1" aria-label="Notifications" aria-expanded="'+st.bell+'"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5h4"/></svg><em>'+open+'</em></button>'+bell+'</div></div>'
       +'<div class="view" key="'+st.view+'">'+v+'</div></main>'
       +'<div class="drawer" id="pv-drawer"'+(st.sel?'':' hidden')+'>'+drawer(d)+'</div></div><div class="toast" id="pv-toast" role="status" aria-live="polite"></div>';
     var q=$('pv-q');if(q&&document.activeElement===document.body&&st._focusQ){q.focus();q.setSelectionRange(q.value.length,q.value.length)}
@@ -106,27 +125,32 @@
   function toast(m){var t=$('pv-toast');if(!t)return;t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},2200)}
   function paint(){ // accent colours live in CSS variables so changing colour does not rebuild the dashboard
     var a=st.accent;win.style.setProperty('--ac',a);win.style.setProperty('--on-ac',lum(a)>.4?'#1a1200':'#fff');
-    win.style.setProperty('--ac-ink',lum(a)>.5?'#6b5200':a);
+    win.style.setProperty('--ac-ink',st.dark?'color-mix(in srgb,'+a+' 65%,#fff)':lum(a)>.5?'#6b5200':a);win.classList.toggle('dk',st.dark);win.dir=I.rtl[st.lang]?'rtl':'ltr';
   }
 
   /* ---------- events (delegated) ---------- */
   win.addEventListener('click',function(e){
     var t=e.target.closest('button,tr[data-row],tr[data-fin],[data-slice]');
-    if(!t){if(st.bell){st.bell=false;shell()}return}
+    if(!t){if(st.bell||st.plus){st.bell=false;st.plus=false;shell()}return}
     var D2=cur();
     if(t.dataset.view){st.view=t.dataset.view;st.q='';st.sel=null;st.bell=false;st.seen[st.view]=1;st.dirty=true;shell();win.scrollIntoView({block:'nearest'})}
     else if(t.dataset.go){st.view=t.dataset.go;st.q='';st.seen[st.view]=1;st.dirty=true;shell()}
     else if(t.dataset.sort){var k=t.dataset.sort;st.sort=st.sort&&st.sort.k===k?(st.sort.d>0?{k:k,d:-1}:null):{k:k,d:1};shell()}
     else if(t.dataset.chart){st.chart=t.dataset.chart;shell()}
     else if(t.dataset.slice!=null){st.sel={t:'row',k:D2.mix[+t.dataset.slice][0]};shell()}
+    else if(t.dataset.plus){st.plus=!st.plus;st.bell=false;shell()}
+    else if(t.dataset.theme){st.dark=!st.dark;st.dirty=true;shell()}
+    else if(t.dataset.rep){st.rep=t.dataset.rep;st.sort=null;st.q='';shell()}
+    else if(t.dataset.app){var ap=t.dataset.app;st.apps[ap]=!st.apps[ap];st.dirty=true;shell();if(st.apps[ap])toast('In Nastaliq this opens a secure sign-in with '+ap+'.')}
+    else if(t.dataset.act==='mail'){toast('Weekly email set up (sample).')}
     else if(t.dataset.task){st.done[t.dataset.task]=!st.done[t.dataset.task];shell()}
-    else if(t.dataset.act==='sale'){toast('In Nastaliq this opens a new sales order.')}
-    else if(t.dataset.act==='po'){st.view='purchasing';st.seen.purchasing=1;st.dirty=true;shell();toast('New purchase order started.')}
+    else if(t.dataset.act==='sale'){st.plus=false;shell();toast('In Nastaliq this opens a new sales order.')}
+    else if(t.dataset.act==='po'){st.plus=false;st.view='purchasing';st.seen.purchasing=1;st.dirty=true;shell();toast('New purchase order started.')}
     else if(t.dataset.low){st.low=t.dataset.low==='1';shell()}
     else if(t.dataset.order){st.orders[t.dataset.order]=1;shell();toast('Purchase order created. See Purchasing.')}
     else if(t.dataset.approve){st.approved[t.dataset.approve]=1;shell();toast('Order approved.')}
     else if(t.dataset.hl!=null){st.sel={t:'hl',k:+t.dataset.hl};st.bell=false;shell()}
-    else if(t.dataset.bell){st.bell=!st.bell;shell()}
+    else if(t.dataset.bell){st.bell=!st.bell;st.plus=false;shell()}
     else if(t.dataset.close){st.sel=null;shell()}
     else if(t.dataset.csv){csv()}
     else if(t.dataset.bar!=null){var i=+t.dataset.bar;if(t.dataset.w==='mix'){st.sel={t:'row',k:D2.mix[i][0]};shell()}}
@@ -134,13 +158,16 @@
     else if(t.dataset.fin){st.sel={t:'fin',k:t.dataset.fin};shell()}
   });
   win.addEventListener('keydown',function(e){var t=e.target;if((e.key==='Enter'||e.key===' ')&&t.matches&&t.matches('tr[data-row],tr[data-fin]')){e.preventDefault();t.click()}if(e.key==='Escape'&&(st.sel||st.bell)){st.sel=null;st.bell=false;shell()}});
-  win.addEventListener('input',function(e){if(e.target.id==='pv-me'){var v=e.target.value.slice(0,30);st.me=v.trim();e.target.size=Math.max(9,v.length+1);st.dirty=true;var fn=document.querySelector('#lead [name=name]');if(fn&&!fn.dataset.t)fn.value=st.me;return}if(e.target.id==='pv-host'){st.host=e.target.value.toLowerCase().replace(/[^a-z0-9.\-]/g,'');st.dirty=true;return}if(e.target.id==='pv-pre'){st.pre=e.target.value;st.dirty=true;return}if(e.target.id==='pv-q'){st.q=e.target.value;st._focusQ=1;var v=win.querySelector('.view'),d=cur();v.innerHTML=({home:vHome,sales:vSales,inventory:vInventory,purchasing:vPurchasing,accounting:vAccounting,reports:vReports})[st.view](d)}});
+  win.addEventListener('input',function(e){if(e.target.id==='pv-me'){var v=e.target.value.slice(0,30);st.me=v.trim();e.target.size=Math.max(9,v.length+1);st.dirty=true;var fn=document.querySelector('#lead [name=name]');if(fn&&!fn.dataset.t)fn.value=st.me;return}if(e.target.id==='pv-host'){st.host=e.target.value.toLowerCase().replace(/[^a-z0-9.\-]/g,'');st.dirty=true;return}if(e.target.id==='pv-lang'){st.lang=e.target.value;st.dirty=true;shell();return}if(e.target.id==='pv-pre'){st.pre=e.target.value;st.dirty=true;return}if(e.target.id==='pv-q'){st.q=e.target.value;st._focusQ=1;var v=win.querySelector('.view'),d=cur();v.innerHTML=VF[st.view](d)}});
   win.addEventListener('mouseover',function(e){var h=e.target.closest('[data-pt]');if(!h)return;var d=cur(),i=+h.dataset.pt,s=d.trend[i],tip=$('pv-tip'),c=win.querySelector('.pt[data-i="'+i+'"]');if(!tip||!s||!c)return;
     win.querySelectorAll('.pt.on').forEach(function(x){x.classList.remove('on')});c.classList.add('on');var r=c.getBoundingClientRect(),p=tip.parentNode.getBoundingClientRect();tip.hidden=false;tip.textContent=s[0].replace(' (derived)','')+': '+money(s[1]);
     tip.style.left=Math.min(p.width-tip.offsetWidth-4,Math.max(4,r.left-p.left+r.width/2-tip.offsetWidth/2))+'px';tip.style.top=Math.max(0,r.top-p.top-38)+'px'});
   win.addEventListener('mouseout',function(e){if(e.target.closest('[data-pt]')){var t=$('pv-tip');if(t)t.hidden=true;win.querySelectorAll('.pt.on').forEach(function(x){x.classList.remove('on')})}});
-  function csv(){var d=cur(),out=['"'+d.mixLabel+'","This period","Prior period"'].concat(d.mix.map(function(m){return'"'+m[0]+'",'+m[1]+','+(m[2]==null?'':m[2])})).join('\n');
-    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([out],{type:'text/csv'}));a.download='sample-report.csv';document.body.appendChild(a);a.click();a.remove();toast('Exported sample-report.csv')}
+  function csv(){var d=cur(),h,r;
+    if(st.view==='reports'&&st.rep==='trend'){h='"Period","Amount ($M)"';r=d.trend.map(function(x){return'"'+x[0]+'",'+x[1]})}
+    else if(st.view==='reports'&&st.rep==='fin'||st.view==='accounting'){h='"Line","This year ($M)","Last year ($M)"';r=d.fin.map(function(x){return'"'+x[0]+'",'+x[1]+','+(x[2]==null?'':x[2])})}
+    else{h='"'+d.mixLabel+'","This period","Prior period"';r=d.mix.map(function(m){return'"'+m[0]+'",'+m[1]+','+(m[2]==null?'':m[2])})}
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([[h].concat(r).join('\n')],{type:'text/csv'}));a.download='sample-report.csv';document.body.appendChild(a);a.click();a.remove();toast('Exported sample-report.csv')}
 
   /* ---------- controls: name, industry, logo, colour ---------- */
   var ind=$('pv-ind'),nm=$('pv-name'),lg=$('pv-logo'),cs=$('pv-color'),er=$('pv-err'),sw=$('pv-sws'),chip=$('pv-chip');
@@ -203,5 +230,5 @@
   swatches();shell();
 
   // What the demo form sends along. Only set once the visitor has touched the preview.
-  window.nqPreview=function(){return st.dirty?{preview:{name:st.name,industry:st.ind,accent:st.accent,hasLogo:!!st.logo,colourFrom:st.from,me:st.me,host:st.pre+'.'+(st.host||slug()+'.com'),views:Object.keys(st.seen)},logo:st.logo}:{}};
+  window.nqPreview=function(){return st.dirty?{preview:{name:st.name,industry:st.ind,accent:st.accent,hasLogo:!!st.logo,colourFrom:st.from,me:st.me,lang:st.lang,theme:st.dark?'dark':'light',host:st.pre+'.'+(st.host||slug()+'.com'),views:Object.keys(st.seen)},logo:st.logo}:{}};
 })();

@@ -27,7 +27,7 @@ export function parseLead(raw) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(lead.email)) return { ok: false, error: 'Enter a valid email address.' };
   const p = raw.preview;
   if (p && typeof p === 'object') {
-    lead.preview = { name: s(p.name, 40), industry: s(p.industry, 40), accent: HEX.test(s(p.accent, 7)) ? s(p.accent, 7) : '#ffc23a', hasLogo: !!p.hasLogo, me: s(p.me, 30), host: s(p.host, 80).replace(/[^a-z0-9.\-]/gi, ''), colourFrom: ['logo', 'preset', 'custom'].includes(p.colourFrom) ? p.colourFrom : '', views: Array.isArray(p.views) ? p.views.slice(0, 8).map((v) => s(v, 20)).filter(Boolean) : [] };
+    lead.preview = { name: s(p.name, 40), industry: s(p.industry, 40), accent: HEX.test(s(p.accent, 7)) ? s(p.accent, 7) : '#ffc23a', hasLogo: !!p.hasLogo, me: s(p.me, 30), lang: s(p.lang, 5).replace(/[^a-z-]/gi, ''), theme: p.theme === 'dark' ? 'dark' : 'light', host: s(p.host, 80).replace(/[^a-z0-9.\-]/gi, ''), colourFrom: ['logo', 'preset', 'custom'].includes(p.colourFrom) ? p.colourFrom : '', views: Array.isArray(p.views) ? p.views.slice(0, 8).map((v) => s(v, 20)).filter(Boolean) : [] };
     if (typeof raw.logo === 'string' && raw.logo.length <= MAX_LOGO) {
       const m = LOGO.exec(raw.logo);
       if (m) {
@@ -48,7 +48,7 @@ export function buildMime({ from, to, site, lead, now = new Date(), id = crypto.
   let link = '';
   if (lead.preview) {
     const p = lead.preview; link = previewLink(site, p);
-    rows.push(['Preview name', p.name || '(left blank)'], ['Preview industry', p.industry || '(default)'], ['Preview greeting name', p.me || '(none)'], ['Preview address', p.host || '(default)'], ['Preview colour', p.accent + (p.colourFrom ? ' (' + p.colourFrom + ')' : '')], ['Screens opened', p.views.join(', ') || 'home'], ['Preview logo', lead.logo ? 'attached' : 'none'], ['Reopen preview', link]);
+    rows.push(['Preview name', p.name || '(left blank)'], ['Preview industry', p.industry || '(default)'], ['Preview language / theme', (p.lang || 'en') + ' / ' + (p.theme || 'light')], ['Preview greeting name', p.me || '(none)'], ['Preview address', p.host || '(default)'], ['Preview colour', p.accent + (p.colourFrom ? ' (' + p.colourFrom + ')' : '')], ['Screens opened', p.views.join(', ') || 'home'], ['Preview logo', lead.logo ? 'attached' : 'none'], ['Reopen preview', link]);
   } else rows.push(['Preview', 'visitor did not use the dashboard preview']);
   const text = rows.map(([k, v]) => k + ': ' + v).join('\n') + '\n';
   const html = '<table style="font:14px/1.5 Arial,sans-serif;border-collapse:collapse">' + rows.map(([k, v]) =>
