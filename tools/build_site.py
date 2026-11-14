@@ -14,6 +14,7 @@ PUB = os.path.join(ROOT, 'public')
 SITE = 'https://nastaliq.co'
 TODAY = '2026-10-26'
 EMAIL = 'hello@nastaliq.co'
+REG_URL = 'https://www.secp.gov.pk/'
 REG_NO = '0361484'   # SECP LLP incorporation number (certificate dated 16 October 2026)
 LEGAL_DATE = '2026-11-12'
 UPDATED = '2026-11-12'   # sitemap lastmod; bump when pages change
@@ -52,6 +53,9 @@ PRODUCTS = [
       'Sales: sales orders, invoices and customer-specific prices',
       'Accounting: books that follow every sale and purchase',
       'Your own dedicated server, with your name and logo on the login']),
+    ('inventory', 'Inventory',
+     'Know what is on the shelf and what to reorder, from the warehouse floor on a phone.',
+     ['Receive, transfer and count stock', 'Barcode scanning with a phone camera', 'See what is below its reorder level']),
     ('janitorial', 'Janitorial operations',
      'Run a commercial cleaning company from one app, for cleaners, supervisors and clients.',
      ['Time clock with GPS geofencing', 'Inspections and checklists with photo proof', 'Client portal and messaging', 'Supplies and job profitability']),
@@ -340,13 +344,13 @@ def products():
               {'@type': 'ItemList', 'name': 'Nastaliq products', 'itemListElement': items},
               crumbs([pg('index.html', 'Home'), pg('products.html', 'Products')])]
     write('products.html', page('products.html', 'Nastaliq Products | Inventory, purchasing, sales, accounting',
-          'What Nastaliq builds: business suite, janitorial operations, owner dashboard, every language, and point of sale.', schema, body, cur='products'))
+          'What Nastaliq builds: business suite, inventory, janitorial operations, owner dashboard, every language, and point of sale.', schema, body, cur='products'))
 
 # ---------------------------------------------------------------- company
 def company():
     facts = [('Legal name', 'Nastaliq LLP'),
-             ('Incorporated', '16 October 2026, as a limited liability partnership.'),
-             ('Registration No.', REG_NO)]
+             ('Incorporated', 'Incorporated under the Limited Liability Partnership Act in 2026 by SECP'),
+             ('Registration No.', '<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>' % (REG_URL, REG_NO))]
     dl = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % f for f in facts)
     body = (hero('A committed team that implements your system and keeps it running.', 'Nastaliq builds and hosts a private cloud ERP for growing businesses.')
             + '<section class="band paper"><div class="in"><h2>What we do</h2><div class="prose" style="margin-top:22px"><p>Nastaliq implements and hosts a private cloud ERP for growing businesses: inventory, purchasing, sales and accounting in one system. Each client runs on its own dedicated server, with its own name and logo, and its data is never shared with another company.</p></div></div></section>'
