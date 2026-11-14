@@ -7,6 +7,7 @@ Pricing never appears on the site: prices go out by email only. The site is Engl
 import datetime, html, json, os, posixpath, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content_en import ARTS
+import iso_map
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUB = os.path.join(ROOT, 'public')
@@ -490,6 +491,7 @@ def home():
     faq_html = ''.join('<details><summary>%s</summary><p>%s</p></details>' % (q, a) for q, a in FAQ)
     main = (main.replace('<!--FAQ-->', faq_html).replace('<!--ARTS-->', art_cards(ARTS[:6]))
             .replace('<!--IND-OPTS-->', opts).replace('<!--IND-LIST-->', cats).replace('<!--IND-CHIPS-->', chips))
+    main = main.replace('<!--ISO-->', iso_map.block())
     assert '@@' not in main and '<!--' not in main
     app = {'@type': 'SoftwareApplication', 'name': 'Nastaliq ERP', 'applicationCategory': 'BusinessApplication', 'operatingSystem': 'Web',
            'description': 'Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on a dedicated server, in the language your team works in.',
@@ -499,7 +501,7 @@ def home():
                'isPartOf': {'@id': SITE + '/#website'}, 'about': {'@id': SITE + '/#org'}}, app, faq_ld(FAQ)]
     title = 'Nastaliq | Private cloud ERP for inventory and accounting'
     desc = 'Private cloud ERP for growing businesses: inventory, purchasing, sales and accounting on your own dedicated server, in your language.'
-    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="vendor/three.min.js" defer></script><script src="js/cube.js" defer></script><script src="js/home.js" defer></script><script src="js/preview-data.js" defer></script><script src="js/preview-i18n.js" defer></script><script src="js/preview-tour.js" defer></script><script src="js/preview.js" defer></script></body></html>\n'
+    out = head('index.html', title, desc, schema) + '<body>' + sprite + header('index.html', '', True) + main + footer('index.html') + '<script src="js/iso.js" defer></script><script src="js/home.js" defer></script><script src="js/preview-data.js" defer></script><script src="js/preview-i18n.js" defer></script><script src="js/preview-tour.js" defer></script><script src="js/preview.js" defer></script></body></html>\n'
     write('index.html', out)
 
 def seo_files():
