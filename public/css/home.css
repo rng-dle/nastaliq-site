@@ -141,9 +141,10 @@ nav a.l:hover{color:var(--txt)}nav a.l[aria-current=page]{color:var(--yellow)}
 .pagehead .in{justify-items:start}
 
 /* industries */
-.tabs{display:flex;flex-wrap:wrap;gap:8px;padding-block:0 6px;justify-content:center}
-.tabs button{flex:none;display:flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:12px;border:2px solid var(--pline);background:#fff;color:var(--ptxt);font:700 .95rem var(--b);cursor:pointer}
-.tabs button svg{width:20px;height:20px}
+.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding-block:0 6px}
+@media(min-width:900px){.tabs{grid-template-columns:repeat(4,1fr)}}
+.tabs button{display:flex;align-items:center;justify-content:center;text-align:center;gap:8px;min-height:56px;padding:6px 12px;line-height:1.2;border-radius:12px;border:2px solid var(--pline);background:#fff;color:var(--ptxt);font:700 .95rem var(--b);cursor:pointer}
+.tabs button svg{width:20px;height:20px;flex:none}
 .tabs button[aria-selected=true]{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
 .sp{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;margin-top:18px;background:var(--paper);border:1px solid var(--pline);border-radius:22px;padding:40px}
 .sp[hidden]{display:none}
