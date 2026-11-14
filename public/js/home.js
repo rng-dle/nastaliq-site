@@ -1,9 +1,21 @@
 (function(){
-  var tabs=document.querySelectorAll('.tabs button');
-  tabs.forEach(function(b){b.onclick=function(){
-    tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
-    document.querySelectorAll('.sp').forEach(function(p){p.hidden=p.id!==b.dataset.p});
-  }});
+  var tabs=[].slice.call(document.querySelectorAll('.tabs button')),sec=document.getElementById('sectors'),cur=0,timer,stopped=false;
+  function show(i){
+    cur=i;
+    tabs.forEach(function(x,k){x.setAttribute('aria-selected',k===i)});
+    document.querySelectorAll('.sp').forEach(function(p){p.hidden=p.id!==tabs[i].dataset.p});
+  }
+  tabs.forEach(function(b,i){b.onclick=function(){stopped=true;clearInterval(timer);show(i)}});
+  if(!sec||tabs.length<2||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var paused=false,visible=false;
+  function tick(){if(!stopped&&!paused&&visible&&!document.hidden)show((cur+1)%tabs.length)}
+  timer=setInterval(tick,6000);
+  sec.addEventListener('mouseenter',function(){paused=true});sec.addEventListener('mouseleave',function(){paused=false});
+  sec.addEventListener('focusin',function(){paused=true});sec.addEventListener('focusout',function(){paused=false});
+  sec.addEventListener('touchstart',function(){stopped=true},{passive:true});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(e){visible=e[0].isIntersecting}).observe(sec);else visible=true;
+})();
+(function(){
   var mb=document.querySelector('.menu-btn'),nv=document.getElementById('nav');
   if(mb&&nv){
     mb.onclick=function(){var o=nv.classList.toggle('open');mb.setAttribute('aria-expanded',o)};

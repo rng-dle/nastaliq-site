@@ -13,6 +13,7 @@ Nastaliq LLP, Registration No. 0361484. Contact: hello@nastaliq.co
 
 ## Products
 - [Business suite](https://nastaliq.co/products#suite): Inventory, purchasing, accounting and sales in one cloud system, implemented for your business and hosted by us.
+- [Inventory](https://nastaliq.co/products#inventory): Know what is on the shelf and what to reorder, from the warehouse floor on a phone.
 - [Janitorial operations](https://nastaliq.co/products#janitorial): Run a commercial cleaning company from one app, for cleaners, supervisors and clients.
 - [Owner dashboard and alerts](https://nastaliq.co/products#owner): A home screen by role, phone-friendly stock screens, and a morning email digest of what needs attention.
 - [Every language](https://nastaliq.co/products#languages): Each user picks their own language on every screen, and documents print in the language your customer reads.
