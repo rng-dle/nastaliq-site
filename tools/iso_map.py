@@ -8,8 +8,8 @@ C = (500, 395)              # centre of the core
 A, B, T = 120, 60, 14       # tile half-width, half-height, thickness
 MODS = [  # key, label, caption, cx, cy  (clockwise from the top)
     ('inventory', 'Inventory', 'Live stock by location. Receive, transfer and count with barcode scanning on a phone.', 500, 180),
-    ('purchasing', 'Purchasing', 'Purchase orders and supplier bills, tied to the stock they bring in.', 790, 288),
-    ('sales', 'Sales', 'Quotes, orders and invoices that draw stock down as you sell.', 790, 502),
+    ('sales', 'Sales & Purchasing', 'Quotes, orders and invoices on the selling side, purchase orders and supplier bills on the buying side, all moving the same stock.', 790, 288),
+    ('hrm', 'HRM', 'Employee records, attendance and leave, in the same system as the rest of the business.', 790, 502),
     ('accounting', 'Accounting', 'Receivables, payables and statements, updated as every sale and purchase is posted.', 500, 610),
     ('reports', 'Reports & Digest', 'Owner metrics, drill-downs and a morning email digest of what needs attention.', 210, 502),
     ('server', 'Dedicated Server', 'Your own server, never shared with another client. We host it and support it.', 210, 288),
@@ -57,13 +57,17 @@ def card(bx, by, w, h, face='L', rows=(), bars=(), line=None):
     return o
 
 
+def person(x, y, k):
+    return coin(x, y, 13 * k, 1, 24 * k) + '<ellipse class="t" cx="%g" cy="%g" rx="%g" ry="%g"/>' % (x, y - 24 * k - 11 * k, 10 * k, 10 * k)
+
+
 def icon(key, cx, cy):
     if key == 'inventory':
         return box(cx, cy - 14, 24, 24) + box(cx, cy - 38, 22, 20) + box(cx - 34, cy + 8, 24, 24) + box(cx + 34, cy + 8, 24, 24)
-    if key == 'purchasing':
-        return card(cx - 14, cy + 10, 64, 82, 'L', rows=(.72, .56, .40)) + box(cx + 40, cy + 18, 20, 24)
     if key == 'sales':
-        return coin(cx - 30, cy + 8, 26, 4) + coin(cx + 30, cy + 20, 26, 2) + coin(cx + 6, cy + 36, 24, 3)
+        return card(cx - 28, cy + 6, 58, 78, 'L', rows=(.72, .56, .40)) + coin(cx + 34, cy + 22, 22, 3) + box(cx - 2, cy + 36, 14, 16)
+    if key == 'hrm':
+        return person(cx - 46, cy + 10, 1.15) + person(cx + 46, cy + 10, 1.15) + person(cx, cy + 32, 1.4)
     if key == 'accounting':
         return (card(cx - 22, cy + 6, 70, 92, 'L', rows=(.78, .64, .50, .36, .22)) +
                 card(cx + 32, cy + 36, 56, 54, 'R', bars=((.14, .30, .28), (.38, .54, .46), (.62, .78, .64))))
@@ -99,7 +103,7 @@ def block():
     btns = ''
     for i, (key, label, cap, cx, cy) in enumerate(MODS):
         btns += ('<button type="button" class="iso-lb" data-i="%d" aria-pressed="%s" data-t="%s" data-d="%s" style="left:%.2f%%;top:%.2f%%">%s</button>'
-                 % (i, 'true' if i == 0 else 'false', html.escape(label, True), html.escape(cap, True), cx / VW * 100, (cy - B - T - 74 if i == 0 else cy + B + T + 20) / VH * 100, html.escape(label)))
+                 % (i, 'true' if i == 0 else 'false', html.escape(label, True), html.escape(cap, True), cx / VW * 100, (cy - B - T - 74 if cy < C[1] else cy + B + T + 20) / VH * 100, html.escape(label)))
     k0 = MODS[0]
     return ('<div id="iso-stage" role="group" aria-label="The Nastaliq modules around one core"><div class="iso-wrap">%s%s</div>'
             '<div class="iso-cap"><b id="iso-t">%s</b><span id="iso-d">%s</span></div></div>') % (s, btns, html.escape(k0[1]), html.escape(k0[2]))
