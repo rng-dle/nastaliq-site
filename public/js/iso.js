@@ -23,5 +23,5 @@
   st.addEventListener('focusin', function () { hold = true; });
   st.addEventListener('focusout', function () { hold = false; });
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setInterval(function () { if (!hold && !done && !document.hidden) show((cur + 1) % n); }, 3200);
+  setInterval(function () { if (!hold && !done && !document.hidden) show((cur + 1) % n); }, 4200);
 })();
